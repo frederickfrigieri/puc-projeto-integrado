@@ -1,0 +1,43 @@
+<div class="row w-100 mx-0 auth-page">
+  <div class="col-md-8 col-xl-6 mx-auto">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-4 pe-md-0">
+          <div class="auth-side-wrapper" [ngStyle]="{ 'background-image': 'url(https://via.placeholder.com/219x452)' }">
+
+          </div>
+        </div>
+        <div class="col-md-8 ps-md-0">
+          <div class="auth-form-wrapper px-4 py-5">
+            <a routerLink="." class="nobleui-logo logo-light d-block mb-2">Delivery <span class="text-uppercase">Store</span></a>
+            <h5 class="text-muted fw-normal mb-4">Informe seus dados para criar uma nova conta.</h5>
+            <form class="forms-sample">
+              <div class="mb-3">
+                <input type="text" class="form-control" id="nome" placeholder="Razão Social">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" mask="00.000.000/0000-00">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" id="nome" placeholder="Nome do Contato">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" id="senha" autocomplete="current-password" placeholder="Senha">
+              </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" id="senhaConfirmacao" autocomplete="current-password" placeholder="Confirme a Senha">
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onRegister($event)">Criar</button>
+              </div>
+              <a routerLink="/auth/login" class="d-block mt-3 text-muted">Clique aqui se for cliente!</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
