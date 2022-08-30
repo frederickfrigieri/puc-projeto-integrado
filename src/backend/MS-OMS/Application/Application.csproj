@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Pedidos\ObterPedidosBase\ObterPedidosBaseReader.cs" />
+		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoImpressaoConsumer.cs" />
+		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoSeparadoConsumer.cs" />
+		<Compile Remove="Pedidos\_ConsumerHandlers\PedidoImportadoConsumer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="ClosedXML" Version="0.95.4" />
+		<PackageReference Include="Dapper" Version="2.0.30" />
+		<PackageReference Include="FluentValidation" Version="9.0.1" />
+		<PackageReference Include="Hangfire" Version="1.7.27" />
+		<PackageReference Include="MassTransit" Version="7.2.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="ExcelDataReader" Version="3.6.0" />
+		<PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\domain\Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Empresas\_ConsumerHandlers\" />
+	  <Folder Include="Jobs\" />
+	</ItemGroup>
+
+</Project>

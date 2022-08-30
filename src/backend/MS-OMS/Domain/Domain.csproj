@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Empresas\**" />
+    <EmbeddedResource Remove="Empresas\**" />
+    <None Remove="Empresas\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Serilog.RequestResponse.Extensions" Version="1.1.1" />
+  </ItemGroup>
+
+  <Import Project="..\..\EventMessage\EventMessage.projitems" Label="Shared" />
+</Project>

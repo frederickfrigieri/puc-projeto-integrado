@@ -9,29 +9,46 @@
         </div>
         <div class="col-md-8 ps-md-0">
           <div class="auth-form-wrapper px-4 py-5">
-            <a routerLink="." class="nobleui-logo logo-light d-block mb-2">Delivery <span class="text-uppercase">Store</span></a>
+            <a routerLink="." class="nobleui-logo logo-light d-block mb-2">Delivery <span
+                class="text-uppercase">Store</span></a>
             <h5 class="text-muted fw-normal mb-4">Informe seus dados para criar uma nova conta.</h5>
-            <form class="forms-sample">
+            <form class="forms-sample" [formGroup]="formGroup">
               <div class="mb-3">
-                <input type="text" class="form-control" id="nome" placeholder="Razão Social">
+                <input formControlName="razaoSocial" type="text" class="form-control" id="razaoSocial"
+                  placeholder="Razão Social">
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="razaoSocial"></app-input-invalid-message>
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" mask="00.000.000/0000-00">
+                <input formControlName="cnpj" type="text" class="form-control" id="cnpj" placeholder="CNPJ"
+                  mask="00.000.000/0000-00">
+                  <app-input-invalid-message [frmGroup]="formGroup" controlName="cnpj"></app-input-invalid-message>
+                </div>
+              <div class="mb-3">
+                <input formControlName="nome" type="text" class="form-control" id="nome" placeholder="Nome do Contato">
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="nome"></app-input-invalid-message>
               </div>
               <div class="mb-3">
-                <input type="text" class="form-control" id="nome" placeholder="Nome do Contato">
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="email"></app-input-invalid-message>
               </div>
               <div class="mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Email">
-              </div>
+                <input formControlName="chaveBling" type="text" class="form-control" id="chaveBling"
+                  placeholder="Chave Bling">
+                  <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveBling"></app-input-invalid-message>
+                </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="senha" autocomplete="current-password" placeholder="Senha">
-              </div>
+                <input formControlName="senha" type="password" class="form-control" id="senha"
+                  autocomplete="current-password" placeholder="Senha">
+                  <app-input-invalid-message [frmGroup]="formGroup" controlName="senha"></app-input-invalid-message>
+                </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="senhaConfirmacao" autocomplete="current-password" placeholder="Confirme a Senha">
-              </div>
+                <input formControlName="senhaConfirmacao" type="password" class="form-control" id="senhaConfirmacao"
+                  autocomplete="current-password" placeholder="Confirme a Senha">
+                  <app-input-invalid-message [frmGroup]="formGroup" controlName="senhaConfirmacao"></app-input-invalid-message>
+                </div>
               <div>
-                <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" (click)="onRegister($event)">Criar</button>
+                <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" [disabled]="formGroup.invalid"
+                  (click)="onRegister($event)">Criar</button>
               </div>
               <a routerLink="/auth/login" class="d-block mt-3 text-muted">Clique aqui se for cliente!</a>
             </form>

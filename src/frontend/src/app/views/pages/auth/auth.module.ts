@@ -5,6 +5,8 @@ import { RegisterComponent } from './register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedComponentsModule } from 'src/app/core/shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -33,7 +35,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NgxMaskModule.forRoot({ validation: true}) // Ngx-mask
+    NgxMaskModule.forRoot({ validation: true}),
+    ReactiveFormsModule,
+    SharedComponentsModule
   ]
 })
 export class AuthModule { }
