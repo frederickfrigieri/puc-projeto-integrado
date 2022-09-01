@@ -13,6 +13,7 @@ namespace Domain._SeedWork
 
         public Guid Chave { get; set; }
         public DateTime DataCadastro { get; set; }
+        public int Id { get; set; }
 
 
         /// <summary>

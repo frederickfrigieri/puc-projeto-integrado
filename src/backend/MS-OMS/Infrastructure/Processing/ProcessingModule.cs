@@ -1,8 +1,7 @@
-﻿using Autofac;
-using Application._Configuration.Commands;
+﻿using Application._Configuration.Commands;
 using Application._Configuration.DomainEvents;
 using Application._Configuration.Processing;
-using Infrastructure.Processing.InternalCommands;
+using Autofac;
 using MediatR;
 using System.Linq;
 
@@ -42,10 +41,6 @@ namespace Infrastructure.Processing
             builder.RegisterGenericDecorator(
                 typeof(DomainEventsDispatcherNotificationHandlerDecorator<>),
                 typeof(INotificationHandler<>));
-
-            builder.RegisterType<CommandsDispatcher>()
-                .As<ICommandsDispatcher>()
-                .InstancePerLifetimeScope();
 
             builder.RegisterType<CommandsScheduler>()
                 .As<ICommandsScheduler>()

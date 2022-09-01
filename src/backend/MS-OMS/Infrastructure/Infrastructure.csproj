@@ -37,6 +37,18 @@
     <Compile Remove="Migrations\20220728205134_AlterTableMotivoCancelamento.Designer.cs" />
     <Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.cs" />
     <Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.Designer.cs" />
+    <Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.cs" />
+    <Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.Designer.cs" />
+    <Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.cs" />
+    <Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.Designer.cs" />
+    <Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.cs" />
+    <Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.Designer.cs" />
+    <Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.cs" />
+    <Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.Designer.cs" />
+    <Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.cs" />
+    <Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.Designer.cs" />
+    <Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.cs" />
+    <Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

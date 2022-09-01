@@ -1,6 +1,6 @@
-﻿using Autofac;
+﻿using Application._Configuration.DomainEvents;
+using Autofac;
 using Autofac.Core;
-using Application._Configuration.DomainEvents;
 using Domain._SeedWork;
 using Infrastructure.Database;
 using Infrastructure.Processing.Outbox;
@@ -56,14 +56,6 @@ namespace Infrastructure.Processing
 
             domainEntities
                 .ForEach(entity => entity.Entity.ClearDomainEvents());
-
-            var tasks = domainEvents
-                .Select(async (domainEvent) =>
-                {
-                    await _mediator.Publish(domainEvent);
-                });
-
-            await Task.WhenAll(tasks);
 
             foreach (var domainEventNotification in domainEventNotifications)
             {

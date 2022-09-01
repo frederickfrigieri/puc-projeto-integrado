@@ -2,9 +2,14 @@
 {
     internal sealed class SchemaNames
     {
-        internal const string Aplicacoes = "Aplicacoes";
-        internal const string Pedidos = "_Exemplo_Pedidos";
-        internal const string Pagamentos = "_Exemplo_Pagamentos";
-        internal const string Empresas = "Empresas";
+        internal const string Migrations = "_configuration";
+
+        internal const string WMS = "WMS";
+        internal const string OMS = "OMS";
+        internal const string TMS = "TMS";
+
+        internal const string Jobs = "Jobs";
+
+
     }
 }

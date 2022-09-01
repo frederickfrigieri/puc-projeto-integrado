@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace Application.ObterParceiro
+namespace Application.ObterProdutosPorParceiro
 {
-    public class ObterParceiroQuery : IQuery<IEnumerable<ObterParceiroResponse>>
+    public class ObterProdutosPorParceiroQuery : IQuery<IEnumerable<ObterProdutosPorParceiroResponse>>
     {
         public Guid ChaveParceiro { get; set; }
 
-        public ObterParceiroQuery(Guid chaveParceiro)
+        public ObterProdutosPorParceiroQuery(Guid chaveParceiro)
         {
             ChaveParceiro = chaveParceiro;
         }

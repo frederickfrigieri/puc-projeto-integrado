@@ -1,5 +1,4 @@
 ﻿using Domain._SeedWork;
-using System;
 
 namespace Domain.Rules
 {
@@ -7,17 +6,17 @@ namespace Domain.Rules
     {
         public string Message => "Produto inválido";
 
-        private readonly Guid _chaveProduto;
+        private readonly int? _produtoId;
 
-        public ItemDeveTerUmProdutoRule(Guid chaveProduto)
+        public ItemDeveTerUmProdutoRule(int? produtoId)
         {
-            _chaveProduto = chaveProduto;
+            _produtoId = produtoId;
         }
 
         public bool IsValid()
         {
-            return _chaveProduto != null
-                && _chaveProduto != Guid.Empty;
+            return _produtoId.HasValue && _produtoId.Value != 0;
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using Application._Configuration.Data;
+using Autofac;
 using Domain;
 using Domain._SeedWork;
 using Infrastructure.Domain;
@@ -17,10 +18,10 @@ namespace Infrastructure.Database
 
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<SqlConnectionFactory>()
-            //    .As<ISqlConnectionFactory>()
-            //    .WithParameter("connectionString", _databaseConnectionString)
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<SqlConnectionFactory>()
+                .As<ISqlConnectionFactory>()
+                .WithParameter("connectionString", _databaseConnectionString)
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<Repository>()
                 .As<IRepository>()

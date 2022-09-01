@@ -16,7 +16,7 @@ namespace Domain.Rules
 
         public bool IsValid()
         {
-            return _dto.ChaveParceiro != null
+            return _dto.ParceiroId != 0
                 && !string.IsNullOrWhiteSpace(_dto.Descricao)
                 && !string.IsNullOrWhiteSpace(_dto.Sku);
         }

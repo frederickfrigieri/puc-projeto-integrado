@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Domain.Dtos
+﻿namespace Domain.Dtos
 {
-    public struct ProdutoDto
+    public class ProdutoDto
     {
         public string Descricao { get; set; }
         public string Sku { get; set; }
-        public Guid ChaveParceiro { get; set; }
+        public int ParceiroId { get; set; }
     }
 }

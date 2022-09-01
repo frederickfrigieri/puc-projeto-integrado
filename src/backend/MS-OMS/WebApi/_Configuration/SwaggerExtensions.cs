@@ -4,7 +4,6 @@ using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 
 namespace WebApi._Configuration
 {
@@ -51,7 +50,7 @@ namespace WebApi._Configuration
                 var commentsFile = Path.Combine(baseDirectory, commentsFileName);
 
                 options.IncludeXmlComments(commentsFile);
-                options.ExampleFilters();
+                //options.ExampleFilters();
             });
 
             //services.AddSwaggerExamplesFromAssemblyOf<DisponibilizarExceptionsExamples>();

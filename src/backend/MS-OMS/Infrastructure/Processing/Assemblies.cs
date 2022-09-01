@@ -1,4 +1,4 @@
-﻿using Application.CadastrarParceiro;
+﻿using Application.Commands.CadastrarParceiro;
 using System.Reflection;
 
 namespace Infrastructure.Processing

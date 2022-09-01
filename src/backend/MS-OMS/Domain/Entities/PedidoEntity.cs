@@ -8,10 +8,15 @@ namespace Domain.Entities
 {
     public class PedidoEntity : Entity, IAggregateRoot
     {
-        public string Nome { get; private set; }
+        public string NomeCompleto { get; private set; }
         public decimal Valor { get; private set; }
 
+        public int ParceiroId { get; set; }
+        public ParceiroEntity Parceiro { get; set; }
+
         public List<ItemPedidoEntity> Itens { get; private set; }
+
+
 
         public PedidoEntity() { }
 
@@ -20,7 +25,8 @@ namespace Domain.Entities
             CheckRule(new PedidoDeveTerCamposObrigatoriosPreenchidosRule(dto));
             CheckRule(new PedidoDeveTerItemRule(dto.Itens));
 
-            Nome = dto.Nome;
+            NomeCompleto = dto.Nome;
+            Valor = dto.Valor;
             Itens = new List<ItemPedidoEntity>();
 
             dto.Itens.ForEach(itemDto =>

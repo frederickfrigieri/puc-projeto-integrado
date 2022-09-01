@@ -28,8 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Empresas\_ConsumerHandlers\" />
-	  <Folder Include="Jobs\" />
+	  <Folder Include="ConsumerHandlers\" />
 	</ItemGroup>
 
 </Project>

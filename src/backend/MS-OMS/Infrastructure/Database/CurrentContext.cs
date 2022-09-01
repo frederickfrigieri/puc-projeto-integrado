@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Infrastructure.Processing.InternalCommands;
 using Infrastructure.Processing.Outbox;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -10,7 +9,9 @@ namespace Infrastructure.Database
     {
         public DbSet<ParceiroEntity> Parceiros { get; set; }
         public DbSet<OutboxMessage> OutboxMessages { get; set; }
-        public DbSet<InternalCommand> InternalCommands { get; set; }
+        public DbSet<ProdutoEntity> Produtos { get; set; }
+        public DbSet<PedidoEntity> Pedidos { get; set; }
+
 
         public CurrentContext(DbContextOptions options) : base(options)
         {

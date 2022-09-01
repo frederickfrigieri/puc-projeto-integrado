@@ -1,7 +1,6 @@
 using Hangfire;
 using HangfireBasicAuthenticationFilter;
 using Infrastructure;
-using Infrastructure.Processing.InternalCommands;
 using Infrastructure.Processing.Outbox;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -73,14 +72,8 @@ namespace HangfireJobs
             app.UseHangfireDashboard("", optionsHangFire);
 
             RecurringJob.RemoveIfExists(nameof(ProcessOutboxJob));
-            RecurringJob.RemoveIfExists(nameof(ProcessInternalCommandsJob));
-
-
             RecurringJob.AddOrUpdate<ProcessOutboxJob>(nameof(ProcessOutboxJob),
                 job => job.Run(JobCancellationToken.Null), "*/5 * * * * *", TimeZoneInfo.Local);
-
-            RecurringJob.AddOrUpdate<ProcessInternalCommandsJob>(nameof(ProcessInternalCommandsJob),
-               job => job.Run(JobCancellationToken.Null), "*/10 * * * * *", TimeZoneInfo.Local);
         }
     }
 }

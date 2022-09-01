@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Domain.Dtos
 {
-    public struct PedidoDto
+    public class PedidoDto
     {
         public string Nome { get; set; }
         public decimal Valor { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
 using Domain.Rules;
-using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -9,8 +9,12 @@ namespace Domain.Entities
     {
         public string Descricao { get; private set; }
         public string Sku { get; private set; }
-        public Guid ChaveParceiro { get; private set; }
+
+        public int ParceiroId { get; private set; }
         public ParceiroEntity Parceiro { get; private set; }
+
+        public List<ItemPedidoEntity> ItensPedidos { get; private set; }
+
 
         private ProdutoEntity()
         {
@@ -22,7 +26,7 @@ namespace Domain.Entities
 
             var entity = new ProdutoEntity()
             {
-                ChaveParceiro = dto.ChaveParceiro,
+                ParceiroId = dto.ParceiroId,
                 Descricao = dto.Descricao,
                 Sku = dto.Sku
             };

@@ -2,9 +2,11 @@
 
 namespace Domain.Dtos
 {
-    public struct ItemPedidoDto
+    public class ItemPedidoDto
     {
-        public short Quantidade { get; set; }
+        public int Quantidade { get; set; }
+        public int? ProdutoId { get; set; }
         public Guid ChaveProduto { get; set; }
+
     }
 }

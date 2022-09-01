@@ -3,6 +3,7 @@ using Domain.Dtos;
 using Domain.Rules;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace Domain.Entities
         public string RazaoSocial { get; private set; }
 
         public List<PedidoEntity> Pedidos { get; private set; }
+        public List<ProdutoEntity> Produtos { get; private set; }
 
         private ParceiroEntity(string cnpj, string razaoSocial)
         {
@@ -21,18 +23,23 @@ namespace Domain.Entities
 
         private ParceiroEntity() { }
 
-        public static Guid Criar(ParceiroCreateDto dto)
+        public static ParceiroEntity Criar(ParceiroCreateDto dto)
         {
             CheckRule(new ParceiroDeveTerCnpjRule(dto.Cnpj));
             CheckRule(new ParceiroDeveTerRazaoSocialRule(dto.Cnpj));
 
             var entity = new ParceiroEntity(dto.Cnpj, dto.RazaoSocial);
 
-            return entity.Chave;
+            return entity;
         }
 
         public Guid CriarPedido(PedidoDto dto)
         {
+            CheckRule(new ParceiroDeveTerUmOuMaisProdutoRule(Produtos));
+            CheckRule(new ItensDeveTerProdutoRule(dto.Itens, Produtos));
+
+            dto.Itens.ForEach(item => item.ProdutoId = Produtos.Single(x => x.Chave == item.ChaveProduto).Id);
+
             var pedido = PedidoEntity.Criar(dto);
 
             if (Pedidos == null) Pedidos = new List<PedidoEntity>();
@@ -44,7 +51,14 @@ namespace Domain.Entities
 
         public Guid CriarProduto(ProdutoDto dto)
         {
+            CheckRule(new SkuDeveSerUnicoRule(dto.Sku, Produtos));
+
             var produto = ProdutoEntity.CriarProduto(dto);
+
+            if (Produtos == null)
+                Produtos = new List<ProdutoEntity>();
+
+            Produtos.Add(produto);
 
             return produto.Chave;
         }

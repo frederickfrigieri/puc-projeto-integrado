@@ -1,15 +1,18 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
 using Domain.Rules;
-using System;
 
 namespace Domain.Entities
 {
     public class ItemPedidoEntity : Entity, IAggregateRoot
     {
-        public short Quantidade { get; private set; }
-        public Guid ChaveProduto { get; private set; }
+        public int Quantidade { get; private set; }
+
+        public int ProdutoId { get; private set; }
         public ProdutoEntity Produto { get; private set; }
+
+        public int PedidoId { get; set; }
+        public PedidoEntity Pedido { get; set; }
 
         private ItemPedidoEntity()
         {
@@ -17,13 +20,13 @@ namespace Domain.Entities
 
         public static ItemPedidoEntity Criar(ItemPedidoDto dto)
         {
-            CheckRule(new ItemDeveTerUmProdutoRule(dto.ChaveProduto));
+            CheckRule(new ItemDeveTerUmProdutoRule(dto.ProdutoId));
             CheckRule(new ItemDeveTerQuantidadeSuperiorAZero(dto));
 
             return new ItemPedidoEntity()
             {
                 Quantidade = dto.Quantidade,
-                ChaveProduto = dto.ChaveProduto
+                ProdutoId = dto.ProdutoId.Value
             };
         }
     }

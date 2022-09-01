@@ -11,8 +11,6 @@ using MassTransit;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using Serilog.RequestResponseExtension.Extensions;
 using Serilog.RequestResponseExtension.Models;
 using System;
 using System.Globalization;
@@ -100,10 +98,10 @@ namespace Infrastructure
         {
             var esConfig = configuration.GetSection("Serilog:Elasticsearch").Get<SerilogElasticsearchConfig>();
 
-            Log.Logger = new LoggerConfiguration()
-                .CreateDefaultInstance("MS-OMS")
-                .WithES(esConfig)
-                .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //    .CreateDefaultInstance("MS-OMS")
+            //    .WithES(esConfig)
+            //    .CreateLogger();
         }
     }
 }
