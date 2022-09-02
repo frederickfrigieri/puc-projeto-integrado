@@ -9,8 +9,10 @@
     <Import_RootNamespace>EventMessage</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)OMS\ParceiroCriadoEventMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OMS\ParceiroCadastradoEventMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OMS\PedidoCadastradoEventMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SeedWork\DomainEventMessageBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SeedWork\IntegrationEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WMS\ProdutoCadastradoEventMessage.cs" />
   </ItemGroup>
 </Project>

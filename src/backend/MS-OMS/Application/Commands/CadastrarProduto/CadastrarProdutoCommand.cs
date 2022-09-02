@@ -8,5 +8,6 @@ namespace Application.Commands.CadastrarProduto
         public string Descricao { get; set; }
         public string Sku { get; set; }
         public Guid ChaveParceiro { get; set; }
+        public Guid ChaveProduto { get; set; }
     }
 }

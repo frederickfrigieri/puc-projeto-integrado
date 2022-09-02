@@ -1,5 +1,6 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
+using Domain.Events;
 using Domain.Rules;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace Domain.Entities
         {
             Cnpj = cnpj;
             RazaoSocial = razaoSocial;
+
+            AddDomainEvent(new ParceiroCadastradoEvent(Chave, RazaoSocial));
         }
 
         private ParceiroEntity() { }
@@ -49,7 +52,7 @@ namespace Domain.Entities
             return pedido.Chave;
         }
 
-        public Guid CriarProduto(ProdutoDto dto)
+        public ProdutoEntity CriarProduto(ProdutoDto dto)
         {
             CheckRule(new SkuDeveSerUnicoRule(dto.Sku, Produtos));
 
@@ -60,7 +63,7 @@ namespace Domain.Entities
 
             Produtos.Add(produto);
 
-            return produto.Chave;
+            return produto;
         }
     }
 }

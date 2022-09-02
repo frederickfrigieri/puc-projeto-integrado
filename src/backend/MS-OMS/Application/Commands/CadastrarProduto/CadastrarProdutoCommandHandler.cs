@@ -2,6 +2,7 @@
 using Domain;
 using Domain.Dtos;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,16 +28,21 @@ namespace Application.Commands.CadastrarProduto
                     "Produtos"
                 });
 
-            var dto = new ProdutoDto
+            var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == request.Sku);
+
+            if (produto == null)
             {
-                Descricao = request.Descricao,
-                Sku = request.Sku,
-                ParceiroId = parceiro.Id
-            };
+                var dto = new ProdutoDto
+                {
+                    Descricao = request.Descricao,
+                    Sku = request.Sku,
+                    ParceiroId = parceiro.Id
+                };
 
-            var chaveProduto = parceiro.CriarProduto(dto);
+                produto = parceiro.CriarProduto(dto);
+            }
 
-            return chaveProduto;
+            return produto.Chave;
         }
     }
 }

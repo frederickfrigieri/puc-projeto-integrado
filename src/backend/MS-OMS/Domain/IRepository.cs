@@ -8,6 +8,8 @@ namespace Domain
     {
         Task<ParceiroEntity> ObterParceiroAsync(Guid chave, string[] includes = null);
         Task CadastrarParceiro(ParceiroEntity parceiro);
+        Task<PedidoEntity> ObterPedidoPorChaveAsync(Guid chave, string[] includes = null);
+
 
         Task<ProdutoEntity[]> ObterProdutoPorChaveAsync(Guid[] chaves);
     }

@@ -35,7 +35,7 @@ namespace Domain.Entities
                 Itens.Add(item);
             });
 
-            AddDomainEvent(new PedidoCriadoEvent(Chave));
+            AddDomainEvent(new PedidoCadastradoEvent(Chave));
         }
 
         public static PedidoEntity Criar(PedidoDto dto)
