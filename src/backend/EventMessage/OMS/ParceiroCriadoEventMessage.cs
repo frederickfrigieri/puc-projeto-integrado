@@ -1,7 +1,7 @@
 ﻿using EventMessage.SeedWork;
 using System;
 
-namespace EventMessage.OMS
+namespace EventMessage.WMS
 {
     public class ParceiroCriadoEventMessage : DomainEventMessageBase
     {
