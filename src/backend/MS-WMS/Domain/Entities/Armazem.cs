@@ -14,9 +14,8 @@ namespace Domain.Entities
 
         public string Descricao { get; private set; }
         public List<Posicao> Posicoes { get; private set; }
-        public List<ProdutoEntity> Produtos { get; private set; }
         public List<Estoque> Estoques { get; private set; }
-        public List<ItemPedidoEntity> Itens { get; private set; }
+        public List<ItemPedido> Itens { get; private set; }
 
         private Armazem() { }
 
@@ -36,34 +35,34 @@ namespace Domain.Entities
             return posicao;
         }
 
-        public Estoque[] CadastrarEstoque(Guid chaveParceiro, Guid chaveProduto, byte quantidade)
-        {
-            var produto = Produtos
-                .Where(x => x.Chave == chaveParceiro && x.Chave == chaveProduto)
-                .Single();
+        //public Estoque[] CadastrarEstoque(Guid chaveParceiro, Guid chaveProduto, byte quantidade)
+        //{
+        //    var produto = Produtos
+        //        .Where(x => x.Chave == chaveParceiro && x.Chave == chaveProduto)
+        //        .Single();
 
-            var estoquesCadastrado = new List<Estoque>();
+        //    var estoquesCadastrado = new List<Estoque>();
 
-            Enumerable.Range(1, quantidade).ToList().ForEach(count =>
-            {
-                var estoque = new Estoque(chaveParceiro, this, produto);
+        //    Enumerable.Range(1, quantidade).ToList().ForEach(count =>
+        //    {
+        //        var estoque = new Estoque(chaveParceiro, this, produto);
 
-                estoquesCadastrado.Add(estoque);
-                Estoques.Add(estoque);
-            });
+        //        estoquesCadastrado.Add(estoque);
+        //        Estoques.Add(estoque);
+        //    });
 
-            return estoquesCadastrado.ToArray();
-        }
+        //    return estoquesCadastrado.ToArray();
+        //}
 
         public CadastrarItemResponse CadastrarItem(
             int quantidade,
-            ProdutoEntity produto,
+            Produto produto,
             Guid chavePedido,
             Guid chaveParceiro)
         {
-            var item = new ItemPedidoEntity(quantidade, produto, chavePedido, chaveParceiro);
+            var item = new ItemPedido(quantidade, produto, chavePedido, chaveParceiro);
 
-            if (Itens == null) Itens = new List<ItemPedidoEntity>();
+            if (Itens == null) Itens = new List<ItemPedido>();
 
             Itens.Add(item);
 
@@ -88,7 +87,7 @@ namespace Domain.Entities
             };
         }
 
-        public AssociarItemPedidoNoEstoqueResponse AssociarItemPedidoNoEstoque(ItemPedidoEntity item)
+        public AssociarItemPedidoNoEstoqueResponse AssociarItemPedidoNoEstoque(ItemPedido item)
         {
             var estoque = Estoques
                 .Where(x => x.ItemPedido == null

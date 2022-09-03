@@ -27,11 +27,12 @@ namespace Infrastructure.Processing
             _scope = scope;
         }
 
-        public async Task DispatchEventsAsync()
+        public Task DispatchEventsAsync()
         {
-            var domainEntities = this._pedidosContext.ChangeTracker
+            var domainEntities = _pedidosContext.ChangeTracker
                 .Entries<Entity>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
+                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any())
+                .ToList();
 
             var domainEvents = domainEntities
                 .SelectMany(x => x.Entity.DomainEvents)
@@ -67,6 +68,8 @@ namespace Infrastructure.Processing
                     data);
                 this._pedidosContext.OutboxMessages.Add(outboxMessage);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

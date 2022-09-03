@@ -1,6 +1,6 @@
 ﻿using Application._Configuration.MessageBus;
-using EventMessage.OMS;
 using MediatR;
+using Shared.EventsMessages.OMS;
 using System.Threading;
 using System.Threading.Tasks;
 

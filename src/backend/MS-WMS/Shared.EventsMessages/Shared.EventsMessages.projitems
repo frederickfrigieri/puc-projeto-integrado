@@ -3,10 +3,10 @@
   <PropertyGroup>
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>e08ec801-4026-40cd-a23e-12b58279b2ff</SharedGUID>
+    <SharedGUID>0c00f816-54fa-4aef-8809-4a6c60bd47fa</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>EventMessage</Import_RootNamespace>
+    <Import_RootNamespace>Shared.EventsMessages</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)OMS\ParceiroCadastradoEventMessage.cs" />

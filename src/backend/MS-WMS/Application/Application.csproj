@@ -24,11 +24,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ConsumerHandlers\" />
+	  <Folder Include="ConsumerHandlers\CadastrarPedido\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
-
 </Project>

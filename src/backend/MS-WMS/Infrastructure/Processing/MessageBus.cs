@@ -1,6 +1,6 @@
 ﻿using Application._Configuration.MessageBus;
-using EventMessage.SeedWork;
 using MassTransit;
+using Shared.EventsMessages.SeedWork;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Processing

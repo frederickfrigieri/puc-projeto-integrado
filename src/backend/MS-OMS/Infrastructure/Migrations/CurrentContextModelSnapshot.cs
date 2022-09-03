@@ -142,6 +142,33 @@ namespace Infrastructure.Migrations
                     b.ToTable("Produtos","WMS");
                 });
 
+            modelBuilder.Entity("Infrastructure.Processing.InternalCommands.InternalCommand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("Varchar(Max)")
+                        .HasMaxLength(8000);
+
+                    b.Property<bool>("Executando")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ProcessedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("Varchar(250)")
+                        .HasMaxLength(8000);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InternalCommands","Jobs");
+                });
+
             modelBuilder.Entity("Infrastructure.Processing.Outbox.OutboxMessage", b =>
                 {
                     b.Property<Guid>("Id")

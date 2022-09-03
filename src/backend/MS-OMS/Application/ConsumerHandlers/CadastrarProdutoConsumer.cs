@@ -1,12 +1,12 @@
 ﻿using Application._Configuration.Processing;
 using Application.Commands.CadastrarProduto;
-using EventMessage.WMS;
 using MassTransit;
+using Shared.EventsMessages.WMS;
 using System.Threading.Tasks;
 
 namespace Application.ConsumerHandlers
 {
-    internal class CadastrarProdutoConsumer : IConsumer<ProdutoCadastradoEventMessage>
+    public class CadastrarProdutoConsumer : IConsumer<ProdutoCadastradoEventMessage>
     {
         private readonly ICommandsScheduler _commandsScheduler;
 

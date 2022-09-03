@@ -16,9 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="Rules\" />
   </ItemGroup>
 
-  <Import Project="..\..\EventMessage\EventMessage.projitems" Label="Shared" />
+  <Import Project="..\Shared.EventsMessages\Shared.EventsMessages.projitems" Label="Shared" />
 </Project>

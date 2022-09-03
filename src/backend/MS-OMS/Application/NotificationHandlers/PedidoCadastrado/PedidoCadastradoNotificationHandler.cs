@@ -1,7 +1,7 @@
 ﻿using Application._Configuration.MessageBus;
 using Domain;
-using EventMessage.OMS;
 using MediatR;
+using Shared.EventsMessages.OMS;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

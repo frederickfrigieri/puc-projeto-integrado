@@ -1,4 +1,4 @@
-﻿using EventMessage.SeedWork;
+﻿using Shared.EventsMessages.SeedWork;
 using System.Threading.Tasks;
 
 namespace Application._Configuration.MessageBus

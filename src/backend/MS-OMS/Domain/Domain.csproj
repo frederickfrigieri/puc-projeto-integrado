@@ -15,5 +15,5 @@
     <PackageReference Include="Serilog.RequestResponse.Extensions" Version="1.1.1" />
   </ItemGroup>
 
-  <Import Project="..\..\EventMessage\EventMessage.projitems" Label="Shared" />
+  <Import Project="..\Shared.EventsMessages\Shared.EventsMessages.projitems" Label="Shared" />
 </Project>

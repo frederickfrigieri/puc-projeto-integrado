@@ -1,7 +1,7 @@
-﻿using EventMessage.SeedWork;
+﻿using Shared.EventsMessages.SeedWork;
 using System;
 
-namespace EventMessage.WMS
+namespace Shared.EventsMessages.WMS
 {
     public class ProdutoCadastradoEventMessage : DomainEventMessageBase
     {

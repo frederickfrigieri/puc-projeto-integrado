@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventMessage.SeedWork
+namespace Shared.EventsMessages.SeedWork
 {
     public class DomainEventMessageBase
     {
