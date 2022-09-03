@@ -1,6 +1,7 @@
 ﻿using Application._Configuration.Commands;
 using Domain;
 using Domain.Dtos;
+using Serilog.RequestResponse.Extensions.Exceptions;
 using System;
 using System.Linq;
 using System.Threading;
@@ -28,21 +29,25 @@ namespace Application.Commands.CadastrarProduto
                     "Produtos"
                 });
 
-            var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == request.Sku);
-
-            if (produto == null)
+            if (parceiro != null)
             {
-                var dto = new ProdutoDto
+                var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == request.Sku);
+                if (produto == null)
                 {
-                    Descricao = request.Descricao,
-                    Sku = request.Sku,
-                    ParceiroId = parceiro.Id
-                };
+                    var dto = new ProdutoDto
+                    {
+                        Descricao = request.Descricao,
+                        Sku = request.Sku,
+                        ParceiroId = parceiro.Id
+                    };
 
-                produto = parceiro.CriarProduto(dto);
+                    produto = parceiro.CriarProduto(dto);
+                }
+                return produto.Chave;
             }
 
-            return produto.Chave;
+            throw new DomainException("Produto não cadastrado.");
+
         }
     }
 }
