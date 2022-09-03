@@ -1,6 +1,8 @@
 ﻿using Domain.Entities;
+using Domain.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Infrastructure.Database.Maps
 {
@@ -31,6 +33,10 @@ namespace Infrastructure.Database.Maps
             builder.HasMany(x => x.Itens)
                 .WithOne(x => x.Pedido)
                 .HasForeignKey(x => x.PedidoId);
+
+            builder.Property(x => x.StatusPedido)
+                .HasConversion(src => src.ToString(),
+                dst => (StatusPedidoEnum)Enum.Parse(typeof(StatusPedidoEnum), dst));
         }
     }
 }

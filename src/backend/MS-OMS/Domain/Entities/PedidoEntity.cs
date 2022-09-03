@@ -1,5 +1,6 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
+using Domain.Entities.Enums;
 using Domain.Events;
 using Domain.Rules;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace Domain.Entities
 
         public List<ItemPedidoEntity> Itens { get; private set; }
 
+        public StatusPedidoEnum StatusPedido { get; private set; }
+
 
 
         public PedidoEntity() { }
@@ -28,6 +31,7 @@ namespace Domain.Entities
             NomeCompleto = dto.Nome;
             Valor = dto.Valor;
             Itens = new List<ItemPedidoEntity>();
+            StatusPedido = StatusPedidoEnum.PendenteDarkStore;
 
             dto.Itens.ForEach(itemDto =>
             {
