@@ -6,7 +6,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace Api.Controllers
 {
     [Route("api/parceiros")]
     [ApiController]
@@ -34,7 +34,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("{chaveParceiro}/pedidos")]
-        public async Task<IActionResult> PbterPedidosPorParceiro([FromRoute] Guid chaveParceiro)
+        public async Task<IActionResult> ObterPedidosPorParceiro([FromRoute] Guid chaveParceiro)
         {
             var query = new ObterPedidosPorParceiroQuery(chaveParceiro);
 

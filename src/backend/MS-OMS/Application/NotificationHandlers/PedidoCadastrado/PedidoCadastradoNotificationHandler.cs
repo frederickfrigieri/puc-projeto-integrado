@@ -21,7 +21,7 @@ namespace Application.NotificationHandlers.PedidoCadastrado
 
         public async Task Handle(PedidoCadastradoNotification notification, CancellationToken cancellationToken)
         {
-            var pedido = await _repository.ObterPedidoPorChaveAsync(notification.ChavePedido, new string[] { "Itens", "Itens.Produto" });
+            var pedido = await _repository.ObterPedidoPorChaveAsync(notification.ChavePedido, new string[] { "Itens", "Itens.Produto", "Parceiro" });
 
             var itensMessage = new List<ItemPedidoCadastradoEventMessage>();
 
@@ -41,7 +41,10 @@ namespace Application.NotificationHandlers.PedidoCadastrado
 
             if (itensMessage.Count > 0)
             {
-                var message = new PedidoCadastradoEventMessage(pedido.Chave, itensMessage);
+                var message = new PedidoCadastradoEventMessage(
+                    pedido.Chave,
+                    itensMessage,
+                    pedido.Parceiro.Chave);
 
                 await _messageBus.Publish(message);
             }

@@ -6,7 +6,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers
+namespace Api.Controllers
 {
     [Route("api/parceiros")]
     [ApiController]

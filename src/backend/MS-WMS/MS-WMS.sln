@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireJobs", "HangfireJobs\HangfireJobs.csproj", "{E3E1E091-D91C-4190-9E03-C28B9B46B290}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{93D8FE8F-4AEA-44F2-AADB-CD48489A8DD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "WebApi\Api.csproj", "{93D8FE8F-4AEA-44F2-AADB-CD48489A8DD9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "Worker\Worker.csproj", "{C2E4142F-0D1E-45D5-A59E-B1C5B6965EDA}"
 EndProject

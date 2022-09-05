@@ -6,13 +6,19 @@ namespace Shared.EventsMessages.OMS
 {
     public class PedidoCadastradoEventMessage : DomainEventMessageBase
     {
-        public PedidoCadastradoEventMessage(Guid chavePedido, List<ItemPedidoCadastradoEventMessage> itens)
+        public PedidoCadastradoEventMessage(
+            Guid chavePedido,
+            List<ItemPedidoCadastradoEventMessage> itens,
+            Guid chaveParceiro)
         {
             ChavePedido = chavePedido;
             Itens = itens;
+            ChaveParceiro = chaveParceiro;
         }
 
         public Guid ChavePedido { get; set; }
+        public Guid ChaveParceiro { get; set; }
+
         public List<ItemPedidoCadastradoEventMessage> Itens { get; set; }
     }
 

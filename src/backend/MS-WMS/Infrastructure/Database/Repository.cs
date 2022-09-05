@@ -18,32 +18,18 @@ namespace Infrastructure.Database
         }
 
 
-        public async Task<T> Adicionar<T>(T entity) where T : Entity
+        public async Task<T> AdicionarAsync<T>(T entity) where T : Entity
         {
             await _context.Set<T>().AddAsync(entity);
 
             return entity;
         }
 
-        //public Task CadastrarArmazem(Armazem armazem)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public async Task CadastrarParceiro(Parceiro parceiro)
-        //{
-        //    await _context.Parceiros.AddAsync(parceiro);
-        //}
-
         public Task<Armazem> ObterArmazemAsync(Guid chave, string[] includes = null)
         {
             throw new NotImplementedException();
         }
 
-        //public async Task<Parceiro> ObterParceiroPorChaveAsync(Guid chave, string[] includes = null)
-        //{
-        //    return await _context.Parceiros.SingleOrDefaultAsync(x => x.Chave == chave);
-        //}
 
         public async Task<Produto[]> ObterProdutoPorChaveAsync(Guid[] chaves)
         {
@@ -52,7 +38,7 @@ namespace Infrastructure.Database
                 .ToArrayAsync();
         }
 
-        public Task<Produto[]> ObterProdutoPorPorParceirto(Guid chaveParceiro)
+        public Task<Produto[]> ObterProdutoPorPorParceiro(Guid chaveParceiro)
         {
             throw new NotImplementedException();
         }

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infras
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared.EventsMessages", "..\Shared.EventsMessages\Shared.EventsMessages.shproj", "{8641F9B5-9745-439D-B4AE-02349A988791}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "..\WebApi\WebApi.csproj", "{E8849364-6519-4AF9-96E8-253782765907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "..\WebApi\Api.csproj", "{E8849364-6519-4AF9-96E8-253782765907}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "..\Worker\Worker.csproj", "{E049DA73-93CC-4B77-8BC2-78B26CBA0278}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace WebApi._Configuration
+namespace Api._Configuration
 {
     public class AuthorizeWithKeyAttribute : ActionFilterAttribute
     {

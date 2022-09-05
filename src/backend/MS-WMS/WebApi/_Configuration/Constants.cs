@@ -1,4 +1,4 @@
-﻿namespace WebApi._Configuration
+﻿namespace Api._Configuration
 {
     public static class Constants
     {

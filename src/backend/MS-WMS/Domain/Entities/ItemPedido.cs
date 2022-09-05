@@ -22,7 +22,7 @@ namespace Domain.Entities
         public Guid ChavePedido { get; private set; }
         public Guid ChaveParceiro { get; private set; }
 
-        public int ArmazemId { get; private set; }
+        public int? ArmazemId { get; private set; }
         public Armazem Armazem { get; private set; }
 
 
@@ -35,7 +35,9 @@ namespace Domain.Entities
             return new ItemPedido()
             {
                 Quantidade = dto.Quantidade,
-                ProdutoId = dto.ProdutoId.Value
+                ProdutoId = dto.ProdutoId.Value,
+                ChaveParceiro = dto.ChaveParceiro,
+                ChavePedido = dto.ChavePedido
             };
         }
 

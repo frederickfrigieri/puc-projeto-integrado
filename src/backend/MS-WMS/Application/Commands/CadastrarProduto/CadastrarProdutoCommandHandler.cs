@@ -36,7 +36,7 @@ namespace Application.Commands.CadastrarProduto
 
                 produto = new Produto(request.Descricao, request.Sku, request.ChaveParceiro);
 
-                await _repository.Adicionar(produto);
+                await _repository.AdicionarAsync(produto);
             }
 
             return new

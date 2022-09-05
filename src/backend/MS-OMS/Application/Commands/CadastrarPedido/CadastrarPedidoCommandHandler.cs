@@ -3,6 +3,7 @@ using Domain;
 using Domain.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,11 +31,13 @@ namespace Application.Commands.CadastrarPedido
             var parceiro = await _repository
                 .ObterParceiroAsync(request.ChaveParceiro, new string[] { "Produtos" });
 
+
             foreach (var item in request.Itens)
             {
+                var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == item.Sku);
                 var itemDto = new ItemPedidoDto
                 {
-                    ChaveProduto = item.ChaveProduto,
+                    ChaveProduto = produto.Chave,
                     Quantidade = item.Quantidade
                 };
 

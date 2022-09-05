@@ -8,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Serilog.RequestResponse.Extensions;
 using Serilog.RequestResponse.Extensions.Models;
 using Serilog.RequestResponseExtension.Extensions;
-using WebApi._Configuration;
+using Api._Configuration;
 
-namespace WebApi
+namespace Api
 {
     public class Startup
     {

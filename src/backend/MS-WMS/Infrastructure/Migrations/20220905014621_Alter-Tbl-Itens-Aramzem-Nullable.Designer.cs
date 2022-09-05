@@ -4,14 +4,16 @@ using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CurrentContext))]
-    partial class CurrentContextModelSnapshot : ModelSnapshot
+    [Migration("20220905014621_Alter-Tbl-Itens-Aramzem-Nullable")]
+    partial class AlterTblItensAramzemNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,8 +109,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
-                    b.Property<byte>("Quantidade")
-                        .HasColumnType("tinyint");
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -116,7 +118,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("ItensPedidos","OMS");
+                    b.ToTable("Itens");
                 });
 
             modelBuilder.Entity("Domain.Entities.Posicao", b =>
