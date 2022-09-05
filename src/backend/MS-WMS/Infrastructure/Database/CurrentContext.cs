@@ -14,6 +14,8 @@ namespace Infrastructure.Database
         public DbSet<Estoque> Estoque { get; set; }
         public DbSet<Posicao> Posicoes { get; set; }
         public DbSet<InternalCommand> InternalCommands { get; set; }
+        public DbSet<Armazem> Armazens { get; set; }
+
 
         public CurrentContext(DbContextOptions options) : base(options)
         {

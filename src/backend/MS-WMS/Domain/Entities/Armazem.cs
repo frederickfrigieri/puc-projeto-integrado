@@ -35,24 +35,26 @@ namespace Domain.Entities
             return posicao;
         }
 
-        //public Estoque[] CadastrarEstoque(Guid chaveParceiro, Guid chaveProduto, byte quantidade)
-        //{
-        //    var produto = Produtos
-        //        .Where(x => x.Chave == chaveParceiro && x.Chave == chaveProduto)
-        //        .Single();
+        public Estoque[] CadastrarEstoque(
+            Guid chaveParceiro,
+            Produto produto,
+            short quantidade)
+        {
+            var estoquesCadastrado = new List<Estoque>();
 
-        //    var estoquesCadastrado = new List<Estoque>();
+            Enumerable.Range(1, quantidade).ToList().ForEach(count =>
+            {
+                var estoque = new Estoque(chaveParceiro, produto);
 
-        //    Enumerable.Range(1, quantidade).ToList().ForEach(count =>
-        //    {
-        //        var estoque = new Estoque(chaveParceiro, this, produto);
+                if (Estoques == null)
+                    Estoques = new List<Estoque>();
 
-        //        estoquesCadastrado.Add(estoque);
-        //        Estoques.Add(estoque);
-        //    });
+                estoquesCadastrado.Add(estoque);
+                Estoques.Add(estoque);
+            });
 
-        //    return estoquesCadastrado.ToArray();
-        //}
+            return estoquesCadastrado.ToArray();
+        }
 
         public CadastrarItemResponse CadastrarItem(
             int quantidade,

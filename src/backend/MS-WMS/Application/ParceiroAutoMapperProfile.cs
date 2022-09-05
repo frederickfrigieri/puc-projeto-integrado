@@ -1,4 +1,5 @@
-﻿using Application.Commands.CadastrarProduto;
+﻿using Application.Commands.CadastrarEstoque;
+using Application.Commands.CadastrarProduto;
 using AutoMapper;
 
 namespace Application.Empresas
@@ -8,6 +9,8 @@ namespace Application.Empresas
         public ParceiroAutoMapperProfile()
         {
             CreateMap<CadastrarProdutoRequest, CadastrarProdutoCommand>();
+            CreateMap<CadastrarEstoqueRequest, CadastrarEstoqueCommand>();
+
         }
     }
 }

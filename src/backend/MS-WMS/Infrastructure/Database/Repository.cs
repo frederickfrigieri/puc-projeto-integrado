@@ -25,9 +25,9 @@ namespace Infrastructure.Database
             return entity;
         }
 
-        public Task<Armazem> ObterArmazemAsync(Guid chave, string[] includes = null)
+        public async Task<Armazem> ObterArmazemAsync(Guid chave, string[] includes = null)
         {
-            throw new NotImplementedException();
+            return await _context.Armazens.SingleOrDefaultAsync(c => c.Chave == chave);
         }
 
 
