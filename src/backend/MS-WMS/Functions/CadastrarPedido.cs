@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Functions
 {
-    public class Function1
+    public class CadastrarPedido
     {
-        private readonly ILogger<Function1> _logger;
+        private readonly ILogger<CadastrarPedido> _logger;
         private readonly ICommandsScheduler _commandScheduler;
 
-        public Function1(
-            ILogger<Function1> log,
+        public CadastrarPedido(
+            ILogger<CadastrarPedido> log,
             ICommandsScheduler commandScheduler
             )
         {
@@ -24,7 +24,7 @@ namespace Functions
 
 
 
-        [FunctionName("Function1")]
+        [FunctionName("CadastrarPedido")]
         public async Task Run([ServiceBusTrigger("oms-pedido-cadastrado", "wms-cadastrar-pedido", Connection = "ConnectionStringServiceBus")] string message)
         {
             _logger.LogInformation($"C# ServiceBus topic trigger function processed message: {message}");

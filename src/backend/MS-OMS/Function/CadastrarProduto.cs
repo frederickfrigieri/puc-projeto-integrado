@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Function
 {
-    public class Function1
+    public class CadastrarProduto
     {
-        private readonly ILogger<Function1> _logger;
+        private readonly ILogger<CadastrarProduto> _logger;
         private readonly ICommandsScheduler _commandScheduler;
 
-        public Function1(
-            ILogger<Function1> log,
+        public CadastrarProduto(
+            ILogger<CadastrarProduto> log,
             ICommandsScheduler commandScheduler)
         {
             _logger = log;
             _commandScheduler = commandScheduler;
         }
 
-        [FunctionName("Function1")]
+        [FunctionName("CadastrarProduto")]
         public async Task Run([ServiceBusTrigger("wms-produto-cadastrado",
             "oms-cadastrar-produto",
             Connection = "ConnectionStringServiceBus")] string message)
