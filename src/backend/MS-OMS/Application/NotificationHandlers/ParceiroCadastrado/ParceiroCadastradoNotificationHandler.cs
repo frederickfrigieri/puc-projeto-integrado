@@ -1,6 +1,6 @@
 ﻿using Application._Configuration.MessageBus;
 using MediatR;
-using Shared.EventsMessages.OMS;
+using Serilog.RequestResponse.Extensions.Exceptions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,15 +17,17 @@ namespace Application.NotificationHandlers.ParceiroCadastrado
 
         public Task Handle(ParceiroCadastradoNotification notification, CancellationToken cancellationToken)
         {
-            var message = new ParceiroCriadoEventMessage
-            {
-                RazaoSocial = notification.RazaoSocial,
-                ChaveParceiro = notification.ChaveParceiro
-            };
+            //var message = new ParceiroCriadoEventMessage
+            //{
+            //    RazaoSocial = notification.RazaoSocial,
+            //    ChaveParceiro = notification.ChaveParceiro
+            //};
 
-            _messageBus.Publish(message);
+            //_messageBus.Publish(message);
 
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
+
+            throw new DomainException($"NotificationHandler náo implementado. {typeof(ParceiroCadastradoNotificationHandler)}");
         }
     }
 }

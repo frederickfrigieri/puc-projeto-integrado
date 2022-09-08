@@ -1,4 +1,5 @@
 ﻿using System;
+using Api._Configuration;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 using Serilog.RequestResponse.Extensions;
 using Serilog.RequestResponse.Extensions.Models;
 using Serilog.RequestResponseExtension.Extensions;
-using Api._Configuration;
 
 namespace Api
 {

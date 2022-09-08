@@ -1,95 +1,98 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Migrations\20211121032002_Ajustes-Nomes-Propriedades.cs" />
-    <Compile Remove="Migrations\20211121032002_Ajustes-Nomes-Propriedades.Designer.cs" />
-    <Compile Remove="Migrations\20211214200416_NovoStatus_AguardandoNotificarEnvioParaTransportadora.cs" />
-    <Compile Remove="Migrations\20211214200416_NovoStatus_AguardandoNotificarEnvioParaTransportadora.Designer.cs" />
-    <Compile Remove="Migrations\20220126144450_NovaColuna_SistemaIntegracaoId_Tabela_Empresa.cs" />
-    <Compile Remove="Migrations\20220126144450_NovaColuna_SistemaIntegracaoId_Tabela_Empresa.Designer.cs" />
-    <Compile Remove="Migrations\20220207123739_NovaTabelaPedidosNotasFiscaisTiny.cs" />
-    <Compile Remove="Migrations\20220207123739_NovaTabelaPedidosNotasFiscaisTiny.Designer.cs" />
-    <Compile Remove="Migrations\20220208182526_AlteraTableSistemaIntegracao.cs" />
-    <Compile Remove="Migrations\20220208182526_AlteraTableSistemaIntegracao.Designer.cs" />
-    <Compile Remove="Migrations\20220131190344_teste.cs" />
-    <Compile Remove="Migrations\20220131190344_teste.Designer.cs" />
-    <Compile Remove="Migrations\20220424232929_Hotfix-Relacionamento-Endereco-Pedido.cs" />
-    <Compile Remove="Migrations\20220424232929_Hotfix-Relacionamento-Endereco-Pedido.Designer.cs" />
-    <Compile Remove="Migrations\20220425002839_Hotifix-Endereco-Pedido.cs" />
-    <Compile Remove="Migrations\20220425002839_Hotifix-Endereco-Pedido.Designer.cs" />
-    <Compile Remove="Migrations\20220425004946_Hotifix-Endereco-Pedido-2.cs" />
-    <Compile Remove="Migrations\20220425004946_Hotifix-Endereco-Pedido-2.Designer.cs" />
-    <Compile Remove="Migrations\20220510022718_EmpresaCliente.cs" />
-    <Compile Remove="Migrations\20220510022718_EmpresaCliente.Designer.cs" />
-    <Compile Remove="Migrations\20220510023011_EmpresaCliente.cs" />
-    <Compile Remove="Migrations\20220510023011_EmpresaCliente.Designer.cs" />
-    <Compile Remove="Migrations\20220517225545_TipoIntegracao-OwnCloud.cs" />
-    <Compile Remove="Migrations\20220517225545_TipoIntegracao-OwnCloud.Designer.cs" />
-    <Compile Remove="Migrations\20220517230055_TipoIntegracao-OwnCloud.cs" />
-    <Compile Remove="Migrations\20220517230055_TipoIntegracao-OwnCloud.Designer.cs" />
-    <Compile Remove="Migrations\20220517230546_Ajuste-TipoIntegracao-SistemaIntegracao.cs" />
-    <Compile Remove="Migrations\20220517230546_Ajuste-TipoIntegracao-SistemaIntegracao.Designer.cs" />
-    <Compile Remove="Migrations\20220728205134_AlterTableMotivoCancelamento.cs" />
-    <Compile Remove="Migrations\20220728205134_AlterTableMotivoCancelamento.Designer.cs" />
-    <Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.cs" />
-    <Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.Designer.cs" />
-    <Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.cs" />
-    <Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.Designer.cs" />
-    <Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.cs" />
-    <Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.Designer.cs" />
-    <Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.cs" />
-    <Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.Designer.cs" />
-    <Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.cs" />
-    <Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.Designer.cs" />
-    <Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.cs" />
-    <Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.Designer.cs" />
-    <Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.cs" />
-    <Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.Designer.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Migrations\20211121032002_Ajustes-Nomes-Propriedades.cs" />
+		<Compile Remove="Migrations\20211121032002_Ajustes-Nomes-Propriedades.Designer.cs" />
+		<Compile Remove="Migrations\20211214200416_NovoStatus_AguardandoNotificarEnvioParaTransportadora.cs" />
+		<Compile Remove="Migrations\20211214200416_NovoStatus_AguardandoNotificarEnvioParaTransportadora.Designer.cs" />
+		<Compile Remove="Migrations\20220126144450_NovaColuna_SistemaIntegracaoId_Tabela_Empresa.cs" />
+		<Compile Remove="Migrations\20220126144450_NovaColuna_SistemaIntegracaoId_Tabela_Empresa.Designer.cs" />
+		<Compile Remove="Migrations\20220207123739_NovaTabelaPedidosNotasFiscaisTiny.cs" />
+		<Compile Remove="Migrations\20220207123739_NovaTabelaPedidosNotasFiscaisTiny.Designer.cs" />
+		<Compile Remove="Migrations\20220208182526_AlteraTableSistemaIntegracao.cs" />
+		<Compile Remove="Migrations\20220208182526_AlteraTableSistemaIntegracao.Designer.cs" />
+		<Compile Remove="Migrations\20220131190344_teste.cs" />
+		<Compile Remove="Migrations\20220131190344_teste.Designer.cs" />
+		<Compile Remove="Migrations\20220424232929_Hotfix-Relacionamento-Endereco-Pedido.cs" />
+		<Compile Remove="Migrations\20220424232929_Hotfix-Relacionamento-Endereco-Pedido.Designer.cs" />
+		<Compile Remove="Migrations\20220425002839_Hotifix-Endereco-Pedido.cs" />
+		<Compile Remove="Migrations\20220425002839_Hotifix-Endereco-Pedido.Designer.cs" />
+		<Compile Remove="Migrations\20220425004946_Hotifix-Endereco-Pedido-2.cs" />
+		<Compile Remove="Migrations\20220425004946_Hotifix-Endereco-Pedido-2.Designer.cs" />
+		<Compile Remove="Migrations\20220510022718_EmpresaCliente.cs" />
+		<Compile Remove="Migrations\20220510022718_EmpresaCliente.Designer.cs" />
+		<Compile Remove="Migrations\20220510023011_EmpresaCliente.cs" />
+		<Compile Remove="Migrations\20220510023011_EmpresaCliente.Designer.cs" />
+		<Compile Remove="Migrations\20220517225545_TipoIntegracao-OwnCloud.cs" />
+		<Compile Remove="Migrations\20220517225545_TipoIntegracao-OwnCloud.Designer.cs" />
+		<Compile Remove="Migrations\20220517230055_TipoIntegracao-OwnCloud.cs" />
+		<Compile Remove="Migrations\20220517230055_TipoIntegracao-OwnCloud.Designer.cs" />
+		<Compile Remove="Migrations\20220517230546_Ajuste-TipoIntegracao-SistemaIntegracao.cs" />
+		<Compile Remove="Migrations\20220517230546_Ajuste-TipoIntegracao-SistemaIntegracao.Designer.cs" />
+		<Compile Remove="Migrations\20220728205134_AlterTableMotivoCancelamento.cs" />
+		<Compile Remove="Migrations\20220728205134_AlterTableMotivoCancelamento.Designer.cs" />
+		<Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.cs" />
+		<Compile Remove="Migrations\20220804190739_NovaTabelaEmpresasStatus.Designer.cs" />
+		<Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.cs" />
+		<Compile Remove="Migrations\20220831045335_Add-Tbl-Parceiros.Designer.cs" />
+		<Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.cs" />
+		<Compile Remove="Migrations\20220831045435_Add-Tbl-Parceiros.Designer.cs" />
+		<Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.cs" />
+		<Compile Remove="Migrations\20220831050249_Add-Tbl-TabelasIniciais.Designer.cs" />
+		<Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.cs" />
+		<Compile Remove="Migrations\20220831050609_Add-Tbl-TabelasIniciais.Designer.cs" />
+		<Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.cs" />
+		<Compile Remove="Migrations\20220831051023_Add-Tbl-TabelasIniciais.Designer.cs" />
+		<Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.cs" />
+		<Compile Remove="Migrations\20220831052139_Add-Tbl-TabelasIniciais.Designer.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="6.0.1" />
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="AWSSDK.S3" Version="3.7.9.2" />
-    <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="GoogleApi" Version="3.10.11" />
-    <PackageReference Include="MassTransit" Version="7.2.3" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.3" />
-    <PackageReference Include="MassTransit.Autofac" Version="7.2.3" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.14" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.14">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.14" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.14" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-	<PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.3.0" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+		<PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="6.0.1" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="AWSSDK.S3" Version="3.7.9.2" />
+		<PackageReference Include="Azure.Messaging.ServiceBus" Version="7.10.0" />
+		<PackageReference Include="Dapper" Version="2.0.30" />
+		<PackageReference Include="GoogleApi" Version="3.10.11" />
+		<PackageReference Include="MassTransit" Version="7.2.3" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.2.3" />
+		<PackageReference Include="MassTransit.Autofac" Version="7.2.3" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="7.2.3" />
+		<PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="7.2.3" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\Application\Application.csproj" />
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.14">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.14" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.14" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.1" />
+	</ItemGroup>
 
-    <ItemGroup>
-	    <Content Update="appsettings.Production.json">
-		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	    </Content>
-	    <Content Update="appsettings.Development.json">
-		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	    </Content>
-	    <Content Update="appsettings.json">
-		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	    </Content>
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Application\Application.csproj" />
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="appsettings.Production.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.Development.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>

@@ -13,7 +13,9 @@ namespace Application.NotificationHandlers.PedidoCadastrado
         private readonly IRepository _repository;
         private readonly IMessageBus _messageBus;
 
-        public PedidoCadastradoNotificationHandler(IRepository repository, IMessageBus messageBus)
+        public PedidoCadastradoNotificationHandler(
+            IRepository repository,
+            IMessageBus messageBus)
         {
             _repository = repository;
             _messageBus = messageBus;
@@ -46,7 +48,7 @@ namespace Application.NotificationHandlers.PedidoCadastrado
                     itensMessage,
                     pedido.Parceiro.Chave);
 
-                await _messageBus.Publish(message);
+                await _messageBus.PublishAsync(message, "oms-pedido-cadastrado");
             }
         }
     }

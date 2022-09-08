@@ -57,11 +57,13 @@
     <PackageReference Include="Autofac.Extras.CommonServiceLocator" Version="6.0.1" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.9.2" />
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.10.0" />
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="GoogleApi" Version="3.10.11" />
     <PackageReference Include="MassTransit" Version="7.2.3" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.2.3" />
     <PackageReference Include="MassTransit.Autofac" Version="7.2.3" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="7.2.3" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.14" />

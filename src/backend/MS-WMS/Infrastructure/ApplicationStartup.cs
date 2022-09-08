@@ -87,11 +87,11 @@ namespace Infrastructure
             {
                 services.AddMassTransitHostedService();
             }
-            else
-            {
-                var bc = serviceProvider.GetService<IBusControl>();
-                bc.Start();
-            }
+            //else
+            //{
+            //    var bc = serviceProvider.GetService<IBusControl>();
+            //    bc.Start();
+            //}
         }
 
         public static void ConfigureLogger(IConfiguration configuration)
