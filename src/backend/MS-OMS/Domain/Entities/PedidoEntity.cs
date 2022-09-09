@@ -48,6 +48,11 @@ namespace Domain.Entities
 
             return pedido;
         }
+
+        public void AtualizarStatus(StatusPedidoEnum status)
+        {
+            StatusPedido = status;
+        }
     }
 
 }

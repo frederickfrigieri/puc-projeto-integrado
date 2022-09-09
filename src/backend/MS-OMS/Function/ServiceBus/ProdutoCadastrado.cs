@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Function.Bus
 {
-    public class CadastrarProduto
+    public class ProdutoCadastrado
     {
-        private readonly ILogger<CadastrarProduto> _logger;
+        private readonly ILogger<ProdutoCadastrado> _logger;
         private readonly ICommandsScheduler _commandScheduler;
 
-        public CadastrarProduto(
-            ILogger<CadastrarProduto> log,
+        public ProdutoCadastrado(
+            ILogger<ProdutoCadastrado> log,
             ICommandsScheduler commandScheduler)
         {
             _logger = log;

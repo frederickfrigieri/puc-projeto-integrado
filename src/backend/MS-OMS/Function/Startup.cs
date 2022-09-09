@@ -35,14 +35,6 @@ namespace Function
             builder.Services.AddScoped<ICommandsScheduler, CommandsScheduler>();
             builder.Services.AddMediatR(typeof(ProcessOutboxCommand));
 
-            //var containerBuilder = ApplicationStartup.InitializeContainer(builder.Services, configuration);
-
-            //containerBuilder
-            //    .RegisterAssemblyTypes(typeof(Startup).Assembly)
-            //    .InNamespaceOf<CadastrarProduto>();
-
-            //builder.Services.AddSingleton(containerBuilder);
-
             ApplicationStartup.Initialize(builder.Services, configuration);
         }
 

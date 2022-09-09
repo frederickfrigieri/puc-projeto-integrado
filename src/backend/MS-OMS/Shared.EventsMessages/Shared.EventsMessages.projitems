@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)OMS\PedidoCadastradoEventMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SeedWork\DomainEventMessageBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SeedWork\IntegrationEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WMS\PedidoAssociadoArmazemEventMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WMS\PedidoAssociadoEstoqueEventMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WMS\ProdutoCadastradoEventMessage.cs" />
   </ItemGroup>
 </Project>
