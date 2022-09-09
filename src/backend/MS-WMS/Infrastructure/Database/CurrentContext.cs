@@ -10,8 +10,8 @@ namespace Infrastructure.Database
     {
         public DbSet<OutboxMessage> OutboxMessages { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<ItemPedido> Itens { get; set; }
-        public DbSet<Estoque> Estoque { get; set; }
+        public DbSet<PedidoItem> PedidosItens { get; set; }
+        public DbSet<Estoque> Estoques { get; set; }
         public DbSet<Posicao> Posicoes { get; set; }
         public DbSet<InternalCommand> InternalCommands { get; set; }
         public DbSet<Armazem> Armazens { get; set; }

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Shared.EventsMessages.OMS;
 using System.Threading.Tasks;
 
-namespace Functions
+namespace Functions.ServiceBus
 {
     public class CadastrarPedido
     {

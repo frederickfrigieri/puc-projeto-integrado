@@ -1,4 +1,5 @@
 ﻿using Domain._SeedWork;
+using Domain.Events;
 using System;
 
 namespace Domain.Entities
@@ -20,15 +21,17 @@ namespace Domain.Entities
 
         public int ProdutoId { get; private set; }
         public Produto Produto { get; private set; }
-        public int? ItemPedidoId { get; private set; }
-        public ItemPedido ItemPedido { get; private set; }
+        public int? PedidoItemId { get; private set; }
+        public PedidoItem PedidoItem { get; private set; }
 
         public int? PosicaoId { get; private set; }
         public Posicao Posicao { get; private set; }
 
-        public void AssociarItem(ItemPedido item)
+        public void AssociarItem(PedidoItem item)
         {
-            ItemPedido = item;
+            PedidoItem = item;
+
+            AddDomainEvent(new PedidoAssociadoEstoqueEvent(PedidoItem.Chave, Chave));
         }
     }
 }

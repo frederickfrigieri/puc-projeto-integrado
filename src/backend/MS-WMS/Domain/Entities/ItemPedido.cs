@@ -1,14 +1,15 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
+using Domain.Events;
 using System;
 
 namespace Domain.Entities
 {
-    public class ItemPedido : Entity, IAggregateRoot
+    public class PedidoItem : Entity, IAggregateRoot
     {
         public int Quantidade { get; private set; }
 
-        internal ItemPedido(int quantidade, Produto produto, Guid chavePedido, Guid chaveParceiro)
+        internal PedidoItem(int quantidade, Produto produto, Guid chavePedido, Guid chaveParceiro)
         {
             Quantidade = quantidade;
             Produto = produto;
@@ -26,13 +27,13 @@ namespace Domain.Entities
         public Armazem Armazem { get; private set; }
 
 
-        private ItemPedido()
+        private PedidoItem()
         {
         }
 
-        public static ItemPedido Criar(ItemPedidoDto dto)
+        public static PedidoItem Criar(ItemPedidoDto dto)
         {
-            return new ItemPedido()
+            return new PedidoItem()
             {
                 Quantidade = dto.Quantidade,
                 ProdutoId = dto.ProdutoId.Value,
@@ -44,6 +45,8 @@ namespace Domain.Entities
         public void AssociarArmazem(Armazem armazem)
         {
             Armazem = armazem;
+
+            AddDomainEvent(new PedidoAssociadoArmazemEvent(ChavePedido, armazem.Chave));
         }
     }
 

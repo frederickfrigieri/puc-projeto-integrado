@@ -31,7 +31,8 @@ namespace Application.Commands.CadastrarProduto
 
             if (parceiro != null)
             {
-                var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == request.Sku);
+                var produto = parceiro.Produtos.FirstOrDefault(x => x.Sku == request.Sku);
+                
                 if (produto == null)
                 {
                     var dto = new ProdutoDto
@@ -43,6 +44,7 @@ namespace Application.Commands.CadastrarProduto
 
                     produto = parceiro.CriarProduto(dto);
                 }
+                
                 return produto.Chave;
             }
 

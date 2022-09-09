@@ -12,7 +12,7 @@ namespace Domain.Entities
 
         public Guid ChaveParceiro { get; private set; }
 
-        public List<ItemPedido> ItensPedidos { get; private set; }
+        public List<PedidoItem> ItensPedidos { get; private set; }
 
         private Produto()
         {

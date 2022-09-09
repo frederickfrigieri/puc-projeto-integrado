@@ -43,7 +43,7 @@ namespace Application.Commands.CadastrarPedido
                     Quantidade = item.Quantidade
                 };
 
-                var itemEntidade = ItemPedido.Criar(dto);
+                var itemEntidade = PedidoItem.Criar(dto);
 
                 await _repository.AdicionarAsync(itemEntidade);
             }

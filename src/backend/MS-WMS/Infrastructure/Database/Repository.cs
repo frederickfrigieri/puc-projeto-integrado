@@ -30,6 +30,45 @@ namespace Infrastructure.Database
             return await _context.Armazens.SingleOrDefaultAsync(c => c.Chave == chave);
         }
 
+        public async Task<Armazem> ObterArmazemMenorQuantidadePedido()
+        {
+            return await _context.Armazens
+                .OrderBy(x => x.Itens.GroupBy(x => x.ChavePedido).Count())
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Estoque> ObterEstoqueDisponivel(
+            int produtoId,
+            int armazemId, 
+            Guid chaveParceiro)
+        {
+            return await _context.Estoques
+                .Where(x => x.ProdutoId == produtoId
+                && x.PedidoItem == null
+                && x.Posicao != null
+                && x.ArmazemId == armazemId
+                && x.ChaveParceiro == chaveParceiro)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<PedidoItem[]> ObterPedidosSemArmazem()
+        {
+            return await _context.PedidosItens
+                .Where(x => x.Armazem == null)
+                .ToArrayAsync();
+        }
+
+        public async Task<PedidoItem[]> ObterPedidosSemEstoque()
+        {
+            var pedidosComEstoque = await _context.Estoques
+                .Where(x => x.PedidoItem != null)
+                .Select(x => x.PedidoItem)
+                .ToListAsync();
+
+            return await _context.PedidosItens
+                .Where(x => pedidosComEstoque.Contains(x) == false)
+                .ToArrayAsync();
+        }
 
         public async Task<Produto[]> ObterProdutoPorChaveAsync(Guid[] chaves)
         {

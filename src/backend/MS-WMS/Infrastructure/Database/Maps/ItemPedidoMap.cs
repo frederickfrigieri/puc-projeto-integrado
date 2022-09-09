@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Maps
 {
-    public class ItemPedidoMap : IEntityTypeConfiguration<ItemPedido>
+    public class ItemPedidoMap : IEntityTypeConfiguration<PedidoItem>
     {
-        public void Configure(EntityTypeBuilder<ItemPedido> builder)
+        public void Configure(EntityTypeBuilder<PedidoItem> builder)
         {
             builder.ToTable("ItensPedidos", SchemaNames.OMS);
 

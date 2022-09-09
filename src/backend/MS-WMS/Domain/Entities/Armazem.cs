@@ -15,7 +15,7 @@ namespace Domain.Entities
         public string Descricao { get; private set; }
         public List<Posicao> Posicoes { get; private set; }
         public List<Estoque> Estoques { get; private set; }
-        public List<ItemPedido> Itens { get; private set; }
+        public List<PedidoItem> Itens { get; private set; }
 
         private Armazem() { }
 
@@ -62,9 +62,9 @@ namespace Domain.Entities
             Guid chavePedido,
             Guid chaveParceiro)
         {
-            var item = new ItemPedido(quantidade, produto, chavePedido, chaveParceiro);
+            var item = new PedidoItem(quantidade, produto, chavePedido, chaveParceiro);
 
-            if (Itens == null) Itens = new List<ItemPedido>();
+            if (Itens == null) Itens = new List<PedidoItem>();
 
             Itens.Add(item);
 
@@ -76,7 +76,7 @@ namespace Domain.Entities
             };
         }
 
-        public AssociarItemPedidoResponse AssociarItemPedido(Guid chavePedido)
+        public AssociarItemPedidoResponse AssociarPedidoItem(Guid chavePedido)
         {
             var item = Itens.Single(x => x.ChavePedido == chavePedido);
 
@@ -89,10 +89,10 @@ namespace Domain.Entities
             };
         }
 
-        public AssociarItemPedidoNoEstoqueResponse AssociarItemPedidoNoEstoque(ItemPedido item)
+        public AssociarItemPedidoNoEstoqueResponse AssociarIPedidoItemNoEstoque(PedidoItem item)
         {
             var estoque = Estoques
-                .Where(x => x.ItemPedido == null
+                .Where(x => x.PedidoItem == null
                 && x.ProdutoId == item.Produto.Id
                 && x.ArmazemId == item.ArmazemId)
                 .FirstOrDefault();

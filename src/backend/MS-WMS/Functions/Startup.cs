@@ -1,8 +1,12 @@
 ﻿using Application._Configuration.Data;
 using Application._Configuration.Processing;
+using Infrastructure;
 using Infrastructure.Database;
 using Infrastructure.Processing;
+using Infrastructure.Processing.Outbox;
+using MediatR;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FunctionsStartup(typeof(Functions.Startup))]
@@ -13,21 +17,31 @@ namespace Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            var connectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MS-WMS;Integrated Security=True;MultipleActiveResultSets=True";
-
-            builder.Services.AddScoped<ICommandsScheduler, CommandsScheduler>();
+            var configuration = BuildConfiguration(builder.GetContext().ApplicationRootPath);
+            var connectionString = configuration.GetConnectionString("ConnectionString");
 
             builder.Services.AddSingleton<ISqlConnectionFactory>((s) =>
             {
                 return new SqlConnectionFactory(connectionString);
             });
 
+            builder.Services.AddScoped<ICommandsScheduler, CommandsScheduler>();
+            builder.Services.AddMediatR(typeof(ProcessOutboxCommand));
 
-            //ApplicationStartup.InitializeCustomServices(builder.Services);
+            ApplicationStartup.Initialize(builder.Services, configuration);
 
-            //builder.RegisterBuildCallback(c => container = c);
-            //ApplicationStartup.InitializeContainerModules(builder, hostContext.Configuration);
+        }
+        private IConfiguration BuildConfiguration(string applicationRootPath)
+        {
+            var config =
+                new ConfigurationBuilder()
+                    .SetBasePath(applicationRootPath)
+                    .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile("settings.json", optional: true, reloadOnChange: true)
+                    .AddEnvironmentVariables()
+                    .Build();
 
+            return config;
         }
     }
 }

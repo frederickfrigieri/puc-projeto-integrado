@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Shared.EventsMessages.WMS;
 using System.Threading.Tasks;
 
-namespace Function
+namespace Function.Bus
 {
     public class CadastrarProduto
     {
@@ -22,7 +22,8 @@ namespace Function
         }
 
         [FunctionName("CadastrarProduto")]
-        public async Task Run([ServiceBusTrigger("wms-produto-cadastrado",
+        public async Task Run([ServiceBusTrigger(
+            "wms-produto-cadastrado",
             "oms-cadastrar-produto",
             Connection = "ConnectionStringServiceBus")] string message)
         {

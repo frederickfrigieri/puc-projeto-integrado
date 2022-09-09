@@ -56,6 +56,24 @@ namespace Infrastructure
             return serviceProvider;
         }
 
+        public static ContainerBuilder InitializeContainer(IServiceCollection services, IConfiguration configuration)
+        {
+            var containerBuilder = InitializeCustomModules(services, configuration);
+
+            var container = containerBuilder.Build();
+
+            ServiceLocator.SetLocatorProvider(() => new AutofacServiceLocator(container));
+
+            var serviceProvider = new AutofacServiceProvider(container);
+
+            InitializeCustomServices(services, serviceProvider);
+
+            CompositionRoot.SetContainer(container);
+
+            return containerBuilder;
+        }
+
+
         public static ContainerBuilder InitializeCustomModules(IServiceCollection services, IConfiguration configuration)
         {
             var container = new ContainerBuilder();
@@ -70,7 +88,6 @@ namespace Infrastructure
         public static void InitializeContainerModules(ContainerBuilder container, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("ConnectionString");
-            _messageBusSettings = configuration.GetSection("MessageBusSettings").Get<MessageBusSettings>();
 
             container.RegisterModule(new DatabaseModule(connectionString));
             container.RegisterModule(new MediatorModule());
@@ -78,7 +95,7 @@ namespace Infrastructure
             container.RegisterModule(new ProcessingModule());
             container.RegisterModule(new ServicesModule());
             container.RegisterModule(new AutoMapperModule(Assemblies.Application));
-            container.RegisterModule(new MessageBusModule(_messageBusSettings));
+            container.RegisterModule(new MessageBusModule());
         }
 
         public static void InitializeCustomServices(IServiceCollection services, IServiceProvider serviceProvider = null)

@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "..\WebApi\Api.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "..\Worker\Worker.csproj", "{E049DA73-93CC-4B77-8BC2-78B26CBA0278}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function", "..\Function\Function.csproj", "{D186E69C-32B9-4F4D-8D14-51936C50D561}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Function", "..\Function\Function.csproj", "{D186E69C-32B9-4F4D-8D14-51936C50D561}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
