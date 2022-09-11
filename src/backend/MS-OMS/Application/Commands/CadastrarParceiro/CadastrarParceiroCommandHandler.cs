@@ -3,6 +3,7 @@ using Domain;
 using Domain.Dtos;
 using Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +23,11 @@ namespace Application.Commands.CadastrarParceiro
             var dto = new ParceiroCreateDto
             {
                 Cnpj = request.Cnpj,
-                RazaoSocial = request.RazaoSocial
+                RazaoSocial = request.RazaoSocial,
+                ChaveBling = Guid.NewGuid().ToString(),
+                Email = request.Email,
+                Nome = request.Nome,
+                Senha = request.Senha
             };
 
             var parceiro = ParceiroEntity.Criar(dto);

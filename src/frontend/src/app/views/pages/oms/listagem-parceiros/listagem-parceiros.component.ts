@@ -16,7 +16,9 @@ export class ListagemParceirosComponent implements OnInit {
 
   ngOnInit(): void {
     this.omsService.getParceiros()
-      .subscribe(resp => resp.forEach(item => this.colecao.push(item)));
+      .subscribe(resp => {
+        resp.forEach(item => this.colecao.push(item))
+      });
   }
 
 }

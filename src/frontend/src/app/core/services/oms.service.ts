@@ -1,12 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OmsService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  // private endpoint = environment.urlOms + '/api';
 
   getPedidos(chaveParceiro: string): Observable<any[]> {
     return of([
@@ -50,24 +54,11 @@ export class OmsService {
   }
 
   createParceiro(model: any): Observable<any> {
-    return of({});
+    return this.httpClient.post(`/parceiros`, model);
   }
 
   getParceiros(): Observable<any[]> {
-    return of([
-      {
-        id: 1,
-        razaoSocial: 'F. F. Frigieri Informática',
-        cnpj: '18.311.884/0001-60',
-        chave: '358995BR-335787E'
-      },
-      {
-        id: 2,
-        razaoSocial: 'Fábrica de Software',
-        cnpj: '18.314.834/0006-55',
-        chave: '359795BR-335787E'
-      }
-    ]);
+    return this.httpClient.get<any[]>(`/parceiros`);
   }
 
   getParceiro(chaveParceiro: string): Observable<any> {

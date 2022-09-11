@@ -12,14 +12,24 @@ namespace Domain.Entities
     {
         public string Cnpj { get; private set; }
         public string RazaoSocial { get; private set; }
+        public string Email { get; set; }
+        public string Nome { get; set; }
+        public string Senha { get; set; }
+        public string ChaveBling { get; set; }
 
         public List<PedidoEntity> Pedidos { get; private set; }
         public List<ProdutoEntity> Produtos { get; private set; }
 
-        private ParceiroEntity(string cnpj, string razaoSocial)
+        private ParceiroEntity(ParceiroCreateDto dto)
         {
-            Cnpj = cnpj;
-            RazaoSocial = razaoSocial;
+            //TODO Validar duplicidade de CNPJ
+
+            Cnpj = dto.Cnpj;
+            RazaoSocial = dto.RazaoSocial;
+            Email = dto.Email;
+            Nome = dto.Nome;
+            Senha = dto.Senha;
+            ChaveBling = dto.ChaveBling;
 
             AddDomainEvent(new ParceiroCadastradoEvent(Chave, RazaoSocial));
         }
@@ -31,7 +41,7 @@ namespace Domain.Entities
             CheckRule(new ParceiroDeveTerCnpjRule(dto.Cnpj));
             CheckRule(new ParceiroDeveTerRazaoSocialRule(dto.Cnpj));
 
-            var entity = new ParceiroEntity(dto.Cnpj, dto.RazaoSocial);
+            var entity = new ParceiroEntity(dto);
 
             return entity;
         }

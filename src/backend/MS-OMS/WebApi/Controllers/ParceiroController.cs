@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Application.Commands.CadastrarParceiro;
 using Application.ObterParceiro;
+using Application.ObterParceiros;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -41,5 +42,17 @@ namespace Api.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> ObterTodos()
+        {
+            var query = new ObterParceirosQuery();
+
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
+        }
+
     }
 }

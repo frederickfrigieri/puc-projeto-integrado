@@ -11,15 +11,19 @@
                                 <th class="pt-0">#</th>
                                 <th class="pt-0">Razão Social</th>
                                 <th class="pt-0">Cnpj</th>
+                                <th class="pt-0">Contato</th>
+                                <th class="pt-0">Email</th>
                                 <th class="pt-0">Chave</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of colecao">
-                                <td>{{item.id}}</td>
+                            <tr *ngFor="let item of colecao; let i=index">
+                                <td>{{i+1}}</td>
                                 <td>{{item.razaoSocial}}</td>
                                 <td>{{item.cnpj}}</td>
-                                <td>{{item.chave}}</td>
+                                <td>{{item.contato}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.chaveBling}}</td>
                             </tr>
                         </tbody>
                     </table>

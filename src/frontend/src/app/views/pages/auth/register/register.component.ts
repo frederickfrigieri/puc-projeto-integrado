@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioLogadoModel } from 'src/app/core/models/usuario-logado.model';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { MessageAlertService } from 'src/app/core/services/message-alert.service';
+import { OmsService } from 'src/app/core/services/oms.service';
+import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +14,11 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private omsService: OmsService,
+    private messageAlertService: MessageAlertService) { }
 
   formGroup: FormGroup;
 
@@ -31,10 +40,15 @@ export class RegisterComponent implements OnInit {
 
   onRegister(e: Event) {
     e.preventDefault();
-    localStorage.setItem('isLoggedin', 'true');
-    if (localStorage.getItem('isLoggedin')) {
-      this.router.navigate(['/']);
-    }
-  }
 
+    const model = this.formGroup.value;
+
+    this.omsService
+      .createParceiro(model)
+      .subscribe(resp => {
+        this.formGroup.reset();
+        this.messageAlertService.success('Parceiro cadastrado', 'Sucesso!!');
+        this.router.navigate(['/']);
+      });
+  }
 }
