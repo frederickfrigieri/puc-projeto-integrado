@@ -1,0 +1,51 @@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            <h6 class="card-title mb-4 mt-3">Adicionar Estoque</h6>
+
+            <form class="forms-sample" [formGroup]="formGroup" (ngSubmit)="submit()">
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-3 col-form-label">Armazens</label>
+                    <div class="col-sm-9">
+                        <ng-select [items]="armazens" bindLabel="name" bindValue="id" [searchable]="false"
+                            formControlName="chaveArmazem" placeholder="Selecione um armazem">
+                        </ng-select>
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveArmazem">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-3 col-form-label">Parceiros</label>
+                    <div class="col-sm-9">
+                        <ng-select [items]="parceiros" bindLabel="name" bindValue="id" [searchable]="false"
+                            formControlName="chaveParceiro" placeholder="Selecione um parceiro">
+                        </ng-select>
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveParceiro">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="chaveProduto" class="col-sm-3 col-form-label">Produtos</label>
+                    <div class="col-sm-9">
+                        <ng-select [items]="produtos" bindLabel="name" bindValue="id" [searchable]="false"
+                            formControlName="chaveProduto" placeholder="Selecione um produto">
+                        </ng-select>
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveProduto">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="sku" class="col-sm-3 col-form-label">Quantidade</label>
+                    <div class="col-sm-9">
+                        <input formControlName="quantidade" type="number" class="form-control" id="quantidade"
+                            placeholder="Informe a quantidade">
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="quantidade">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <button type="submit" *ngIf="formGroup.valid" class="btn btn-primary me-2">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>

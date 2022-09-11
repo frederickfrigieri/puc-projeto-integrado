@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './views/layout/base/base.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 const routes: Routes = [
-  { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
   {
     path: '',
     component: BaseComponent,
@@ -16,11 +17,20 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
+      {
+        path: 'oms',
+        loadChildren: () => import('./views/pages/oms/oms.module').then(m => m.OmsModule)
+      },
+      {
+        path: 'wms',
+        loadChildren: () => import('./views/pages/wms/wms.module').then(m => m.WmsModule)
+      },
+
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
-  { 
+  {
     path: 'error',
     component: ErrorPageComponent,
     data: {
@@ -37,7 +47,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
+    BrowserModule
+  ],
+  exports: [RouterModule, BrowserModule]
 })
 export class AppRoutingModule { }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputInvalidMessageComponent } from './input-invalid-message/input-invalid-message.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbAlert, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -9,8 +11,10 @@ import { InputInvalidMessageComponent } from './input-invalid-message/input-inva
     InputInvalidMessageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgSelectModule,
+    NgbModule
   ],
-  exports: [InputInvalidMessageComponent]
+  exports: [InputInvalidMessageComponent, NgSelectModule, NgbAlert]
 })
 export class SharedComponentsModule { }

@@ -1,0 +1,80 @@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            <h6 class="card-title mb-4 mt-3">Enviar Pedido</h6>
+
+            <form class="forms-sample" [formGroup]="formGroup" (ngSubmit)="submit()">
+                <div class="row mb-3">
+                    <label for="nome" class="col-sm-3 col-form-label">Nome Completo</label>
+                    <div class="col-sm-9">
+                        <input formControlName="nome" type="text" class="form-control" id="nome"
+                            placeholder="Informe o nome completo">
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="nome">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="numero" class="col-sm-3 col-form-label">Número do Pedido</label>
+                    <div class="col-sm-9">
+                        <input formControlName="numero" type="text" class="form-control" id="numero"
+                            placeholder="Informe um numero único para o pedido">
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="numero">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+                <div class=" row mb-3">
+                    <label for="valor" class="col-sm-3 col-form-label">Valor</label>
+                    <div class="col-sm-9">
+                        <input formControlName="valor" type="number" class="form-control" id="valor"
+                            placeholder="Informe o valor do pedido">
+                        <app-input-invalid-message [frmGroup]="formGroup" controlName="valor">
+                        </app-input-invalid-message>
+                    </div>
+                </div>
+
+                <div formArrayName="itens">
+                    <div *ngFor="let item of itens.controls; let i = index">
+                        <div class="row" [formGroupName]="i">
+                            <label for="numero" class="col-sm-3 col-form-label">Itens</label>
+                            <div class="col-sm-3">
+                                <div class="mb-3">
+                                    <input formControlName="quantidade" type="number" class="form-control"
+                                        id="quantidade" placeholder="Informe a quantidade">
+                                    <app-input-invalid-message [frmGroup]="formGroup" arrayName="itens" [arrayIndex]="i"
+                                        controlName="quantidade">
+                                    </app-input-invalid-message>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <ng-select [items]="produtos" bindLabel="name" bindValue="id" [searchable]="false"
+                                        formControlName="chaveProduto" placeholder="Selecione um produto">
+                                    </ng-select>
+                                    <app-input-invalid-message [frmGroup]="formGroup" arrayName="itens" [arrayIndex]="i"
+                                        controlName="chaveProduto">
+                                    </app-input-invalid-message>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" *ngIf="formGroup.valid" class="btn btn-primary me-2">Enviar</button>
+                <button type="button" class="btn btn-secondary me-2" (click)="addItem()">Adicionar + Item</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<ngb-alert [dismissible]="false" [type]="'info'">
+
+    <h4 class="alert-heading">Informação!</h4>
+    <br>
+    <p>Além deste formulário é possível enviar pedido de outras 2 maneiras:</p>
+    <hr>
+    <p>1- Via API</p>
+    <p>2- Api Key de uma conta do Bling</p>
+
+</ngb-alert>

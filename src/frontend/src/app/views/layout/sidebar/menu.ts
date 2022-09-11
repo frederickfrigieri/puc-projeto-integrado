@@ -16,21 +16,10 @@ export const MENU: MenuItem[] = [
     link: 'oms/pedidos'
   },
   {
-    label: 'Impressão Etiqueta',
-    icon: 'printer',
-    link: 'oms/impressao-etiqueta'
+    label: 'Parceiros',
+    icon: 'clipboard',
+    link: 'oms/parceiros'
   },
-  {
-    label: 'Separação',
-    icon: 'layers',
-    link: 'oms/separacao'
-  },
-  {
-    label: 'Despacho',
-    icon: 'send',
-    link: 'oms/despacho'
-  },
-
 
   //WMS
   {
@@ -38,26 +27,16 @@ export const MENU: MenuItem[] = [
     isTitle: true
   },
   {
-    label: 'Estoque',
+    label: 'Estoques',
     icon: 'codesandbox',
-    link: '/wms/estoque'
+    link: 'wms/estoques'
   },
   {
     label: 'Produtos',
     icon: 'gift',
-    link: '/wms/produtos'
+    link: 'wms/produtos'
   },
-  {
-    label: 'Recebimento',
-    icon: 'repeat',
-    link: '/wms/estoque'
-  },
-  {
-    label: 'Nota de Entrada',
-    icon: 'file-plus',
-    link: '/wms/estoque'
-  },
-
+  
   //TMS
   {
     label: 'TMS',
