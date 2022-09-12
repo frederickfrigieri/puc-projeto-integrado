@@ -5,11 +5,13 @@ using Application.ObterParceiro;
 using Application.ObterParceiros;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/parceiros")]
+    [Authorize]
     [ApiController]
     public class ParceiroController : ControllerBase
     {
@@ -23,6 +25,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Postar([FromBody] CadastrarParceiroRequest request)
         {
             var command = _mapper.Map<CadastrarParceiroCommand>(request);
