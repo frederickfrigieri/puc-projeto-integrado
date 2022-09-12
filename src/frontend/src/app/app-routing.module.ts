@@ -13,7 +13,6 @@ const routes: Routes = [
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: '/auth', pathMatch: 'full' },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -26,6 +25,7 @@ const routes: Routes = [
         path: 'wms',
         loadChildren: () => import('./views/pages/wms/wms.module').then(m => m.WmsModule)
       },
+      { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
     ]
   },
   {

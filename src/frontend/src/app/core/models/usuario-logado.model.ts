@@ -1,8 +1,7 @@
 export class UsuarioLogadoModel {
     chaveUsuario: string;
     perfilId: PerfilId;
-    nome: string;
-    email: string;
+    login: string;
     logado: boolean;
 }
 

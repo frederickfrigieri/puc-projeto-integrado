@@ -1,25 +1,22 @@
 import { Injectable } from "@angular/core";
 import { UsuarioLogadoModel } from "../models/usuario-logado.model";
-import { SessionStorageService } from "./session-storage.service";
+import jwt_decode from "jwt-decode";
+import { Observable, of } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {
 
+    constructor() { }
 
-    constructor(private sessionStorage: SessionStorageService) { }
+    decrypt(token: string): UsuarioLogadoModel {
+        var jsonToken = jwt_decode<any>(token);
 
-    decrypt(token: string): any {
-
-        var key = this.sessionStorage.get(token);
-
-        if (!key) return null;
-
-        return <UsuarioLogadoModel>{
-            chaveUsuario: '',
-            email: '',
+        var usuario = <UsuarioLogadoModel>{
+            chaveUsuario: jsonToken['nameid'],
             logado: true,
-            nome: ''
-        }
-    }
+            login: jsonToken.actort
+        };
 
+        return usuario;
+    }
 }

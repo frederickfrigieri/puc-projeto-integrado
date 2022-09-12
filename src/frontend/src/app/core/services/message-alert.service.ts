@@ -10,4 +10,13 @@ export class MessageAlertService {
   success(message: string, title?: string): void {
     alert(message);
   }
+
+  formularioInvalido(): void {
+    alert('Preenche os campos obrigatórios!');
+  }
+
+  error(message: string): void {
+    alert(message);
+  }
+
 }

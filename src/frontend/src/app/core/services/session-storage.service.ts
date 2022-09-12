@@ -7,7 +7,7 @@ export class SessionStorageService {
         localStorage.setItem(chave, content);
     }
 
-    get(chave: any): Observable<any> {
-        return of(localStorage.getItem(chave));
+    get(chave: any): any {
+        return localStorage.getItem(chave);
     }
 }

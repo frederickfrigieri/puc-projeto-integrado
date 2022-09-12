@@ -15,11 +15,12 @@ export class HttpCustomInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    
     var http = '';
     
     if (request.url.includes("parceiro")) {
       http = environment.urlOms;
+    } else if (request.url.includes("login")) {
+      http = environment.urlAuth;
     }
     
     const requestNew = request.clone({
