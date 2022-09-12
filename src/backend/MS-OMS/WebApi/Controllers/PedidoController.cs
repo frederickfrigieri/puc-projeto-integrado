@@ -4,11 +4,13 @@ using Application.Commands.CadastrarPedido;
 using Application.ObterPedidosPorParceiro;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/parceiros")]
+    [Authorize]
     [ApiController]
     public class PedidoController : ControllerBase
     {
