@@ -4,12 +4,15 @@
             <div class="card-body">
                 <h6 class="card-title mb-4">Pedidos</h6>
 
-                <div class="table-responsive">
+                <div class="table-responsive" *ngIf="colecao && colecao.length > 0 else naoEncontrado">
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th class="pt-0">#</th>
                                 <th class="pt-0">Cliente</th>
                                 <th class="pt-0">Produto</th>
+                                <th class="pt-0">Quantidade</th>
+                                <th class="pt-0">Valor</th>
                                 <th class="pt-0">Data Pedido</th>
                                 <th class="pt-0">Status</th>
                                 <th class="pt-0">Armazém</th>
@@ -17,9 +20,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let pedido of colecaoPedidos">
+                            <tr *ngFor="let pedido of colecao; let i=index">
+                                <td>{{i+1}}</td>
                                 <td>{{pedido.cliente}}</td>
                                 <td>{{pedido.produto}}</td>
+                                <td>{{pedido.quantidade}}</td>
+                                <td>{{pedido.valor}}</td>
                                 <td>{{pedido.dataPedido}}</td>
                                 <td>{{pedido.statusPedido}}</td>
                                 <td>{{pedido.armazem}}</td>
@@ -28,6 +34,10 @@
                         </tbody>
                     </table>
                 </div>
+                <ng-template #naoEncontrado>
+                    <span *ngIf="carregando == false">Nenhum registro encontrado!</span>
+                    <span *ngIf="carregando == true">Carregando</span>
+                </ng-template>
             </div>
         </div>
     </div>

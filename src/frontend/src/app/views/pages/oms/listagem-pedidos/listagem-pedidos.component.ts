@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { OmsService } from 'src/app/core/services/oms.service';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
+import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
   selector: 'app-listagem-pedidos',
@@ -8,16 +11,28 @@ import { OmsService } from 'src/app/core/services/oms.service';
 })
 export class ListagemPedidosComponent implements OnInit {
 
-  constructor(private omsService: OmsService) { }
+  constructor(
+    private omsService: OmsService,
+    private sessionStorage: SessionStorageService,
+    private token: TokenService
+  ) { }
 
-  colecaoPedidos: any[] = [];
+  colecao: any[] = [];
+  carregando = false;
+  usuarioLogado: any;
 
   ngOnInit(): void {
+
+    const token = this.sessionStorage.get(AuthService.chave);
+    this.usuarioLogado = this.token.decrypt(token);
+
+    this.carregando = true;
     this.omsService
-      .getPedidos("")
+      .getPedidos(this.usuarioLogado.chaveUsuario)
       .subscribe(resp => {
-        resp.forEach(item => this.colecaoPedidos.push(item));
+        console.table(resp);
+        resp.forEach(item => this.colecao.push(item));
+        this.carregando = false;
       });
   }
-
 }

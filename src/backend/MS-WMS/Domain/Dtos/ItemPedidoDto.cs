@@ -9,5 +9,6 @@ namespace Domain.Dtos
         public Guid ChaveProduto { get; set; }
         public Guid ChaveParceiro { get; set; }
         public Guid ChavePedido { get; set; }
+        public Guid ChaveItem { get; set; }
     }
 }

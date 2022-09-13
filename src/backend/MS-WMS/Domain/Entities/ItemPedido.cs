@@ -9,13 +9,16 @@ namespace Domain.Entities
     {
         public int Quantidade { get; private set; }
 
-        internal PedidoItem(int quantidade, Produto produto, Guid chavePedido, Guid chaveParceiro)
+        internal PedidoItem(int quantidade, Produto produto, Guid chavePedido, Guid chaveParceiro, Guid chaveItem)
         {
             Quantidade = quantidade;
             Produto = produto;
             ChavePedido = chavePedido;
             ChaveParceiro = chaveParceiro;
+            Chave = chaveItem;
         }
+
+        private PedidoItem(){}
 
         public int ProdutoId { get; private set; }
         public Produto Produto { get; private set; }
@@ -26,19 +29,16 @@ namespace Domain.Entities
         public int? ArmazemId { get; private set; }
         public Armazem Armazem { get; private set; }
 
-
-        private PedidoItem()
-        {
-        }
-
         public static PedidoItem Criar(ItemPedidoDto dto)
         {
+            //Todo depois usar o constructor
             return new PedidoItem()
             {
                 Quantidade = dto.Quantidade,
                 ProdutoId = dto.ProdutoId.Value,
                 ChaveParceiro = dto.ChaveParceiro,
-                ChavePedido = dto.ChavePedido
+                ChavePedido = dto.ChavePedido,
+                Chave = dto.ChaveItem
             };
         }
 

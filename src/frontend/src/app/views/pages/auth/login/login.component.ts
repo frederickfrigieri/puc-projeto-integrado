@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         }
       });
     } else {
-      this.mensagemAlert.formularioInvalido();
+      this.mensagemAlert.erroFormulario();
     }
   }
 

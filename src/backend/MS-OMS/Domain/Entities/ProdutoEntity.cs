@@ -28,7 +28,8 @@ namespace Domain.Entities
             {
                 ParceiroId = dto.ParceiroId,
                 Descricao = dto.Descricao,
-                Sku = dto.Sku
+                Sku = dto.Sku,
+                Chave = dto.ChaveProduto
             };
 
             return entity;

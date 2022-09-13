@@ -13,6 +13,7 @@ export class ListagemProdutosComponent implements OnInit {
 
   titulo = 'Listagem de Produtos';
 
+  carregando = false;
   colecao: any[] = [];
 
   constructor(
@@ -25,8 +26,10 @@ export class ListagemProdutosComponent implements OnInit {
     const usuario = this.tokenService
       .decrypt(this.sessionStorage.get(AuthService.chave));
 
+    this.carregando = true;
     this.wmsService.getProdutos(usuario.chaveUsuario).subscribe(resp => {
       resp.forEach(item => this.colecao.push(item));
+      this.carregando = false;
     });
   }
 

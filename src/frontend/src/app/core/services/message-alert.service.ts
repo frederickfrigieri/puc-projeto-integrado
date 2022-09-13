@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageAlertService {
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   success(message: string, title?: string): void {
-    alert(message);
+    this.toastr.success(message, title);
   }
 
-  formularioInvalido(): void {
-    alert('Preenche os campos obrigatórios!');
+  erroFormulario(): void {
+    this.toastr.info('Preencha os campos obrigatórios!');
   }
 
-  error(message: string): void {
-    alert(message);
+  error(message: string, title?: string): void {
+    this.toastr.error(message, title);
   }
 
-  aviso(message: string): void {
-    alert(message);
+  aviso(message: string, title?: string): void {
+    this.toastr.info(message, title);
   }
 }

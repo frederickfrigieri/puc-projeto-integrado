@@ -15,6 +15,11 @@ import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpCustomInterceptor } from './http-custom.interceptor';
 
+import { ToastrModule } from 'ngx-toastr';
+
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,10 +27,12 @@ import { HttpCustomInterceptor } from './http-custom.interceptor';
   ],
   imports: [
     BrowserModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadingBarHttpClientModule
   ],
   providers: [
     AuthGuard,
@@ -40,7 +47,8 @@ import { HttpCustomInterceptor } from './http-custom.interceptor';
         }
       }
     },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpCustomInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpCustomInterceptor, multi: true },
+    { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } }
   ],
   bootstrap: [AppComponent]
 })

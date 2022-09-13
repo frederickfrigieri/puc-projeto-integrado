@@ -11,36 +11,10 @@ export class OmsService {
   constructor(private httpClient: HttpClient) { }
 
   getPedidos(chaveParceiro: string): Observable<any[]> {
-    return of([
-      {
-        "cliente": "Teodora",
-        "produto": "Boneca da Barbie",
-        "dataPedido": "20/06/2022",
-        "statusPedido": "Aguardando Despacho",
-        "armazem": "Armazem Zona Sul"
-      },
-      {
-        "cliente": "Milka",
-        "produto": "Osso para cachorro",
-        "dataPedido": "10/12/2021",
-        "statusPedido": "Aguardando Despacho",
-        "armazem": "Armazem Zona Oeste"
-      },
-      {
-        "cliente": "Fred",
-        "produto": "TV Samsung",
-        "dataPedido": "20/01/2022",
-        "statusPedido": "Pendente Armazém",
-        "armazem": ""
-      },
-      {
-        "cliente": "Lola",
-        "produto": "Comedouro",
-        "dataPedido": "20/11/2021",
-        "statusPedido": "Pendente Estoque",
-        "armazem": "Armazem Zona Leste"
-      }
-    ]);
+    const endpoint = `/parceiros/${chaveParceiro}/pedidos`;
+
+    return this.httpClient.get<any[]>(endpoint);
+
   }
 
   sendPedido(model: any): Observable<any> {

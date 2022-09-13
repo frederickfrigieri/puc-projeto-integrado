@@ -60,9 +60,10 @@ namespace Domain.Entities
             int quantidade,
             Produto produto,
             Guid chavePedido,
-            Guid chaveParceiro)
+            Guid chaveParceiro,
+            Guid chaveItem)
         {
-            var item = new PedidoItem(quantidade, produto, chavePedido, chaveParceiro);
+            var item = new PedidoItem(quantidade, produto, chavePedido, chaveParceiro, chaveItem);
 
             if (Itens == null) Itens = new List<PedidoItem>();
 

@@ -39,7 +39,8 @@ namespace Application.Commands.CadastrarProduto
                     {
                         Descricao = request.Descricao,
                         Sku = request.Sku,
-                        ParceiroId = parceiro.Id
+                        ParceiroId = parceiro.Id,
+                        ChaveProduto = request.ChaveProduto
                     };
 
                     produto = parceiro.CriarProduto(dto);

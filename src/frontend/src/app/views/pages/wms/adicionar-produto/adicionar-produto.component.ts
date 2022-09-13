@@ -43,7 +43,7 @@ export class AdicionarProdutoComponent implements OnInit {
 
   submit() {
     if (this.formGroup.invalid) {
-      this.messageAlert.formularioInvalido();
+      this.messageAlert.erroFormulario();
     } else {
       this.wmsService
         .createProduto(this.formGroup.value)

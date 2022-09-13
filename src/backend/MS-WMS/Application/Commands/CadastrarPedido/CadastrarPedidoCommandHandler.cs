@@ -40,7 +40,8 @@ namespace Application.Commands.CadastrarPedido
                     ChavePedido = request.ChavePedido,
                     ProdutoId = produto.Id,
                     ChaveProduto = item.ChaveProduto,
-                    Quantidade = item.Quantidade
+                    Quantidade = item.Quantidade,
+                    ChaveItem = item.ChaveItemPedido
                 };
 
                 var itemEntidade = PedidoItem.Criar(dto);
