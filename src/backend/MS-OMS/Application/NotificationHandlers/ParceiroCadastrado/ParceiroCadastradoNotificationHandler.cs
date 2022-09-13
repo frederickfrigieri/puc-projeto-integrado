@@ -1,6 +1,7 @@
-﻿using Application._Configuration.MessageBus;
+﻿using Application.Services;
+using Application.Services.Contracts;
+using Domain;
 using MediatR;
-using Serilog.RequestResponse.Extensions.Exceptions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,26 +9,27 @@ namespace Application.NotificationHandlers.ParceiroCadastrado
 {
     public class ParceiroCadastradoNotificationHandler : INotificationHandler<ParceiroCadastradoNotification>
     {
-        private readonly IMessageBus _messageBus;
+        private readonly IAutenticacao _autenticacao;
+        private readonly IRepository _repository;
 
-        public ParceiroCadastradoNotificationHandler(IMessageBus messageBus)
+        public ParceiroCadastradoNotificationHandler(IAutenticacao autenticacao, IRepository repository)
         {
-            _messageBus = messageBus;
+            _autenticacao = autenticacao;
+            _repository = repository;
         }
 
-        public Task Handle(ParceiroCadastradoNotification notification, CancellationToken cancellationToken)
+        public async Task Handle(ParceiroCadastradoNotification notification, CancellationToken cancellationToken)
         {
-            //var message = new ParceiroCriadoEventMessage
-            //{
-            //    RazaoSocial = notification.RazaoSocial,
-            //    ChaveParceiro = notification.ChaveParceiro
-            //};
+            var parceiro = await _repository.ObterParceiroAsync(notification.ChaveParceiro);
 
-            //_messageBus.Publish(message);
+            var dto = new AutenticacaoRequest
+            {
+                ChaveParceiro = parceiro.Chave,
+                Login = parceiro.Email,
+                Password = parceiro.Senha
+            };
 
-            //return Task.CompletedTask;
-
-            throw new DomainException($"NotificationHandler náo implementado. {typeof(ParceiroCadastradoNotificationHandler)}");
+            await _autenticacao.Cadastrar(dto);
         }
     }
 }

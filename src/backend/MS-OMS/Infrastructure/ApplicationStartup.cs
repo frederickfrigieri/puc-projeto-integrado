@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using Application.Settings;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
@@ -20,9 +21,7 @@ namespace Infrastructure
 {
     public class ApplicationStartup
     {
-        private static MessageBusSettings _messageBusSettings;
         public static IConfiguration Configuration { get; set; }
-
 
         public static IConfigurationBuilder InitializeConfiguration(IConfigurationBuilder configuration = null)
         {
@@ -88,14 +87,16 @@ namespace Infrastructure
         public static void InitializeContainerModules(ContainerBuilder container, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("ConnectionString");
+            var autenticacaoSetting = configuration.GetSection("Autenticacao").Get<AutenticacaoSetting>();
+            var messageBusSettings = configuration.GetSection("MessageBusSettings").Get<MessageBusSettings>();
 
             container.RegisterModule(new DatabaseModule(connectionString));
             container.RegisterModule(new MediatorModule());
             container.RegisterModule(new DomainModule());
             container.RegisterModule(new ProcessingModule());
-            container.RegisterModule(new ServicesModule());
+            container.RegisterModule(new ServicesModule(autenticacaoSetting));
             container.RegisterModule(new AutoMapperModule(Assemblies.Application));
-            container.RegisterModule(new MessageBusModule());
+            container.RegisterModule(new MessageBusModule(messageBusSettings));
         }
 
         public static void InitializeCustomServices(IServiceCollection services, IServiceProvider serviceProvider = null)

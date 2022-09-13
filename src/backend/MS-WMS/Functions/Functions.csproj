@@ -4,6 +4,8 @@
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Jobs\AssociarPedidoArmazem.cs" />
+    <Compile Remove="Jobs\AssociarPedidoEstoque.cs" />
     <Compile Remove="PedidoCadastradoConsumer.cs" />
   </ItemGroup>
   <ItemGroup>

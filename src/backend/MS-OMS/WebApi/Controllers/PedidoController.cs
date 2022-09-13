@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     [Route("api/parceiros")]
-    [Authorize]
     [ApiController]
     public class PedidoController : ControllerBase
     {

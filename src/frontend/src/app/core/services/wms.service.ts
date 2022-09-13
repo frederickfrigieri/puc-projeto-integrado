@@ -1,36 +1,20 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class WmsService {
 
-    constructor() { };
+    constructor(private httpClient: HttpClient) { };
 
     createProduto(model: any): Observable<any> {
-        return of({});
+        const endpoint = `/parceiros/${model.chaveParceiro}/produtos`;
+        return this.httpClient.post<any>(endpoint, model);
     }
 
     getProdutos(chaveParceiro: string): Observable<any[]> {
-        return of([
-            {
-                id: 1,
-                descricao: 'TV Samsung',
-                sku: 'TVS-1020',
-                chave: '366498TR-36498698AB'
-            },
-            {
-                id: 2,
-                descricao: 'Iphone 10',
-                sku: 'IPH-3020',
-                chave: '36649T8R-3649X8698B'
-            },
-            {
-                id: 3,
-                descricao: 'Notebook Dell',
-                sku: 'DLL-3440',
-                chave: '366498E9-36498698XX'
-            }
-        ]);
+        const endpoint = `/parceiros/${chaveParceiro}/produtos`;
+        return this.httpClient.get<any[]>(endpoint);
     }
 
     setEstoque(model: any): Observable<any> {

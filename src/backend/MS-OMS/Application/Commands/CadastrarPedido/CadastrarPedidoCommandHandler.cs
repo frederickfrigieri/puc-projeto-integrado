@@ -34,10 +34,9 @@ namespace Application.Commands.CadastrarPedido
 
             foreach (var item in request.Itens)
             {
-                var produto = parceiro.Produtos.SingleOrDefault(x => x.Sku == item.Sku);
                 var itemDto = new ItemPedidoDto
                 {
-                    ChaveProduto = produto.Chave,
+                    ChaveProduto = item.ChaveProduto,
                     Quantidade = item.Quantidade
                 };
 

@@ -29,44 +29,47 @@ namespace Infrastructure.Processing
 
         public async Task DispatchEventsAsync()
         {
-            var domainEntities = this._pedidosContext.ChangeTracker
-                .Entries<Entity>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
-
-            var domainEvents = domainEntities
-                .SelectMany(x => x.Entity.DomainEvents)
-                .ToList();
-
-            var domainEventNotifications = new List<IDomainEventNotification<IDomainEvent>>();
-
-            foreach (var domainEvent in domainEvents)
+            await Task.Run(() =>
             {
-                Type domainEvenNotificationType = typeof(IDomainEventNotification<>);
-                var domainNotificationWithGenericType = domainEvenNotificationType.MakeGenericType(domainEvent.GetType());
-                var domainNotification = _scope.ResolveOptional(domainNotificationWithGenericType, new List<Parameter>
+                var domainEntities = this._pedidosContext.ChangeTracker
+                    .Entries<Entity>()
+                    .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
+
+                var domainEvents = domainEntities
+                    .SelectMany(x => x.Entity.DomainEvents)
+                    .ToList();
+
+                var domainEventNotifications = new List<IDomainEventNotification<IDomainEvent>>();
+
+                foreach (var domainEvent in domainEvents)
+                {
+                    Type domainEvenNotificationType = typeof(IDomainEventNotification<>);
+                    var domainNotificationWithGenericType = domainEvenNotificationType.MakeGenericType(domainEvent.GetType());
+                    var domainNotification = _scope.ResolveOptional(domainNotificationWithGenericType, new List<Parameter>
                 {
                     new NamedParameter("domainEvent", domainEvent)
                 });
 
-                if (domainNotification != null)
-                {
-                    domainEventNotifications.Add(domainNotification as IDomainEventNotification<IDomainEvent>);
+                    if (domainNotification != null)
+                    {
+                        domainEventNotifications.Add(domainNotification as IDomainEventNotification<IDomainEvent>);
+                    }
                 }
-            }
 
-            domainEntities
-                .ForEach(entity => entity.Entity.ClearDomainEvents());
+                domainEntities
+                    .ForEach(entity => entity.Entity.ClearDomainEvents());
 
-            foreach (var domainEventNotification in domainEventNotifications)
-            {
-                string type = domainEventNotification.GetType().FullName;
-                var data = JsonConvert.SerializeObject(domainEventNotification);
-                OutboxMessage outboxMessage = new OutboxMessage(
-                    domainEventNotification.DomainEvent.OccurredOn,
-                    type,
-                    data);
-                this._pedidosContext.OutboxMessages.Add(outboxMessage);
-            }
+                foreach (var domainEventNotification in domainEventNotifications)
+                {
+                    string type = domainEventNotification.GetType().FullName;
+                    var data = JsonConvert.SerializeObject(domainEventNotification);
+                    OutboxMessage outboxMessage = new OutboxMessage(
+                        domainEventNotification.DomainEvent.OccurredOn,
+                        type,
+                        data);
+                    this._pedidosContext.OutboxMessages.Add(outboxMessage);
+                }
+            });
         }
     }
 }

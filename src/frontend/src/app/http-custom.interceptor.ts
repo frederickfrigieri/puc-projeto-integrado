@@ -3,30 +3,92 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MessageAlertService } from './core/services/message-alert.service';
+import { Router } from '@angular/router';
+import { SessionStorageService } from './core/services/session-storage.service';
+import { AuthService } from './core/services/auth.service';
+import { TokenService } from './core/services/token.service';
 
 @Injectable()
 export class HttpCustomInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(
+    private messageAlert: MessageAlertService,
+    private router: Router,
+    private sessionStorage: SessionStorageService,
+    private token: TokenService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     var http = '';
-    
-    if (request.url.includes("parceiro")) {
-      http = environment.urlOms;
-    } else if (request.url.includes("login")) {
+
+    if (request.url.includes("produtos")) {
+      http = environment.urlWms;
+    } else if (request.url.includes("autenticacao")) {
       http = environment.urlAuth;
+    } else if (request.url.includes("parceiro")) {
+      http = environment.urlOms;
     }
-    
+
+    const token = this.sessionStorage.get(AuthService.chave);
+    if (token) {
+      request.clone({ headers: request.headers.set('Authorization', `Bearer ${token}`) });
+    }
+
     const requestNew = request.clone({
-      url: http + request.url
+      url: http + request.url,
     });
-    
-    return next.handle(requestNew);
+
+    return next.handle(requestNew).pipe(catchError((error: HttpErrorResponse) => {
+
+      const messageDefault = 'Algo inesperado aconteceu antes de completar a solicitação!'
+      let errorMessage = messageDefault;
+
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = `Error: ${error.error}`;
+      } else {
+        switch (error.status) {
+          case 400:
+            errorMessage = error.error ?
+              error.error.mensagem ?
+                error.error.mensagem :
+                messageDefault :
+              messageDefault;
+            break;
+          case 401:
+            {
+              this.messageAlert.aviso('Acesso negado! Efetue login novamente.');
+              this.sessionStorage.remove(AuthService.chave);
+              this.router.navigate(['auth/login'], { queryParams: {}, });
+              break;
+            }
+          case 403:
+            errorMessage = 'O servidor não autorizou o acesso ao recurso solicitado!';
+            break;
+          case 404: {
+            errorMessage = error.error ? error.error : 'Recurso solicitado não encontrado!';
+            break;
+          }
+          case 500:
+            errorMessage = 'Ops, não foi possível realizar essa ação no momento.';
+            break;
+          default:
+            errorMessage = 'Algo inesperado aconteceu.';
+            break;
+        }
+      }
+
+      if (errorMessage) {
+        this.messageAlert.error(errorMessage);
+        return throwError(() => new Error(errorMessage));
+      } else {
+        return throwError(() => new Error('Erro inesperado!'));
+      }
+    }));
   }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/identidade")]
     [ApiController]
     public class IdentidadeController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace Api.Controllers
         {
             var dto = new NovoAcessoDto
             {
-                Chave = Guid.Parse(request.ChaveUsuario),
+                Chave = Guid.Parse(request.ChaveParceiro),
                 Login = request.Login,
                 Password = request.Password
             };
@@ -31,6 +31,15 @@ namespace Api.Controllers
             await _identidade.CadastrarUsuario(dto);
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("existe-login")]
+        public async Task<IActionResult> ExisteLogin([FromQuery] string login)
+        {
+            var response = await _identidade.ExisteLogin(login);
+
+            return Ok(response);
         }
     }
 }

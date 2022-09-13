@@ -8,5 +8,7 @@ namespace Domain._Contracts
         Task Adicionar(Usuario entity);
 
         Task<UsuarioResponse> Obter(string login, string senha);
+        Task<bool> Existe(string login);
+
     }
 }

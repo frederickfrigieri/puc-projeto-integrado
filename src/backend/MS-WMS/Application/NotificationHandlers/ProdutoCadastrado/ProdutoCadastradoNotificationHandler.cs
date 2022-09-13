@@ -26,7 +26,7 @@ namespace Application.NotificationHandlers.ProdutoCadastrado
                 Sku = notification.Sku
             };
 
-            await _messageBus.PublishAsync(message, "wms-produto-cadastrado");
+            await _messageBus.Publish(message);
         }
     }
 

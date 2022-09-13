@@ -49,10 +49,10 @@ namespace HangfireJobs
                 app.UseDeveloperExceptionPage();
             }
 
-            optionsHangFire = new DashboardOptions
-            {
-                Authorization = new[] { new HangfireCustomBasicAuthenticationFilter { User = "hangfire", Pass = "123@Trocar" } }
-            };
+            //optionsHangFire = new DashboardOptions
+            //{
+            //    Authorization = new[] { new HangfireCustomBasicAuthenticationFilter { User = "hangfire", Pass = "123@Trocar" } }
+            //};
 
             app.UseHttpsRedirection();
 

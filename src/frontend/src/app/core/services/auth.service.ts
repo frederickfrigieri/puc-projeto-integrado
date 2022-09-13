@@ -7,13 +7,13 @@ import { UsuarioLogadoModel } from "../models/usuario-logado.model";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-    usuarioLogado: UsuarioLogadoModel;
+    _usuarioLogado: UsuarioLogadoModel;
 
     static chave = 'DS-202212';
 
     constructor(private httpClient: HttpClient) { }
 
     logar(model: any): Observable<any> {
-        return this.httpClient.post<any>(`/login`, model);
+        return this.httpClient.post<any>(`/autenticacao`, model);
     }
 }

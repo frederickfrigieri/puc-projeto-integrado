@@ -2,6 +2,7 @@
 using Autofac;
 using GreenPipes;
 using MassTransit;
+using System;
 
 namespace Infrastructure.Processing
 {
@@ -27,12 +28,10 @@ namespace Infrastructure.Processing
                 if (MessageBusSettings.Consumer)
                     x.AddConsumers(Assemblies.Application);
 
-                x.SetKebabCaseEndpointNameFormatter();
-
                 // add the bus to the container
-                x.UsingAzureServiceBus((context, cfg) =>
+                x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.Host(MessageBusSettings.ConnectionString);
+                    cfg.Host(new Uri(MessageBusSettings.ConnectionString));
 
                     if (MessageBusSettings.Consumer)
                     {
@@ -40,16 +39,13 @@ namespace Infrastructure.Processing
                         {
                             ec.UseConcurrencyLimit(1);
                             ec.ConfigureConsumers(context);
-                            //ec.UseRetry(opt => opt.Incremental(3, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5)));
+                            ec.UseRetry(opt => opt.Incremental(3, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5)));
 
                             AutofacFilterExtensions.UseConsumeFilter(ec, typeof(UnitOfWorkConsumerFilter<>), context);
                         });
                     }
-
-                    cfg.ConfigureEndpoints(context);
                 });
             });
-
         }
     }
 }

@@ -10,4 +10,8 @@ export class SessionStorageService {
     get(chave: any): any {
         return localStorage.getItem(chave);
     }
+
+    remove(chave: any) {
+        localStorage.removeItem(chave);
+    }
 }

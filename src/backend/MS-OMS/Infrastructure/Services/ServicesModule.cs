@@ -1,29 +1,33 @@
-﻿using Autofac;
+﻿using Application.Services.Contracts;
+using Application.Settings;
+using Autofac;
+using Infrastructure.Services.Http;
+using System;
+using System.Net.Http;
 
 namespace Infrastructure.Services
 {
     public class ServicesModule : Module
     {
-        public ServicesModule()
+        private readonly AutenticacaoSetting _autenticacaoSetting;
+
+        public ServicesModule(AutenticacaoSetting autenticacaoSetting)
         {
+            _autenticacaoSetting = autenticacaoSetting;
         }
 
         protected override void Load(ContainerBuilder builder)
         {
-            //if (_apiUsuarioSettings != null)
-            //{
-            //    builder.Register(ctx => new HttpClient() { BaseAddress = new Uri(_apiUsuarioSettings.BaseUrl) })
-            //        .Named<HttpClient>("HttpApiUsuario")
-            //        .SingleInstance();
+            if (_autenticacaoSetting != null)
+            {
+                builder.Register(ctx => new HttpClient() { BaseAddress = new Uri(_autenticacaoSetting.BaseUrl) })
+                    .Named<HttpClient>("HttpAutenticacao")
+                    .SingleInstance();
 
-            //    builder.Register(context => new UsuarioService(context.ResolveNamed<HttpClient>("HttpApiUsuario")))
-            //        .As<IUsuarioService>()
-            //        .InstancePerDependency();
-            //}
-
-            //builder.Register(ctx => new HttpClient())
-            //  .Named<HttpClient>("HttpApiIFood")
-            //  .SingleInstance();
+                builder.Register(context => new AutenticacaoService(context.ResolveNamed<HttpClient>("HttpAutenticacao")))
+                    .As<IAutenticacao>()
+                    .InstancePerDependency();
+            }
         }
     }
 }

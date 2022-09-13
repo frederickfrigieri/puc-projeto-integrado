@@ -21,5 +21,10 @@ namespace Application
             if (existe == null)
                 await _repository.Adicionar(Usuario.Cadastrar(acesso));
         }
+
+        public async Task<bool> ExisteLogin(string login)
+        {
+            return await _repository.Existe(login);
+        }
     }
 }

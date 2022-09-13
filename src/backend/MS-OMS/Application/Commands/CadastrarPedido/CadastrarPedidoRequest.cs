@@ -15,7 +15,7 @@ namespace Application.Commands.CadastrarPedido
     public class CadastrarItemPedidoRequest
     {
         public int Quantidade { get; set; }
-        public string Sku { get; set; }
+        public Guid ChaveProduto { get; set; }
     }
 
 }

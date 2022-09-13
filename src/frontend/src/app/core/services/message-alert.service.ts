@@ -19,4 +19,7 @@ export class MessageAlertService {
     alert(message);
   }
 
+  aviso(message: string): void {
+    alert(message);
+  }
 }

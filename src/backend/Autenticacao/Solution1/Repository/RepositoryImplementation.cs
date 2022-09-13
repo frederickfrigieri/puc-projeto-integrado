@@ -22,6 +22,11 @@ namespace Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> Existe(string login)
+        {
+            return await _context.Usuarios.AnyAsync(x => x.Login == login);
+        }
+
         public async Task<UsuarioResponse> Obter(string login, string senha)
         {
             var dados = await _context.Usuarios

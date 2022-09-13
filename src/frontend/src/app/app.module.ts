@@ -40,7 +40,8 @@ import { HttpCustomInterceptor } from './http-custom.interceptor';
         }
       }
     },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpCustomInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: HttpCustomInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

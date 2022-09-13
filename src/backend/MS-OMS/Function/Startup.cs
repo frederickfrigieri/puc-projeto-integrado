@@ -1,20 +1,13 @@
 ﻿using Application._Configuration.Data;
 using Application._Configuration.Processing;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using Infrastructure;
 using Infrastructure.Database;
 using Infrastructure.Processing;
 using Infrastructure.Processing.Outbox;
 using MediatR;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using System;
 
 [assembly: FunctionsStartup(typeof(Function.Startup))]
 namespace Function

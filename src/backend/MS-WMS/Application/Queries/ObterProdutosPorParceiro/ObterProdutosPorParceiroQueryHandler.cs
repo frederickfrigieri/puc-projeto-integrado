@@ -23,8 +23,7 @@ namespace Application.ObterParceiro
         {
             var sql = @"select pr.Chave, pr.DataCadastro, pr.Descricao, pr.Sku 
                         from WMS.Produtos pr 
-                        join WMS.Parceiros p on p.Id = pr.ParceiroId
-                        where p.Chave = @ChaveParceiro";
+                        where pr.ChaveParceiro = @ChaveParceiro";
 
             using var connection = _sqlConnectionFactory.GetOpenConnection();
             var query = await connection.QueryAsync<ObterProdutosPorParceiroResponse>(sql,

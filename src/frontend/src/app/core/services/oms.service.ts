@@ -10,8 +10,6 @@ export class OmsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // private endpoint = environment.urlOms + '/api';
-
   getPedidos(chaveParceiro: string): Observable<any[]> {
     return of([
       {
@@ -46,7 +44,9 @@ export class OmsService {
   }
 
   sendPedido(model: any): Observable<any> {
-    return of({});
+    const endpoint = `/parceiros/${model.chaveParceiro}/pedidos`;
+
+    return this.httpClient.post<any>(endpoint, model);
   }
 
   detailsPedido(chavePedido: string): Observable<any> {
@@ -63,5 +63,11 @@ export class OmsService {
 
   getParceiro(chaveParceiro: string): Observable<any> {
     return of({});
+  }
+
+  getProdutos(chaveParceiro: string): Observable<any[]> {
+    const endpoint = `/parceiros/${chaveParceiro}/produtos`;
+
+    return this.httpClient.get<any[]>(endpoint);
   }
 }

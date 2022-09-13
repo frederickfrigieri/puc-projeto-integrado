@@ -48,7 +48,7 @@ namespace Application.NotificationHandlers.PedidoCadastrado
                     itensMessage,
                     pedido.Parceiro.Chave);
 
-                await _messageBus.PublishAsync(message, "oms-pedido-cadastrado");
+                await _messageBus.Publish(message);
             }
         }
     }
