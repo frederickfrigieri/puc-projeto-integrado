@@ -34,7 +34,7 @@ namespace Application.Commands.CadastrarProduto
                     ChaveParceiro = request.ChaveParceiro
                 };
 
-                produto = new Produto(request.Descricao, request.Sku, request.ChaveParceiro);
+                produto = Produto.Criar(dto);
 
                 await _repository.AdicionarAsync(produto);
             }

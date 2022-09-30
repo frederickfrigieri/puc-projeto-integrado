@@ -44,10 +44,9 @@ namespace Domain.Entities
 
             Enumerable.Range(1, quantidade).ToList().ForEach(count =>
             {
-                var estoque = new Estoque(chaveParceiro, produto);
+                var estoque = Estoque.Criar(chaveParceiro, produto);
 
-                if (Estoques == null)
-                    Estoques = new List<Estoque>();
+                Estoques ??= new List<Estoque>();
 
                 estoquesCadastrado.Add(estoque);
                 Estoques.Add(estoque);

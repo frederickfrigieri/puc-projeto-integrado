@@ -13,6 +13,11 @@ namespace Domain.Entities
             Produto = produto;
         }
 
+        public static Estoque Criar(Guid chaveParceiro, Produto produto)
+        {
+            return new Estoque(chaveParceiro, produto);
+        }
+
         private Estoque() { }
 
         public Guid ChaveParceiro { get; private set; }
