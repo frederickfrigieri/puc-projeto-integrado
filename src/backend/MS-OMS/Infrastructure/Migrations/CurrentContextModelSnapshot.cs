@@ -159,7 +159,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ParceiroId");
 
-                    b.ToTable("Produtos","WMS");
+                    b.ToTable("Produtos","OMS");
                 });
 
             modelBuilder.Entity("Infrastructure.Processing.InternalCommands.InternalCommand", b =>
@@ -186,7 +186,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InternalCommands","Jobs");
+                    b.ToTable("InternalCommands","OMS");
                 });
 
             modelBuilder.Entity("Infrastructure.Processing.Outbox.OutboxMessage", b =>
@@ -212,7 +212,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages","Jobs");
+                    b.ToTable("OutboxMessages","OMS");
                 });
 
             modelBuilder.Entity("Domain.Entities.ItemPedidoEntity", b =>

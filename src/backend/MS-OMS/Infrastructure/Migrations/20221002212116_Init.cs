@@ -3,22 +3,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class AddTblTabelasIniciais : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "OMS");
 
-            migrationBuilder.EnsureSchema(
-                name: "WMS");
-
-            migrationBuilder.EnsureSchema(
-                name: "Jobs");
+            migrationBuilder.CreateTable(
+                name: "InternalCommands",
+                schema: "OMS",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    OccurredOn = table.Column<DateTime>(nullable: false),
+                    Type = table.Column<string>(type: "Varchar(250)", maxLength: 8000, nullable: true),
+                    Data = table.Column<string>(type: "Varchar(Max)", maxLength: 8000, nullable: true),
+                    ProcessedDate = table.Column<DateTime>(nullable: true),
+                    Executando = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InternalCommands", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "OutboxMessages",
-                schema: "Jobs",
+                schema: "OMS",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -42,7 +53,11 @@ namespace Infrastructure.Migrations
                     Chave = table.Column<Guid>(nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
                     Cnpj = table.Column<string>(type: "varchar(14)", maxLength: 256, nullable: false),
-                    RazaoSocial = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: false)
+                    RazaoSocial = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: false),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    Nome = table.Column<string>(maxLength: 256, nullable: true),
+                    Senha = table.Column<string>(maxLength: 256, nullable: true),
+                    ChaveBling = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +75,8 @@ namespace Infrastructure.Migrations
                     DataCadastro = table.Column<DateTime>(type: "datetime", nullable: false),
                     NomeCompleto = table.Column<string>(type: "varchar(100)", maxLength: 256, nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,12)", nullable: false),
-                    ParceiroId = table.Column<int>(nullable: false)
+                    ParceiroId = table.Column<int>(nullable: false),
+                    StatusPedido = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +92,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Produtos",
-                schema: "WMS",
+                schema: "OMS",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -125,7 +141,7 @@ namespace Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ItensPedidos_Produtos_ProdutoId",
                         column: x => x.ProdutoId,
-                        principalSchema: "WMS",
+                        principalSchema: "OMS",
                         principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -151,7 +167,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produtos_ParceiroId",
-                schema: "WMS",
+                schema: "OMS",
                 table: "Produtos",
                 column: "ParceiroId");
         }
@@ -159,11 +175,15 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OutboxMessages",
-                schema: "Jobs");
+                name: "InternalCommands",
+                schema: "OMS");
 
             migrationBuilder.DropTable(
                 name: "ItensPedidos",
+                schema: "OMS");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessages",
                 schema: "OMS");
 
             migrationBuilder.DropTable(
@@ -172,7 +192,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Produtos",
-                schema: "WMS");
+                schema: "OMS");
 
             migrationBuilder.DropTable(
                 name: "Parceiros",

@@ -26,39 +26,21 @@ namespace Infrastructure.Processing
             builder.AddMassTransit(x =>
             {
                 x.SetKebabCaseEndpointNameFormatter();
-                
+
                 if (MessageBusSettings.Consumer)
                     x.AddConsumers(Assemblies.Application);
 
                 x.UsingAzureServiceBus((context, cfg) =>
                 {
                     cfg.Host("Endpoint=sb://tcc-puc-minas-delivery-store.servicebus.windows.net/;SharedAccessKeyName=DeliveryStoreServiceBus;SharedAccessKey=TNdBNd6fXqCyZL+646cAjSNXp3uSAlwwWFSdIxCBCLM=");
-
                     cfg.ReceiveEndpoint("ms-wms-pedido", e =>
                     {
                         e.UseConcurrencyLimit(1);
                         e.ConfigureConsumers(context);
                         e.UseRetry(opt => opt.Incremental(3, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5)));
+                        AutofacFilterExtensions.UseConsumeFilter(e, typeof(UnitOfWorkConsumerFilter<>), context);
                     });
                 });
-
-                // add the bus to the container
-                //x.UsingRabbitMq((context, cfg) =>
-                //{
-                //    cfg.Host(new Uri(MessageBusSettings.ConnectionString));
-
-                //    if (MessageBusSettings.Consumer)
-                //    {
-                //        cfg.ReceiveEndpoint("MS-WMS-Queue", ec =>
-                //        {
-                //            ec.UseConcurrencyLimit(1);
-                //            ec.ConfigureConsumers(context);
-                //            ec.UseRetry(opt => opt.Incremental(3, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5)));
-
-                //            AutofacFilterExtensions.UseConsumeFilter(ec, typeof(UnitOfWorkConsumerFilter<>), context);
-                //        });
-                //    }
-                //});
             });
         }
     }

@@ -8,7 +8,7 @@ namespace Infrastructure.Database.Maps
     {
         public void Configure(EntityTypeBuilder<ProdutoEntity> builder)
         {
-            builder.ToTable("Produtos", SchemaNames.WMS);
+            builder.ToTable("Produtos", SchemaNames.OMS);
 
             builder.HasKey(x => x.Id);
 

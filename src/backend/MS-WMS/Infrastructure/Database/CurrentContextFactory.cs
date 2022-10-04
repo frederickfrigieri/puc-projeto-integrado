@@ -8,9 +8,10 @@ namespace Infrastructure.Database
         public CurrentContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CurrentContext>();
-            var connectionString = @"Data Source=(localdb)\Mssqllocaldb;Initial Catalog=MS-WMS;Integrated Security=True";
+            //var connectionString = @"Data Source=(localdb)\Mssqllocaldb;Initial Catalog=MS-WMS;Integrated Security=True";
+            var connectionString = @"Server=tcp:deliverystore-db.database.windows.net,1433;Initial Catalog=deliverystore;Persist Security Info=False;User ID=deliverystore;Password=123@Trocar;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-            optionsBuilder.UseSqlServer(connectionString, x => x.MigrationsHistoryTable("MigrationsHistory", SchemaNames.Migrations));
+            optionsBuilder.UseSqlServer(connectionString, x => x.MigrationsHistoryTable("MigrationsHistory", SchemaNames.WMS));
 
             return new CurrentContext(optionsBuilder.Options);
         }

@@ -28,11 +28,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Domain\Domain.csproj" />
+	  <Folder Include="NotificationHandlers\PedidoAssociadoArmazem\" />
+	  <Folder Include="NotificationHandlers\PedidoAssociadoEstoque\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="NotificationHandlers\PedidoAssociadoArmazem\" />
-	  <Folder Include="NotificationHandlers\PedidoAssociadoEstoque\" />
+	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>
 </Project>

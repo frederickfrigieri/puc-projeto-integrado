@@ -7,14 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Repository;
-using Serilog;
 using Serilog.RequestResponse.Extensions;
 using Serilog.RequestResponse.Extensions.Models;
 using Serilog.RequestResponseExtension.Extensions;
-using Serilog.RequestResponseExtension.Models;
-using System;
 
 namespace Api
 {
@@ -48,7 +44,7 @@ namespace Api
             services.AddScoped<IRepository, RepositoryImplementation>();
             services.AddDbContext<RepositoryDbContext>(opt =>
             {
-                opt.UseSqlServer(connectionstring);
+                opt.UseSqlServer(connectionstring, x => x.MigrationsHistoryTable("MigrationsHistory", "Identidade"));
             });
 
             services.AddScoped<IAutenticacao, AutenticacaoService>();
@@ -63,9 +59,9 @@ namespace Api
             if (!env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerDocumentation();
             }
 
+            app.UseSwaggerDocumentation();
             app.UseHttpsRedirection();
             app.UseHsts();
             app.UseRouting();

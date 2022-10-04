@@ -28,7 +28,7 @@ namespace Infrastructure.Processing.InternalCommands
                                "[Command].[Id], " +
                                "[Command].[Type], " +
                                "[Command].[Data] " +
-                               "FROM [Jobs].[InternalCommands] AS [Command] " +
+                               "FROM [OMS].[InternalCommands] AS [Command] " +
                                "WHERE [Command].[ProcessedDate] IS NULL " +
                                "AND [Command].[Executando] = 0 " +
                                "ORDER BY OccurredOn";
@@ -41,7 +41,7 @@ namespace Infrastructure.Processing.InternalCommands
                 Type type = Assemblies.Application.GetType(internalCommand.Type);
                 dynamic commandToProcess = JsonConvert.DeserializeObject(internalCommand.Data, type);
 
-                await connection.ExecuteAsync("update [Jobs].[InternalCommands] set Executando = 1 where id = @id",
+                await connection.ExecuteAsync("update [OMS].[InternalCommands] set Executando = 1 where id = @id",
                     new { internalCommand.Id });
 
                 try

@@ -28,14 +28,14 @@ namespace Infrastructure.Processing.Outbox
                                "[OutboxMessage].[Id], " +
                                "[OutboxMessage].[Type], " +
                                "[OutboxMessage].[Data] " +
-                               "FROM [Jobs].[OutboxMessages] AS [OutboxMessage] " +
+                               "FROM [OMS].[OutboxMessages] AS [OutboxMessage] " +
                                "WHERE [OutboxMessage].[ProcessedDate] IS NULL " +
                                "ORDER BY [OutboxMessage].[OccurredOn]";
 
             var messages = await connection.QueryAsync<OutboxMessageDto>(sql);
             var messagesList = messages.AsList();
 
-            const string sqlUpdateProcessedDate = "UPDATE [Jobs].[OutboxMessages] " +
+            const string sqlUpdateProcessedDate = "UPDATE [OMS].[OutboxMessages] " +
                                                   "SET [ProcessedDate] = @Date " +
                                                   "WHERE [Id] = @Id";
             if (messagesList.Count > 0)

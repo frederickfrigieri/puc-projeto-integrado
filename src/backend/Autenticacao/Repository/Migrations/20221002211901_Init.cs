@@ -7,8 +7,12 @@ namespace Repository.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Identidade");
+
             migrationBuilder.CreateTable(
                 name: "Usuarios",
+                schema: "Identidade",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -27,7 +31,8 @@ namespace Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Usuarios",
+                schema: "Identidade");
         }
     }
 }

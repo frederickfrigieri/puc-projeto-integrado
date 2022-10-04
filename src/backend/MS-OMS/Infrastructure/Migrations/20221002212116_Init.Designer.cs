@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(CurrentContext))]
-    [Migration("20220903064742_Add-Tbl-Init")]
-    partial class AddTblInit
+    [Migration("20221002212116_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Domain.Entities.Armazem", b =>
+            modelBuilder.Entity("Domain.Entities.ItemPedidoEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,124 +34,69 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Armazens","WMS");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Estoque", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ArmazemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("Chave")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ChaveParceiro")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ItemPedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PosicaoId")
+                    b.Property<int>("PedidoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
+                    b.Property<byte>("Quantidade")
+                        .HasColumnType("tinyint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ArmazemId");
-
-                    b.HasIndex("ItemPedidoId");
-
-                    b.HasIndex("PosicaoId");
+                    b.HasIndex("PedidoId");
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("Estoques","WMS");
+                    b.ToTable("ItensPedidos","OMS");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ItemPedido", b =>
+            modelBuilder.Entity("Domain.Entities.ParceiroEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ArmazemId")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("Chave")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ChaveParceiro")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ChavePedido")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArmazemId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Itens");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Posicao", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ArmazemId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("Chave")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Letra")
+                    b.Property<string>("ChaveBling")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasColumnType("varchar(14)")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Senha")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArmazemId");
-
-                    b.ToTable("Posicoes","WMS");
+                    b.ToTable("Parceiros","OMS");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Produto", b =>
+            modelBuilder.Entity("Domain.Entities.PedidoEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +106,39 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("Chave")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ChaveParceiro")
+                    b.Property<DateTime>("DataCadastro")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("NomeCompleto")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(256);
+
+                    b.Property<int>("ParceiroId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StatusPedido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,12)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParceiroId");
+
+                    b.ToTable("Pedidos","OMS");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ProdutoEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("Chave")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataCadastro")
@@ -172,6 +149,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("varchar(1000)")
                         .HasMaxLength(256);
 
+                    b.Property<int>("ParceiroId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Sku")
                         .IsRequired()
                         .HasColumnType("varchar(13)")
@@ -179,7 +159,36 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos","WMS");
+                    b.HasIndex("ParceiroId");
+
+                    b.ToTable("Produtos","OMS");
+                });
+
+            modelBuilder.Entity("Infrastructure.Processing.InternalCommands.InternalCommand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("Varchar(Max)")
+                        .HasMaxLength(8000);
+
+                    b.Property<bool>("Executando")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ProcessedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("Varchar(250)")
+                        .HasMaxLength(8000);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InternalCommands","OMS");
                 });
 
             modelBuilder.Entity("Infrastructure.Processing.Outbox.OutboxMessage", b =>
@@ -205,50 +214,36 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages","Jobs");
+                    b.ToTable("OutboxMessages","OMS");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Estoque", b =>
+            modelBuilder.Entity("Domain.Entities.ItemPedidoEntity", b =>
                 {
-                    b.HasOne("Domain.Entities.Armazem", "Armazem")
-                        .WithMany("Estoques")
-                        .HasForeignKey("ArmazemId")
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.ItemPedido", "ItemPedido")
-                        .WithMany()
-                        .HasForeignKey("ItemPedidoId")
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Posicao", "Posicao")
-                        .WithMany()
-                        .HasForeignKey("PosicaoId")
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.ItemPedido", b =>
-                {
-                    b.HasOne("Domain.Entities.Armazem", "Armazem")
+                    b.HasOne("Domain.Entities.PedidoEntity", "Pedido")
                         .WithMany("Itens")
-                        .HasForeignKey("ArmazemId")
+                        .HasForeignKey("PedidoId")
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Produto", "Produto")
+                    b.HasOne("Domain.Entities.ProdutoEntity", "Produto")
                         .WithMany("ItensPedidos")
                         .HasForeignKey("ProdutoId")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Posicao", b =>
+            modelBuilder.Entity("Domain.Entities.PedidoEntity", b =>
                 {
-                    b.HasOne("Domain.Entities.Armazem", null)
-                        .WithMany("Posicoes")
-                        .HasForeignKey("ArmazemId");
+                    b.HasOne("Domain.Entities.ParceiroEntity", "Parceiro")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("ParceiroId")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.ProdutoEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.ParceiroEntity", "Parceiro")
+                        .WithMany("Produtos")
+                        .HasForeignKey("ParceiroId")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

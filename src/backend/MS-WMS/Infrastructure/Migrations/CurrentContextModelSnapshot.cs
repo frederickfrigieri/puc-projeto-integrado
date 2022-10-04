@@ -60,7 +60,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ItemPedidoId")
+                    b.Property<int?>("PedidoItemId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PosicaoId")
@@ -73,7 +73,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ArmazemId");
 
-                    b.HasIndex("ItemPedidoId");
+                    b.HasIndex("PedidoItemId");
 
                     b.HasIndex("PosicaoId");
 
@@ -82,7 +82,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Estoques","WMS");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ItemPedido", b =>
+            modelBuilder.Entity("Domain.Entities.PedidoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +116,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("ItensPedidos","OMS");
+                    b.ToTable("ItensPedidos","WMS");
                 });
 
             modelBuilder.Entity("Domain.Entities.Posicao", b =>
@@ -204,7 +204,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InternalCommands","Jobs");
+                    b.ToTable("InternalCommands","WMS");
                 });
 
             modelBuilder.Entity("Infrastructure.Processing.Outbox.OutboxMessage", b =>
@@ -230,7 +230,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages","Jobs");
+                    b.ToTable("OutboxMessages","WMS");
                 });
 
             modelBuilder.Entity("Domain.Entities.Estoque", b =>
@@ -240,9 +240,9 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ArmazemId")
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.ItemPedido", "ItemPedido")
+                    b.HasOne("Domain.Entities.PedidoItem", "PedidoItem")
                         .WithMany()
-                        .HasForeignKey("ItemPedidoId");
+                        .HasForeignKey("PedidoItemId");
 
                     b.HasOne("Domain.Entities.Posicao", "Posicao")
                         .WithMany()
@@ -254,7 +254,7 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.ItemPedido", b =>
+            modelBuilder.Entity("Domain.Entities.PedidoItem", b =>
                 {
                     b.HasOne("Domain.Entities.Armazem", "Armazem")
                         .WithMany("Itens")

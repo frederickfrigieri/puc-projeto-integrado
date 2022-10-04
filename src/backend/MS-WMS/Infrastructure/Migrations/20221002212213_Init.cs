@@ -3,31 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class AddTblInit : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "WMS");
-
-            migrationBuilder.EnsureSchema(
-                name: "Jobs");
-
-            migrationBuilder.CreateTable(
-                name: "OutboxMessages",
-                schema: "Jobs",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    OccurredOn = table.Column<DateTime>(nullable: false),
-                    Type = table.Column<string>(unicode: false, maxLength: 8000, nullable: true),
-                    Data = table.Column<string>(unicode: false, maxLength: 8000, nullable: true),
-                    ProcessedDate = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OutboxMessages", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "Armazens",
@@ -43,6 +24,39 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Armazens", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InternalCommands",
+                schema: "WMS",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    OccurredOn = table.Column<DateTime>(nullable: false),
+                    Type = table.Column<string>(type: "Varchar(250)", maxLength: 8000, nullable: true),
+                    Data = table.Column<string>(type: "Varchar(Max)", maxLength: 8000, nullable: true),
+                    ProcessedDate = table.Column<DateTime>(nullable: true),
+                    Executando = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InternalCommands", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OutboxMessages",
+                schema: "WMS",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    OccurredOn = table.Column<DateTime>(nullable: false),
+                    Type = table.Column<string>(unicode: false, maxLength: 8000, nullable: true),
+                    Data = table.Column<string>(unicode: false, maxLength: 8000, nullable: true),
+                    ProcessedDate = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OutboxMessages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,31 +103,32 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Itens",
+                name: "ItensPedidos",
+                schema: "WMS",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Chave = table.Column<Guid>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
-                    Quantidade = table.Column<int>(nullable: false),
+                    Quantidade = table.Column<byte>(type: "tinyint", nullable: false),
                     ProdutoId = table.Column<int>(nullable: false),
                     ChavePedido = table.Column<Guid>(nullable: false),
                     ChaveParceiro = table.Column<Guid>(nullable: false),
-                    ArmazemId = table.Column<int>(nullable: false)
+                    ArmazemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Itens", x => x.Id);
+                    table.PrimaryKey("PK_ItensPedidos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Itens_Armazens_ArmazemId",
+                        name: "FK_ItensPedidos_Armazens_ArmazemId",
                         column: x => x.ArmazemId,
                         principalSchema: "WMS",
                         principalTable: "Armazens",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Itens_Produtos_ProdutoId",
+                        name: "FK_ItensPedidos_Produtos_ProdutoId",
                         column: x => x.ProdutoId,
                         principalSchema: "WMS",
                         principalTable: "Produtos",
@@ -131,10 +146,10 @@ namespace Infrastructure.Migrations
                     Chave = table.Column<Guid>(nullable: false),
                     DataCadastro = table.Column<DateTime>(nullable: false),
                     ChaveParceiro = table.Column<Guid>(nullable: false),
-                    ItemPedidoId = table.Column<int>(nullable: false),
-                    PosicaoId = table.Column<int>(nullable: false),
                     ArmazemId = table.Column<int>(nullable: false),
-                    ProdutoId = table.Column<int>(nullable: false)
+                    ProdutoId = table.Column<int>(nullable: false),
+                    PedidoItemId = table.Column<int>(nullable: true),
+                    PosicaoId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -147,9 +162,10 @@ namespace Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Estoques_Itens_ItemPedidoId",
-                        column: x => x.ItemPedidoId,
-                        principalTable: "Itens",
+                        name: "FK_Estoques_ItensPedidos_PedidoItemId",
+                        column: x => x.PedidoItemId,
+                        principalSchema: "WMS",
+                        principalTable: "ItensPedidos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -169,26 +185,16 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Itens_ArmazemId",
-                table: "Itens",
-                column: "ArmazemId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Itens_ProdutoId",
-                table: "Itens",
-                column: "ProdutoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Estoques_ArmazemId",
                 schema: "WMS",
                 table: "Estoques",
                 column: "ArmazemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Estoques_ItemPedidoId",
+                name: "IX_Estoques_PedidoItemId",
                 schema: "WMS",
                 table: "Estoques",
-                column: "ItemPedidoId");
+                column: "PedidoItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Estoques_PosicaoId",
@@ -203,6 +209,18 @@ namespace Infrastructure.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItensPedidos_ArmazemId",
+                schema: "WMS",
+                table: "ItensPedidos",
+                column: "ArmazemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedidos_ProdutoId",
+                schema: "WMS",
+                table: "ItensPedidos",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Posicoes_ArmazemId",
                 schema: "WMS",
                 table: "Posicoes",
@@ -212,15 +230,20 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OutboxMessages",
-                schema: "Jobs");
-
-            migrationBuilder.DropTable(
                 name: "Estoques",
                 schema: "WMS");
 
             migrationBuilder.DropTable(
-                name: "Itens");
+                name: "InternalCommands",
+                schema: "WMS");
+
+            migrationBuilder.DropTable(
+                name: "OutboxMessages",
+                schema: "WMS");
+
+            migrationBuilder.DropTable(
+                name: "ItensPedidos",
+                schema: "WMS");
 
             migrationBuilder.DropTable(
                 name: "Posicoes",

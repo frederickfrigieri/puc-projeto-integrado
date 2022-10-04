@@ -28,7 +28,7 @@ namespace Infrastructure.Processing.InternalCommands
                                "[Command].[Id], " +
                                "[Command].[Type], " +
                                "[Command].[Data] " +
-                               "FROM [Jobs].[InternalCommands] AS [Command] " +
+                               "FROM [WMS].[InternalCommands] AS [Command] " +
                                "WHERE [Command].[ProcessedDate] IS NULL " +
                                "AND [Command].[Executando] = 0 " +
                                "ORDER BY OccurredOn";
@@ -41,19 +41,19 @@ namespace Infrastructure.Processing.InternalCommands
                 Type type = Assemblies.Application.GetType(internalCommand.Type);
                 dynamic commandToProcess = JsonConvert.DeserializeObject(internalCommand.Data, type);
 
-                await connection.ExecuteAsync("update [Jobs].[InternalCommands] set Executando = 1 where id = @id",
+                await connection.ExecuteAsync("update [WMS].[InternalCommands] set Executando = 1 where id = @id",
                     new { internalCommand.Id });
 
                 try
                 {
                     await CommandsExecutor.Execute(commandToProcess);
 
-                    await connection.ExecuteAsync("update [Jobs].[InternalCommands] set processedDate = getdate(), Executando = 0 where id = @id",
+                    await connection.ExecuteAsync("update [WMS].[InternalCommands] set processedDate = getdate(), Executando = 0 where id = @id",
                         new { internalCommand.Id });
                 }
                 catch (Exception)
                 {
-                    await connection.ExecuteAsync("update [Jobs].[InternalCommands] set Executando = 0 where id = @id", new { internalCommand.Id });
+                    await connection.ExecuteAsync("update [WMS].[InternalCommands] set Executando = 0 where id = @id", new { internalCommand.Id });
                 }
             }
 

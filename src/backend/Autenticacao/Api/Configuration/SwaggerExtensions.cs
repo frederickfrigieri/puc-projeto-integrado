@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
+using System;
 
 namespace Api.Configuration
 {
@@ -42,10 +45,11 @@ namespace Api.Configuration
                     }
                 });
 
-                //var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                //var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
-                //var commentsFile = Path.Combine(baseDirectory, commentsFileName);
-                //options.IncludeXmlComments(commentsFile);
+                var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".XML";
+                var commentsFile = Path.Combine(baseDirectory, commentsFileName);
+
+                options.IncludeXmlComments(commentsFile);
             });
 
             return services;
@@ -57,7 +61,7 @@ namespace Api.Configuration
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "Sample CQRS API V1");
+                c.SwaggerEndpoint("v1/swagger.json", "Identidade");
             });
 
 

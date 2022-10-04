@@ -8,7 +8,7 @@ namespace Infrastructure.Processing.InternalCommands
     {
         public void Configure(EntityTypeBuilder<InternalCommand> builder)
         {
-            builder.ToTable("InternalCommands", SchemaNames.Jobs);
+            builder.ToTable("InternalCommands", SchemaNames.OMS);
 
             builder.Property(x => x.Type).HasColumnType("Varchar(250)");
             builder.Property(x => x.Data).HasColumnType("Varchar(Max)");

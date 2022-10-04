@@ -1,6 +1,7 @@
 ﻿using Domain._SeedWork;
 using Domain.Dtos;
 using Domain.Events;
+using Domain.Extensions;
 using Domain.Rules;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Domain.Entities
         {
             //TODO Validar duplicidade de CNPJ
 
-            Cnpj = dto.Cnpj;
+            Cnpj = dto.Cnpj.SomenteNumeros();
             RazaoSocial = dto.RazaoSocial;
             Email = dto.Email;
             Nome = dto.Nome;

@@ -40,7 +40,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios","Identidade");
                 });
 #pragma warning restore 612, 618
         }

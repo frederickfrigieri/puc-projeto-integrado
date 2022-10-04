@@ -51,7 +51,7 @@ namespace HangfireJobs
 
             optionsHangFire = new DashboardOptions
             {
-                Authorization = new[] { new HangfireCustomBasicAuthenticationFilter { User = "hangfire", Pass = "123@Trocar" } }
+                Authorization = new[] { new HangfireCustomBasicAuthenticationFilter { User = "deliverystore", Pass = "123@Trocar" } }
             };
 
             app.UseHttpsRedirection();

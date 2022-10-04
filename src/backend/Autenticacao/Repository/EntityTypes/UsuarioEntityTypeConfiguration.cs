@@ -8,7 +8,7 @@ namespace Repository.EntityTypes
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-            builder.ToTable("Usuarios");
+            builder.ToTable("Usuarios", "Identidade");
 
             builder.HasKey(x => x.Id);
 

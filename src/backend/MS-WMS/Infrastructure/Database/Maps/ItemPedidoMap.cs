@@ -8,7 +8,7 @@ namespace Infrastructure.Database.Maps
     {
         public void Configure(EntityTypeBuilder<PedidoItem> builder)
         {
-            builder.ToTable("ItensPedidos", SchemaNames.OMS);
+            builder.ToTable("ItensPedidos", SchemaNames.WMS);
 
             builder.HasKey(x => x.Id);
 
