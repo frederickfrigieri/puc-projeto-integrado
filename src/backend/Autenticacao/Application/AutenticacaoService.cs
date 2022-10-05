@@ -38,7 +38,8 @@ namespace Application
             {
                 Chave = usuario.ChaveUsuario,
                 Data = DateTime.Now,
-                Login = login
+                Login = login,
+                Perfil = usuario.Perfil
             };
 
             var token = _tokenService.GerarToken(tokenProperties, jwtSecrets);

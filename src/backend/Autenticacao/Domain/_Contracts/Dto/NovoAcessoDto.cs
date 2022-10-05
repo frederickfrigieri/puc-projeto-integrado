@@ -7,5 +7,6 @@ namespace Domain._Contracts.Dto
         public Guid Chave { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Perfil { get; set; }
     }
 }

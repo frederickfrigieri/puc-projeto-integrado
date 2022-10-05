@@ -15,7 +15,8 @@ namespace Application
             var claimsUser = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.Chave.ToString()),
-                new Claim(ClaimTypes.Actor, usuario.Login)
+                new Claim(ClaimTypes.Actor, usuario.Login),
+                new Claim("Perfil", usuario.Perfil)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

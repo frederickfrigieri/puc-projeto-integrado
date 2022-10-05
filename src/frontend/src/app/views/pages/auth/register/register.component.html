@@ -21,8 +21,8 @@
               <div class="mb-3">
                 <input formControlName="cnpj" type="text" class="form-control" id="cnpj" placeholder="CNPJ"
                   mask="00.000.000/0000-00">
-                  <app-input-invalid-message [frmGroup]="formGroup" controlName="cnpj"></app-input-invalid-message>
-                </div>
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="cnpj"></app-input-invalid-message>
+              </div>
               <div class="mb-3">
                 <input formControlName="nome" type="text" class="form-control" id="nome" placeholder="Nome do Contato">
                 <app-input-invalid-message [frmGroup]="formGroup" controlName="nome"></app-input-invalid-message>
@@ -31,21 +31,22 @@
                 <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
                 <app-input-invalid-message [frmGroup]="formGroup" controlName="email"></app-input-invalid-message>
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <input formControlName="chaveBling" type="text" class="form-control" id="chaveBling"
                   placeholder="Chave Bling">
-                  <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveBling"></app-input-invalid-message>
-                </div>
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveBling"></app-input-invalid-message>
+              </div> -->
               <div class="mb-3">
                 <input formControlName="senha" type="password" class="form-control" id="senha"
                   autocomplete="current-password" placeholder="Senha">
-                  <app-input-invalid-message [frmGroup]="formGroup" controlName="senha"></app-input-invalid-message>
-                </div>
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="senha"></app-input-invalid-message>
+              </div>
               <div class="mb-3">
                 <input formControlName="senhaConfirmacao" type="password" class="form-control" id="senhaConfirmacao"
                   autocomplete="current-password" placeholder="Confirme a Senha">
-                  <app-input-invalid-message [frmGroup]="formGroup" controlName="senhaConfirmacao"></app-input-invalid-message>
-                </div>
+                <app-input-invalid-message [frmGroup]="formGroup" controlName="senhaConfirmacao">
+                </app-input-invalid-message>
+              </div>
               <div>
                 <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0" [disabled]="formGroup.invalid"
                   (click)="onRegister($event)">Criar</button>

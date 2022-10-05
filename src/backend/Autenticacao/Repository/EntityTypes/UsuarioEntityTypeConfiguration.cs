@@ -15,6 +15,10 @@ namespace Repository.EntityTypes
             builder.Property(x => x.DataCadastro)
                 .HasColumnType("datetime")
                 .IsRequired();
+
+            builder.Property(x => x.Perfil)
+                .HasColumnType("varchar(10)")
+                .HasConversion<string>();
         }
     }
 }

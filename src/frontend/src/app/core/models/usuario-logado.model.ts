@@ -1,12 +1,12 @@
 export class UsuarioLogadoModel {
     chaveUsuario: string;
-    perfilId: PerfilId;
+    perfil: Perfil;
     login: string;
     logado: boolean;
 }
 
-export enum PerfilId {
-    parceiro = 1,
-    consumidor = 2,
-    operador = 3
+export enum Perfil {
+    Admin,
+    operador,
+    Parceiro
 }

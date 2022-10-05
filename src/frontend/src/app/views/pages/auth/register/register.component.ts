@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       'cnpj': [null, [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       'nome': [null, [Validators.required]],
       'email': [null, [Validators.required, Validators.email]],
-      'chaveBling': [null, [Validators.required]],
+      'chaveBling': ['0DA60B8A-2E72-4AD9-94D9-F5FBDA693BD0', [Validators.required]],
       'senha': [null, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
       'senhaConfirmacao': [null, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
     });

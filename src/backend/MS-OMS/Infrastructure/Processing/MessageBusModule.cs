@@ -29,18 +29,29 @@ namespace Infrastructure.Processing
                 x.SetKebabCaseEndpointNameFormatter();
 
                 if (MessageBusSettings.Consumer)
-                    //x.AddConsumer<CadastrarProdutoConsumer>();
-                    x.AddConsumers(Assemblies.Application);
+                    x.AddConsumer<CadastrarProdutoConsumer>();
+                //x.AddConsumers(Assemblies.Application);
 
                 x.UsingAzureServiceBus((context, cfg) =>
                 {
                     cfg.Host("Endpoint=sb://tcc-puc-minas-delivery-store.servicebus.windows.net/;SharedAccessKeyName=DeliveryStoreServiceBus;SharedAccessKey=TNdBNd6fXqCyZL+646cAjSNXp3uSAlwwWFSdIxCBCLM=");
                     cfg.ReceiveEndpoint("ms-oms-produto", e =>
                     {
+                        e.PrefetchCount = 100;
+
+                        // number of "threads" to run concurrently
+                        e.MaxConcurrentCalls = 100;
+
+                        // default, but shown for example
+                        e.LockDuration = TimeSpan.FromMinutes(5);
+
+                        // lock will be renewed up to 30 minutes
+                        e.MaxAutoRenewDuration = TimeSpan.FromMinutes(30);
+
                         e.UseConcurrencyLimit(1);
                         e.ConfigureConsumers(context);
                         e.UseRetry(opt => opt.Incremental(3, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5)));
-                        AutofacFilterExtensions.UseConsumeFilter(e, typeof(UnitOfWorkConsumerFilter<>), context);
+                        //AutofacFilterExtensions.UseConsumeFilter(e, typeof(UnitOfWorkConsumerFilter<>), context);
                     });
                 });
             });

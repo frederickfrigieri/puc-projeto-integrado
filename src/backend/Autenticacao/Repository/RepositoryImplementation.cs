@@ -38,7 +38,8 @@ namespace Repository
 
             return new UsuarioResponse
             {
-                ChaveUsuario = dados.Chave
+                ChaveUsuario = dados.Chave,
+                Perfil = dados.Perfil.ToString()
             };
         }
     }

@@ -48,12 +48,12 @@ namespace Infrastructure.Processing.InternalCommands
                 {
                     await CommandsExecutor.Execute(commandToProcess);
 
-                    await connection.ExecuteAsync("update [Jobs].[InternalCommands] set processedDate = getdate(), Executando = 0 where id = @id",
+                    await connection.ExecuteAsync("update [OMS].[InternalCommands] set processedDate = getdate(), Executando = 0 where id = @id",
                         new { internalCommand.Id });
                 }
                 catch (Exception)
                 {
-                    await connection.ExecuteAsync("update [Jobs].[InternalCommands] set Executando = 0 where id = @id", new { internalCommand.Id });
+                    await connection.ExecuteAsync("update [OMS].[InternalCommands] set Executando = 0 where id = @id", new { internalCommand.Id });
                 }
             }
 

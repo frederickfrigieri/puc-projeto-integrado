@@ -4,12 +4,14 @@ using Application.Commands.CadastrarProduto;
 using Application.ObterProdutosPorParceiro;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/parceiros")]
     [ApiController]
+    [Authorize]
     public class ProdutoController : ControllerBase
     {
         private readonly IMediator _mediator;

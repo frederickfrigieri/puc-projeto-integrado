@@ -5,5 +5,6 @@
         public string ChaveParceiro { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Perifl { get; set; }
     }
 }

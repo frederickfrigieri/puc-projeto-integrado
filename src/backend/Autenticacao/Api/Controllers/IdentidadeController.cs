@@ -25,7 +25,8 @@ namespace Api.Controllers
             {
                 Chave = Guid.Parse(request.ChaveParceiro),
                 Login = request.Login,
-                Password = request.Password
+                Password = request.Password,
+                Perfil = request.Perifl ?? "Parceiro"
             };
 
             await _identidade.CadastrarUsuario(dto);

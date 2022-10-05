@@ -21,7 +21,7 @@ namespace Infrastructure.Processing
         {
             var connection = this._sqlConnectionFactory.GetOpenConnection();
 
-            const string sqlInsert = "INSERT INTO [Jobs].[InternalCommands] ([Id], [OccurredOn], [Type], [Data], [Executando]) VALUES " +
+            const string sqlInsert = "INSERT INTO [OMS].[InternalCommands] ([Id], [OccurredOn], [Type], [Data], [Executando]) VALUES " +
                                      "(@Id, @OccurredOn, @Type, @Data, 0)";
 
             await connection.ExecuteAsync(sqlInsert, new
@@ -37,7 +37,7 @@ namespace Infrastructure.Processing
         {
             var connection = this._sqlConnectionFactory.GetOpenConnection();
 
-            const string sqlInsert = "INSERT INTO [Jobs].[InternalCommands] ([Id], [OccurredOn], [Type], [Data], Executando) VALUES " +
+            const string sqlInsert = "INSERT INTO [OMS].[InternalCommands] ([Id], [OccurredOn], [Type], [Data], Executando) VALUES " +
                                      "(@Id, @OccurredOn, @Type, @Data, 0)";
 
             await connection.ExecuteAsync(sqlInsert, new

@@ -7,5 +7,6 @@ namespace Application.Services.Dto
         public string Login { get; set; }
         public Guid Chave { get; set; }
         public DateTime Data { get; set; }
+        public string Perfil { get; set; }
     }
 }
