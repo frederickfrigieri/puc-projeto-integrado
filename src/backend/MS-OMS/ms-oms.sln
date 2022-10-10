@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32901.215
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{18F61354-C52E-4619-8ED1-534F6237538B}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared.EventsMessages", "..\Shared.EventsMessages\Shared.EventsMessages.shproj", "{0C00F816-54FA-4AEF-8809-4A6C60BD47FA}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Shared.EventsMessages\Shared.EventsMessages.projitems*{0c00f816-54fa-4aef-8809-4a6c60bd47fa}*SharedItemsImports = 13
+		..\Shared.EventsMessages\Shared.EventsMessages.projitems*{337bc7ba-ac67-4e00-856e-ec453a338141}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -53,9 +57,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6893256B-FB92-4FB9-87AB-13764224CE85}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\Shared.EventsMessages\Shared.EventsMessages.projitems*{0c00f816-54fa-4aef-8809-4a6c60bd47fa}*SharedItemsImports = 13
-		..\Shared.EventsMessages\Shared.EventsMessages.projitems*{337bc7ba-ac67-4e00-856e-ec453a338141}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

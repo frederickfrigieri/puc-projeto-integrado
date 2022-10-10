@@ -29,12 +29,10 @@ export class HttpCustomInterceptor implements HttpInterceptor {
     let requestNew: any;
 
     if (request.url.includes("produtos")) {
-      http = 'https://ds-wms-api.azurewebsites.net/api';
+      http = 'https://localhost:7201/api';
     } else if (request.url.includes("autenticacao")) {
-      // http = 'https://ds-identidade-api.azurewebsites.net/api';
       http = 'https://localhost:7001/api';
     } else if (request.url.includes("parceiro")) {
-      // http = 'https://ds-oms-api.azurewebsites.net/api';
       http = 'https://localhost:7101/api';
     }
 
