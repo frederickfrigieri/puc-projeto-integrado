@@ -29,6 +29,12 @@ stages:
           solutionName: 'backend'
           projects:
             - "MS-OMS/WebApi/Api"
+            - "MS-OMS/Worker/Worker"
+            - "MS-OMS/HangfireJobs/HangfireJobs"
+            - "MS-WMS/WebApi/Api"
+            - "MS-WMS/Worker/Worker"
+            - "MS-WMS/HangfireJobs/HangfireJobs"
+            - "Autenticacao/Api/Api"
             # - "MS-WMS"
             # - "Autenticacao"
           artifactName: 'Backend'
