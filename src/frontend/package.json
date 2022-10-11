@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "rtl": "webpack --config webpack-rtl.config.js"
+    "rtl": "webpack --config webpack-rtl.config.js",
+    "prod": "ng build --prod --aot=false  --build-optimizer=false --base-href #{{basehref}}# "
   },
   "private": true,
   "dependencies": {
