@@ -16,6 +16,18 @@ parameters:
 - name: BuildBackend
   displayName: Build Backend?
   type: boolean
+- name: PublishFrontend
+  displayName: Publicar Frontend?
+  type: boolean
+- name: PublishBackend
+  displayName: Publicar Backend (WebApi)?
+  type: boolean
+- name: PublishHangfire
+  displayName: Publicar HangFire Jobs?
+  type: boolean
+- name: PublishWorker
+  displayName: Publicar Worker?
+  type: boolean
   
 stages:
 # BUILD
@@ -50,3 +62,110 @@ stages:
               ProjectPath: 'src/frontend'
               ArtifactName: 'Frontend'
 # FIM BUILD
+
+# PUBLISH
+  - stage: Deploy_Prod
+    jobs:
+      - deployment: Deploy_Producao
+        displayName: 'Deploy Produção'
+        variables:
+          AutenticacoEndpoint: 'https://www.ezconet.com.br/webservices/tcc-puc/autenticacao/api'
+          basehref: '/tcc-puc/'
+          ConnectionString: 'Data Source=$(servidorSqlDesenvWeb);Initial Catalog=DeliveryStore;User ID=$(loginSql);Password=$(passSqlDev);Connection Timeout=120;MultipleActiveResultSets=True'
+          MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/tcc-puc'
+        environment:
+          name: 'Embratel'
+          resourceType: VirtualMachine
+          tags: iisweb
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: none
+                #FRONTEND
+                - template: /templates/ezc-deploy-angular.yaml@Pipelines
+                  parameters:
+                    TargetFolder: '$(wwwroot)\ezconet\tcc-puc'
+                    ArtifactName: 'Frontend'
+                    Publish: ${{ eq(parameters.PublishFrontend, true) }}
+                #OMS
+                - template: /templates/ezc-deploy-netcore-webapp.yaml@Pipelines
+                  parameters:
+                    SiteName: 'www.ezconet.com.br'
+                    ApplicationPool: 'TCC.Puc.OMS.Api'
+                    ArtifactName: 'Backend'
+                    Project: 'MS-OMS/WebApi/Api'
+                    PhysicalPath: '$(wwwroot)\ezconet\webservices\tcc-puc\oms'
+                    VirtualPathForApplication: '/webservices/tcc-puc/oms'
+                    Publish: ${{ eq(parameters.PublishBackend, true) }}
+                - template: /templates/ezc-deploy-netcore-hangfire.yaml@Pipelines
+                  parameters:
+                    SiteName: 'www.ezconet.com.br'
+                    ApplicationPool: 'TCC.Puc.OMS.Hangfire'
+                    ArtifactName: 'Backend'
+                    Project: 'MS-OMS/HangfireJobs/HangfireJobs'
+                    PhysicalPath: '$(wwwroot)\ezconet\hangfire\tcc-puc\oms'
+                    VirtualPathForApplication: '/hangfire/tcc-puc/oms'
+                    Publish: ${{ eq(parameters.PublishHangfire, true) }}
+                #WMS
+                - template: /templates/ezc-deploy-netcore-webapp.yaml@Pipelines
+                  parameters:
+                    SiteName: 'www.ezconet.com.br'
+                    ApplicationPool: 'TCC.Puc.WMS.Api'
+                    ArtifactName: 'Backend'
+                    Project: 'MS-WMS/WebApi/Api'
+                    PhysicalPath: '$(wwwroot)\ezconet\webservices\tcc-puc\wms'
+                    VirtualPathForApplication: '/webservices/tcc-puc/wms'
+                    Publish: ${{ eq(parameters.PublishBackend, true) }}
+                - template: /templates/ezc-deploy-netcore-hangfire.yaml@Pipelines
+                  parameters:
+                    SiteName: 'www.ezconet.com.br'
+                    ApplicationPool: 'TCC.Puc.Wms.Hangfire'
+                    ArtifactName: 'Backend'
+                    Project: 'MS-WMS/HangfireJobs/HangfireJobs'
+                    PhysicalPath: '$(wwwroot)\ezconet\hangfire\tcc-puc\wms'
+                    VirtualPathForApplication: '/hangfire/tcc-puc/wms'
+                    Publish: ${{ eq(parameters.PublishHangfire, true) }}
+                #Autenticacao
+                - template: /templates/ezc-deploy-netcore-webapp.yaml@Pipelines
+                  parameters:
+                    SiteName: 'www.ezconet.com.br'
+                    ApplicationPool: 'TCC.Puc.Autenticacao'
+                    ArtifactName: 'Backend'
+                    Project: 'Autenticacao/Api/Api'
+                    PhysicalPath: '$(wwwroot)\ezconet\webservices\tcc-puc\autenticacao'
+                    VirtualPathForApplication: '/webservices/tcc-puc/autenticacao'
+                    Publish: ${{ eq(parameters.PublishBackend, true) }}
+
+  - stage: Deploy_Services
+    jobs:
+      - deployment: Deploy_Service_Producao
+        displayName: 'Deploy Service'
+        variables:
+          ConnectionString: 'Data Source=$(servidorSqlDesenvWeb);Initial Catalog=DeliveryStore;User ID=$(loginSql);Password=$(passSqlDev);Connection Timeout=120;MultipleActiveResultSets=True'
+          MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/tcc-puc'
+        environment:
+          name: 'Jobs'
+          resourceType: VirtualMachine
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: none
+                - template: /templates/ezc-deploy-service.yaml@Pipelines
+                  parameters:
+                    ArtifactName: 'Backend'
+                    PhysicalPath: 'TCC-Puc\OMS\Worker'
+                    Project: 'MS-OMS\Worker\Worker'
+                    ServiceName: 'TCC-Puc.OMS.Worker'
+                    Environment: 'Producao'
+                    Publish: ${{ eq(parameters.PublishWorker, true) }}
+                - template: /templates/ezc-deploy-service.yaml@Pipelines
+                  parameters:
+                    ArtifactName: 'Backend'
+                    PhysicalPath: 'TCC-Puc\WMS\Worker'
+                    Project: 'MS-WMS\Worker\Worker'
+                    ServiceName: 'TCC-Puc.WMS.Worker'
+                    Environment: 'Producao'
+                    Publish: ${{ eq(parameters.PublishWorker, true) }}  
+# FIM PUBLISH
