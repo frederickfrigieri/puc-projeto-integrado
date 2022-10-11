@@ -8,7 +8,7 @@ namespace Infrastructure.Database
         public CurrentContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CurrentContext>();
-            var connectionString = @"Data Source=(localdb)\Mssqllocaldb;Initial Catalog=MS-OMS;Integrated Security=True";
+            var connectionString = @"Data Source=(localdb)\Mssqllocaldb;Initial Catalog=DeliveryStore;Integrated Security=True";
 
 
             optionsBuilder.UseSqlServer(connectionString, x => x.MigrationsHistoryTable("MigrationsHistory", SchemaNames.OMS));
