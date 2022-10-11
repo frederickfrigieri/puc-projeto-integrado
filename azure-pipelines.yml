@@ -28,8 +28,8 @@ stages:
           jobName: 'Build Solution'
           solutionName: 'backend'
           projects:
-            - "MS-OMS/Api"
-            - "MS-OMS/Worker"
+            - "Api"
+            # - "MS-OMS/Worker"
             # - "MS-WMS/HangFireJobs"
             # - "backend/Autenticacao"
           artifactName: 'Backend'
