@@ -1,0 +1,40 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: Pipelines
+      type: git
+      name: Ezconet.Pipelines
+
+variables:
+  - group: Servidores
+
+stages:
+# BUILD
+  - stage: BuildSolution
+    displayName: 'Build Solution'
+    condition: eq('${{ parameters.BuildBackend }}', true)
+    jobs:
+      - template: /templates/ezc-build-pack-netcore-solution.yaml@Pipelines
+        parameters:
+          jobName: 'Build Solution'
+          solutionName: 'backend'
+          projects:
+            - "MS-OMS"
+            - "MS-WMS"
+            - "Autenticacao"
+          artifactName: 'Backend'
+          selfContained: true
+
+  - stage: BuildFrontend
+    displayName: 'Build Frontend'
+    condition: eq('${{ parameters.BuildFrontend }}', true)
+    jobs:
+      - job:
+        steps:
+          - template: /templates/ezc-build-pack-angular.yaml@Pipelines
+            parameters:
+              Job: BuildFrontend
+              ProjectPath: 'frontend'
+              ArtifactName: 'Frontend'
+# FIM BUILD
