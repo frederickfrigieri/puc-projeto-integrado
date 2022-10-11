@@ -23,27 +23,34 @@ stages:
     displayName: 'Build Solution'
     condition: eq('${{ parameters.BuildBackend }}', true)
     jobs:
-      - template: /templates/ezc-build-pack-netcore-solution.yaml@Pipelines
-        parameters:
-          jobName: 'Build Solution'
-          solutionName: 'backend'
-          projects:
-            - "/MS-OMS/Api"
-            # - "MS-OMS/Worker"
-            # - "MS-WMS/HangFireJobs"
-            # - "backend/Autenticacao"
-          artifactName: 'Backend'
-          selfContained: true
+    - job: EZC_Build_Pack_Net_Core_Solution
+      pool:
+        vmImage: 'windows-latest'
+      steps:
+        - task: DotNetCoreCLI@2
+          displayName: 'Publish OMS-API'
+          inputs:
+            command: publish
+            publishWebProjects: false
+            projects: '**/MS-OMS/Api.csproj'
+            arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)\MS-OMS\Api --runtime win10-x64 --self-contained true'
+            zipAfterPublish: false
+            modifyOutputPath: false
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact'
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'OMS-API'
 
-  - stage: BuildFrontend
-    displayName: 'Build Frontend'
-    condition: eq('${{ parameters.BuildFrontend }}', true)
-    jobs:
-      - job:
-        steps:
-          - template: /templates/ezc-build-pack-angular.yaml@Pipelines
-            parameters:
-              Job: BuildFrontend
-              ProjectPath: 'frontend'
-              ArtifactName: 'Frontend'
+  # - stage: BuildFrontend
+  #   displayName: 'Build Frontend'
+  #   condition: eq('${{ parameters.BuildFrontend }}', true)
+  #   jobs:
+  #     - job:
+  #       steps:
+  #         - template: /templates/ezc-build-pack-angular.yaml@Pipelines
+  #           parameters:
+  #             Job: BuildFrontend
+  #             ProjectPath: 'frontend'
+  #             ArtifactName: 'Frontend'
 # FIM BUILD
