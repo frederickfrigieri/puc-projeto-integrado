@@ -28,7 +28,7 @@ stages:
           jobName: 'Build Solution'
           solutionName: 'backend'
           projects:
-            - "Api"
+            - "/MS-OMS/Api"
             # - "MS-OMS/Worker"
             # - "MS-WMS/HangFireJobs"
             # - "backend/Autenticacao"
