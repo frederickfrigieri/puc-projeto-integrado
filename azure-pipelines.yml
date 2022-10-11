@@ -32,11 +32,11 @@ stages:
           inputs:
             command: publish
             publishWebProjects: false
-            projects: 'Api'
+            projects: 'Api.csproj'
             arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)\MS-OMS\Api --runtime win10-x64 --self-contained true'
             zipAfterPublish: false
             modifyOutputPath: false
-            workingDirectory: src/backend/MS-OMS/
+            workingDirectory: /src/backend/MS-OMS
         - task: PublishBuildArtifacts@1
           displayName: 'Publish Artifact'
           inputs:
