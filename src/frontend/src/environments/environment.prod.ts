@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  urlAuth: 'https://ds-identidade-api.azurewebsites.net/api',
-  urlOms: 'https://ds-oms-api.azurewebsites.net/api',
-  urlWms: 'https://ds-wms-api.azurewebsites.net/api'
+  urlAuth: 'https://www.ezconet.com.br/webservices/tcc-puc/autenticacao/api',
+  urlOms: 'https://www.ezconet.com.br/webservices/tcc-puc/oms/api',
+  urlWms: 'https://www.ezconet.com.br/webservices/tcc-puc/wms/api'
 };
