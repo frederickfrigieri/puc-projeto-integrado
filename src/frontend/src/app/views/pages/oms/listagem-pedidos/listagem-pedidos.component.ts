@@ -29,10 +29,14 @@ export class ListagemPedidosComponent implements OnInit {
     this.carregando = true;
     this.omsService
       .getPedidos(this.usuarioLogado.chaveUsuario)
-      .subscribe(resp => {
-        console.table(resp);
-        resp.forEach(item => this.colecao.push(item));
-        this.carregando = false;
-      });
+      .subscribe({
+        next: (resp) => {
+          resp.forEach(item => this.colecao.push(item));
+          this.carregando = false;
+        },
+        complete: () => {
+          this.carregando = false;
+        }
+      })
   }
 }

@@ -33,7 +33,7 @@ export class HttpCustomInterceptor implements HttpInterceptor {
     } else if (request.url.includes("autenticacao")) {
       http = environment.urlAuth;
     } else if (request.url.includes("parceiro")) {
-      http = environment.urlWms;
+      http = environment.urlOms;
     }
 
     requestNew = request.clone({
