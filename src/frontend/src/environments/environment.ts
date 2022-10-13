@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  urlAuth: 'https://localhost:7001/api',
-  urlOms: 'https://localhost:7101/api',
-  urlWms: 'https://localhost:7201/api'
+  // urlAuth: 'https://localhost:7001/api',
+  // urlOms: 'https://localhost:7101/api',
+  // urlWms: 'https://localhost:7201/api'
+  urlAuth: 'https://www.ezconet.com.br/webservices/tcc-puc/autenticacao/api',
+  urlOms: 'https://www.ezconet.com.br/webservices/tcc-puc/oms/api',
+  urlWms: 'https://www.ezconet.com.br/webservices/tcc-puc/wms/api'
 };
 
 /*
