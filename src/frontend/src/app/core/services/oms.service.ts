@@ -10,38 +10,27 @@ export class OmsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getPedidos(chaveParceiro: string): Observable<any[]> {
-    const endpoint = `/parceiros/${chaveParceiro}/pedidos`;
+  endpoint = environment.urlOms;
 
-    return this.httpClient.get<any[]>(endpoint);
-
+  getPedidos(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.endpoint}/parceiros/pedidos`);
   }
 
   sendPedido(model: any): Observable<any> {
-    const endpoint = `/parceiros/${model.chaveParceiro}/pedidos`;
-
+    const endpoint = `${this.endpoint}/parceiros/${model.chaveParceiro}/pedidos`;
     return this.httpClient.post<any>(endpoint, model);
   }
 
-  detailsPedido(chavePedido: string): Observable<any> {
-    return of({});
-  }
-
   createParceiro(model: any): Observable<any> {
-    return this.httpClient.post(`/parceiros`, model);
+    return this.httpClient.post(`${this.endpoint}/parceiros`, model);
   }
 
   getParceiros(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`/parceiros`);
+    return this.httpClient.get<any[]>(`${this.endpoint}/parceiros`);
   }
 
-  getParceiro(chaveParceiro: string): Observable<any> {
-    return of({});
-  }
-
-  getProdutos(chaveParceiro: string): Observable<any[]> {
-    const endpoint = `/parceiros/${chaveParceiro}/produtos`;
-
+  getProdutos(): Observable<any[]> {
+    const endpoint = `${this.endpoint}/parceiros/produtos`;
     return this.httpClient.get<any[]>(endpoint);
   }
 }

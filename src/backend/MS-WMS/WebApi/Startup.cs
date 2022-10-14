@@ -9,6 +9,7 @@ using Serilog.RequestResponse.Extensions;
 using Serilog.RequestResponse.Extensions.Models;
 using Serilog.RequestResponseExtension.Extensions;
 using Api._Configuration;
+using Application;
 
 namespace Api
 {
@@ -31,6 +32,7 @@ namespace Api
             services.AddMemoryCache();
             services.AddSwaggerDocumentation();
             services.AddHttpContextAccessor();
+            services.AddScoped<UsuarioAutenticado>();
             services.AddJWT(_configuration);
 
             return ApplicationStartup.Initialize(services, _configuration);

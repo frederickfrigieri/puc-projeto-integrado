@@ -5,6 +5,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Queries\ObterParceiro\**" />
+	  <EmbeddedResource Remove="Queries\ObterParceiro\**" />
+	  <None Remove="Queries\ObterParceiro\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Remove="Pedidos\ObterPedidosBase\ObterPedidosBaseReader.cs" />
 		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoImpressaoConsumer.cs" />
 		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoSeparadoConsumer.cs" />

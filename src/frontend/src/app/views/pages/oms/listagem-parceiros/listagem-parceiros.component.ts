@@ -20,5 +20,4 @@ export class ListagemParceirosComponent implements OnInit {
         resp.forEach(item => this.colecao.push(item))
       });
   }
-
 }

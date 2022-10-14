@@ -1,5 +1,6 @@
 ﻿using System;
 using Api._Configuration;
+using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,7 @@ namespace Api
             services.AddSwaggerDocumentation();
             services.AddHttpContextAccessor();
             services.AddJWT(_configuration);
+            services.AddScoped<UsuarioAutenticado>();
 
             return ApplicationStartup.Initialize(services, _configuration);
         }

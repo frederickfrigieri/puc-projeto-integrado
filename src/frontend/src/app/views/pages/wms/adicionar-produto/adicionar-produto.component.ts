@@ -34,6 +34,8 @@ export class AdicionarProdutoComponent implements OnInit {
     this.formGroup.get('chaveParceiro')?.patchValue(this.chaveParceiro);
   }
 
+  travaBotao = false;
+
   get chaveParceiro() {
     const token = this.sessionStorage.get(AuthService.chave);
     const usuario = this.tokenService.decrypt(token);
@@ -45,11 +47,15 @@ export class AdicionarProdutoComponent implements OnInit {
     if (this.formGroup.invalid) {
       this.messageAlert.erroFormulario();
     } else {
+      this.travaBotao = true;
       this.wmsService
         .createProduto(this.formGroup.value)
-        .subscribe(resp => {
-          this.messageAlert.success('Produto Cadastrado', 'Sucesso!');
-          this.router.navigateByUrl('/wms/produtos');
+        .subscribe({
+          next: () => {
+            this.messageAlert.success('Produto Cadastrado', 'Sucesso!');
+            this.router.navigateByUrl('/wms/produtos');
+          },
+          complete: () => this.travaBotao = false
         });
     }
   }

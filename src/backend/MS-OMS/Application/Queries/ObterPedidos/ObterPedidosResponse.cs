@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Application.ObterPedidosPorParceiro
+namespace Application.ObterPedidos
 {
-    public class ObterPedidosPorParceiroResponse
+    public class ObterPedidosResponse
     {
         public Guid Chave { get; set; }
         public string DataPedido { get; set; }

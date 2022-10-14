@@ -25,24 +25,24 @@ export class HttpCustomInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    var http = '';
-    let requestNew: any;
+    // var http = '';
+    let requestNew = request.clone();
 
-    if (request.url.includes("produtos")) {
-      http = environment.urlWms;
-    } else if (request.url.includes("autenticacao")) {
-      http = environment.urlAuth;
-    } else if (request.url.includes("parceiro")) {
-      http = environment.urlOms;
-    }
+    // if (request.url.includes("parceiro")) {
+    //   http = environment.urlOms;
+    // } else if (request.url.includes("autenticacao")) {
+    //   http = environment.urlAuth;
+    // } else if (request.url.includes("produtos") || request.url.includes("estoque")) {
+    //   http = environment.urlWms;
+    // }
 
-    requestNew = request.clone({
-      url: http + request.url,
-    });
+    // requestNew = request.clone({
+    //   url: http + request.url,
+    // });
 
     const token = this.sessionStorage.get(AuthService.chave);
     if (token) {
-      requestNew = requestNew.clone({ headers: request.headers.set('Authorization', `Bearer ${token}`) });
+      requestNew = request.clone({ headers: request.headers.set('Authorization', `Bearer ${token}`) });
     }
 
     return next.handle(requestNew).pipe(catchError((error: HttpErrorResponse) => {

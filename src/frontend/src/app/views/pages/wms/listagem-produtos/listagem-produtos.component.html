@@ -12,6 +12,7 @@
                                 <th class="pt-0">Descrição</th>
                                 <th class="pt-0">Sku</th>
                                 <th class="pt-0">Chave</th>
+                                <th *ngIf="usuario.perfil == 'Operador'">Parceiro</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -20,6 +21,7 @@
                                 <td>{{item.descricao}}</td>
                                 <td>{{item.sku}}</td>
                                 <td>{{item.chave}}</td>
+                                <td *ngIf="usuario.perfil == 'Operador'">{{item.razaoSocial}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -33,7 +35,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="exibeBotaoNovoProduto">
     <div class="col-3">
         <button [routerLink]="['/wms/produtos/novo']" type="button" class="btn btn-primary me-2 mb-2 mb-md-0">Novo
             Produto</button>

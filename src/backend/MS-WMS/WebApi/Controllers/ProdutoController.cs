@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Application.Commands.CadastrarProduto;
-using Application.ObterProdutosPorParceiro;
+using Application.ObterProdutos;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -35,10 +35,10 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("{chaveParceiro}/produtos")]
-        public async Task<IActionResult> ObterProdutosPorParceiro([FromRoute] Guid chaveParceiro)
+        [Route("produtos")]
+        public async Task<IActionResult> ObterProdutosPorParceiro()
         {
-            var query = new ObterProdutosPorParceiroQuery(chaveParceiro);
+            var query = new ObterProdutosQuery();
             var produtos = await _mediator.Send(query);
 
             return Ok(produtos);

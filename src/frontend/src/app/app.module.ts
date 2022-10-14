@@ -19,11 +19,12 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
+import { InfoApiSwaggerComponent } from './core/shared-components/info-api-swagger/info-api-swagger.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorPageComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

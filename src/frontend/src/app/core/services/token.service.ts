@@ -14,7 +14,7 @@ export class TokenService {
             chaveUsuario: jsonToken['nameid'],
             logado: true,
             login: jsonToken.actort,
-            perfil: jsonToken.perfil 
+            perfil: jsonToken['Perfil']
         };
 
         return usuario;

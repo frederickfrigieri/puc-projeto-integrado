@@ -10,7 +10,7 @@
                             <tr>
                                 <th class="pt-0">#</th>
                                 <th class="pt-0">Cliente</th>
-                                <th class="pt-0">Produto</th>
+                                <!-- <th class="pt-0">Produto</th> -->
                                 <th class="pt-0">Quantidade</th>
                                 <th class="pt-0">Valor</th>
                                 <th class="pt-0">Data Pedido</th>
@@ -23,7 +23,7 @@
                             <tr *ngFor="let pedido of colecao; let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{pedido.cliente}}</td>
-                                <td>{{pedido.produto}}</td>
+                                <!-- <td>{{pedido.produto}}</td> -->
                                 <td>{{pedido.quantidade}}</td>
                                 <td>{{pedido.valor}}</td>
                                 <td>{{pedido.dataPedido}}</td>
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="exibeBotaoNovoPedido">
     <div class="col-3">
         <button [routerLink]="['/oms/pedidos/novo']" type="button" class="btn btn-primary me-2 mb-2 mb-md-0">Novo
             Pedido</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioLogadoModel } from 'src/app/core/models/usuario-logado.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { OmsService } from 'src/app/core/services/oms.service';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
@@ -13,8 +14,7 @@ export class ListagemPedidosComponent implements OnInit {
 
   constructor(
     private omsService: OmsService,
-    private sessionStorage: SessionStorageService,
-    private token: TokenService
+    private authService: AuthService
   ) { }
 
   colecao: any[] = [];
@@ -22,13 +22,9 @@ export class ListagemPedidosComponent implements OnInit {
   usuarioLogado: any;
 
   ngOnInit(): void {
-
-    const token = this.sessionStorage.get(AuthService.chave);
-    this.usuarioLogado = this.token.decrypt(token);
-
     this.carregando = true;
     this.omsService
-      .getPedidos(this.usuarioLogado.chaveUsuario)
+      .getPedidos()
       .subscribe({
         next: (resp) => {
           resp.forEach(item => this.colecao.push(item));
@@ -38,5 +34,9 @@ export class ListagemPedidosComponent implements OnInit {
           this.carregando = false;
         }
       })
+  }
+
+  get exibeBotaoNovoPedido(): boolean {
+    return this.authService.usuarioLogado.perfil != 'Operador';
   }
 }

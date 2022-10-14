@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Application.Commands.CadastrarPedido;
-using Application.ObterPedidosPorParceiro;
+using Application.ObterPedidos;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -35,10 +35,10 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("{chaveParceiro}/pedidos")]
-        public async Task<IActionResult> ObterPedidosPorParceiro([FromRoute] Guid chaveParceiro)
+        [Route("pedidos")]
+        public async Task<IActionResult> ObterPedidos()
         {
-            var query = new ObterPedidosPorParceiroQuery(chaveParceiro);
+            var query = new ObterPedidosQuery();
 
             var response = await _mediator.Send(query);
 

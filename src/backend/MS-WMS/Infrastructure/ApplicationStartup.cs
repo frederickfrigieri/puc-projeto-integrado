@@ -11,6 +11,8 @@ using MassTransit;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.RequestResponseExtension.Extensions;
 using Serilog.RequestResponseExtension.Models;
 using System;
 using System.Globalization;
@@ -87,21 +89,21 @@ namespace Infrastructure
             {
                 services.AddMassTransitHostedService();
             }
-            //else
-            //{
-            //    var bc = serviceProvider.GetService<IBusControl>();
-            //    bc.Start();
-            //}
+            else
+            {
+                var bc = serviceProvider.GetService<IBusControl>();
+                bc.Start();
+            }
         }
 
         public static void ConfigureLogger(IConfiguration configuration)
         {
             var esConfig = configuration.GetSection("Serilog:Elasticsearch").Get<SerilogElasticsearchConfig>();
 
-            //Log.Logger = new LoggerConfiguration()
-            //    .CreateDefaultInstance("MS-WMS")
-            //    .WithES(esConfig)
-            //    .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .CreateDefaultInstance("MS-WMS-DeliveryStore")
+                .WithES(esConfig)
+                .CreateLogger();
         }
     }
 }

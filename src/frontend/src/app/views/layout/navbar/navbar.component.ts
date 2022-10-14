@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,14 +12,22 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  parceiroLogin = '';
+  parceiroChave = '';
+
   constructor(
-    @Inject(DOCUMENT) private document: Document, 
+    @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     private router: Router,
+    private tokenService: TokenService,
     private sessionStorage: SessionStorageService
   ) { }
 
   ngOnInit(): void {
+    const token = this.sessionStorage.get(AuthService.chave);
+    var usuario = this.tokenService.decrypt(token);
+    this.parceiroLogin = usuario.login;
+    this.parceiroChave = usuario.chaveUsuario;
   }
 
   /**

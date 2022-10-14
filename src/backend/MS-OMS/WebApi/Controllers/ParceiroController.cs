@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.Commands.CadastrarParceiro;
 using Application.ObterParceiro;
 using Application.ObterParceiros;
+using Application.ObterProdutosPorParceiro;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -36,19 +37,8 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("{chaveParceiro}")]
-        public async Task<IActionResult> ObterPorChave([FromRoute] Guid chaveParceiro)
-        {
-            var query = new ObterParceiroQuery(chaveParceiro);
-
-            var response = await _mediator.Send(query);
-
-            return Ok(response);
-        }
-
-        [HttpGet]
         [Route("")]
-        public async Task<IActionResult> ObterTodos()
+        public async Task<IActionResult> Obter()
         {
             var query = new ObterParceirosQuery();
 
@@ -57,5 +47,15 @@ namespace Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("produtos")]
+        public async Task<IActionResult> ObterProdutos()
+        {
+            var query = new ObterProdutosQuery();
+
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
+        }
     }
 }

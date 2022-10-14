@@ -53,7 +53,7 @@ export class CadastrarPedidoComponent implements OnInit {
 
 
   private carregarProdutos() {
-    this.wmsService.getProdutos(this.usuario.chaveUsuario).subscribe(resp => {
+    this.omsService.getProdutos().subscribe(resp => {
       this.produtos = resp.map(item => {
         return {
           id: item.chave,

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Application.ObterProdutosPorParceiro
+namespace Application.ObterProdutos
 {
-    public class ObterProdutosPorParceiroResponse
+    public class ObterProdutosResponse
     {
         public Guid Chave { get; set; }
         public string DataCadastro { get; set; }
