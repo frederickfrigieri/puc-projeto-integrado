@@ -1,4 +1,5 @@
 ﻿using Domain._SeedWork;
+using Serilog.RequestResponse.Extensions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,24 +36,18 @@ namespace Domain.Entities
             return posicao;
         }
 
-        public Estoque[] CadastrarEstoque(
+        public void CadastrarEstoque(
             Guid chaveParceiro,
             Produto produto,
             short quantidade)
         {
-            var estoquesCadastrado = new List<Estoque>();
+            Estoques ??= new List<Estoque>();
 
             Enumerable.Range(1, quantidade).ToList().ForEach(count =>
             {
-                var estoque = Estoque.Criar(chaveParceiro, produto);
-
-                Estoques ??= new List<Estoque>();
-
-                estoquesCadastrado.Add(estoque);
+                var estoque = new Estoque(chaveParceiro, produto);
                 Estoques.Add(estoque);
             });
-
-            return estoquesCadastrado.ToArray();
         }
 
         public CadastrarItemResponse CadastrarItem(

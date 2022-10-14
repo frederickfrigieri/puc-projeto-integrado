@@ -32,8 +32,8 @@ namespace Application.ObterParceiro
                         pr.Descricao, 
                         pr.Sku, 
                         p.RazaoSocial 
-                        from OMS.Produtos pr 
-                        join OMS.Parceiros p on p.Id = pr.ParceiroId";
+                        from WMS.Produtos pr 
+                        join OMS.Parceiros p on p.Chave = pr.ChaveParceiro";
 
             if (_autenticado.Perfil == Domain.Entities.Enums.PerfilUsuario.Parceiro)
             {

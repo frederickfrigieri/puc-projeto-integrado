@@ -16,17 +16,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="nome" class="col-sm-3 col-form-label">Parceiros</label>
-                    <div class="col-sm-9">
-                        <ng-select [items]="parceiros" bindLabel="name" bindValue="id" [searchable]="false"
-                            formControlName="chaveParceiro" placeholder="Selecione um parceiro">
-                        </ng-select>
-                        <app-input-invalid-message [frmGroup]="formGroup" controlName="chaveParceiro">
-                        </app-input-invalid-message>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="chaveProduto" class="col-sm-3 col-form-label">Produtos</label>
+                    <label for="chaveProduto" class="col-sm-3 col-form-label">Produto</label>
                     <div class="col-sm-9">
                         <ng-select [items]="produtos" bindLabel="name" bindValue="id" [searchable]="false"
                             formControlName="chaveProduto" placeholder="Selecione um produto">

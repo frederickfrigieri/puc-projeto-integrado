@@ -9,13 +9,7 @@ namespace Domain.Entities
         internal Estoque(Guid chaveParceiro, Produto produto)
         {
             ChaveParceiro = chaveParceiro;
-            //Armazem = armazem;
             Produto = produto;
-        }
-
-        public static Estoque Criar(Guid chaveParceiro, Produto produto)
-        {
-            return new Estoque(chaveParceiro, produto);
         }
 
         private Estoque() { }

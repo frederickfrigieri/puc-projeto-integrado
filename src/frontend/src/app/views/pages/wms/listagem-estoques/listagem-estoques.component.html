@@ -9,17 +9,21 @@
                         <thead>
                             <tr>
                                 <th class="pt-0">#</th>
+                                <th class="pt-0">Sku</th>
                                 <th class="pt-0">Produto</th>
+                                <th class="pt-0">Armazem</th>
                                 <th class="pt-0">Quantidade</th>
-                                <th class="pt-0">Posição</th>
+                                <th class="pt-0" *ngIf="perfil == 'Operador'">Parceiro</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of colecao">
-                                <td>{{item.id}}</td>
-                                <td>{{item.produto}}</td>
+                            <tr *ngFor="let item of colecao; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.sku}}</td>
+                                <td>{{item.descricao}}</td>
+                                <td>{{item.armazem}}</td>
                                 <td>{{item.quantidade}}</td>
-                                <td>{{item.posicao}}</td>
+                                <td *ngIf="perfil == 'Operador'">{{item.parceiro}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -29,8 +33,9 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="perfil == 'Parceiro'">
     <div class="col-3">
-        <button [routerLink]="['/wms/estoques/adicionar']" type="button" class="btn btn-primary me-2 mb-2 mb-md-0">Adicionar Estoque</button>
+        <button [routerLink]="['/wms/estoques/adicionar']" type="button"
+            class="btn btn-primary me-2 mb-2 mb-md-0">Adicionar Estoque</button>
     </div>
 </div>
