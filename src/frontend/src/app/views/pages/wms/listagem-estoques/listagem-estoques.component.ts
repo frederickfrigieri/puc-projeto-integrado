@@ -10,6 +10,7 @@ import { WmsService } from 'src/app/core/services/wms.service';
 export class ListagemEstoquesComponent implements OnInit {
 
   titulo = 'Listagem de Estoques';
+  carregando = false;
 
   constructor(
     private wmsService: WmsService,
@@ -19,8 +20,17 @@ export class ListagemEstoquesComponent implements OnInit {
   colecao: any[] = [];
 
   ngOnInit(): void {
+    this.carregarEstoques();
+  }
+
+  private carregarEstoques() {
+    this.carregando = true;
     this.wmsService.getEstoques(this.authService.usuarioLogado.chaveUsuario)
-      .subscribe(resp => resp.forEach(item => this.colecao.push(item)));
+      .subscribe(resp => {
+        resp.forEach(item => this.colecao.push(item));
+        this.carregando = false;
+      });
+
   }
 
   get perfil() {
