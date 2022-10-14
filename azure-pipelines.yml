@@ -138,6 +138,7 @@ stages:
                     Publish: ${{ eq(parameters.PublishBackend, true) }}
 
   - stage: Deploy_Services
+    condition: eq('${{ parameters.PublishWorker }}', true)
     jobs:
       - deployment: Deploy_Service_Producao
         displayName: 'Deploy Service'
@@ -159,7 +160,6 @@ stages:
                     Project: 'MS-OMS\Worker\Worker'
                     ServiceName: 'TCC-Puc.OMS.Worker'
                     Environment: 'Producao'
-                    Publish: ${{ eq(parameters.PublishWorker, true) }}
                 - template: /templates/ezc-deploy-service.yaml@Pipelines
                   parameters:
                     ArtifactName: 'Backend'
@@ -167,5 +167,4 @@ stages:
                     Project: 'MS-WMS\Worker\Worker'
                     ServiceName: 'TCC-Puc.WMS.Worker'
                     Environment: 'Producao'
-                    Publish: ${{ eq(parameters.PublishWorker, true) }}  
 # FIM PUBLISH
