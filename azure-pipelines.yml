@@ -72,7 +72,7 @@ stages:
           AutenticacoEndpoint: 'https://www.ezconet.com.br/webservices/tcc-puc/autenticacao/api'
           basehref: '/tcc-puc/'
           ConnectionString: 'Data Source=$(servidorSqlWeb);Initial Catalog=DeliveryStore;User ID=$(loginSql);Password=$(passSql);Connection Timeout=120;MultipleActiveResultSets=True'
-          MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/tcc-puc'
+          MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/deliverystore'
         environment:
           name: 'Embratel'
           resourceType: VirtualMachine
@@ -144,7 +144,7 @@ stages:
       displayName: 'Deploy Service'
       variables:
         ConnectionString: 'Data Source=$(servidorSqlWeb);Initial Catalog=DeliveryStore;User ID=$(loginSql);Password=$(passSql);Connection Timeout=120;MultipleActiveResultSets=True'
-        MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/tcc-puc'
+        MessageBusConnectionString: 'amqp://user:ubLK6H9b3eHY@192.168.4.55:5672/deliverystore'
       environment:
         name: 'Jobs'
         resourceType: VirtualMachine
