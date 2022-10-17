@@ -1,6 +1,8 @@
 ﻿using Application._Configuration.Data;
 using Application._Configuration.Queries;
 using Dapper;
+using Domain.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -34,10 +36,10 @@ namespace Application.ObterPedidos
                                 p.Valor, 
                                 p.DataCadastro as DataPedido,
                                 sum(i.Quantidade) as Quantidade
-                                from Oms.Pedidos p
-                                join Oms.ItensPedidos i on i.PedidoId = p.Id
+                                from OMS.Pedidos p
+                                join OMS.ItensPedidos i on i.PedidoId = p.Id
                                 join OMS.Parceiros pa on pa.Id = p.ParceiroId
-                                join WMS.Produtos pr on pr.Id = i.ProdutoId";
+                                join OMS.Produtos pr on pr.Id = i.ProdutoId";
 
             if (_usuarioAutenticado.Perfil == Domain.Entities.Enums.PerfilUsuario.Parceiro)
             {
@@ -51,7 +53,12 @@ namespace Application.ObterPedidos
             var pedidos = await connection
                 .QueryAsync<ObterPedidosResponse>(sqlPedidos);
 
-            return pedidos.ToArray();
+            pedidos.ToList().ForEach(pedido =>
+            {
+                pedido.StatusPedido = Enum.Parse<StatusPedidoEnum>(pedido.StatusPedido).GetEnumDescription();
+            });
+
+            return pedidos;
         }
     }
 }

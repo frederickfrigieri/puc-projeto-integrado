@@ -31,7 +31,7 @@ namespace Domain.Entities
             NomeCompleto = dto.Nome;
             Valor = dto.Valor;
             Itens = new List<ItemPedidoEntity>();
-            StatusPedido = StatusPedidoEnum.PendenteDarkStore;
+            StatusPedido = StatusPedidoEnum.PendenteArmazem;
 
             dto.Itens.ForEach(itemDto =>
             {

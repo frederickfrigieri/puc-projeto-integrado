@@ -1,10 +1,18 @@
-﻿namespace Domain.Entities.Enums
+﻿using System.ComponentModel;
+
+namespace Domain.Entities.Enums
 {
     public enum StatusPedidoEnum
     {
-        PendenteDarkStore,
+        [Description("Pendente Armazem")]
+        PendenteArmazem,
+        [Description("Pendente Estoque")]
         PendenteEstoque,
+        [Description("Aguardando Envio")]
         AguardandoEnvio,
-        EmTransito
+        [Description("Em Trânsito")]
+        EmTransito,
+        [Description("Entregue")]
+        Entregue
     }
 }
