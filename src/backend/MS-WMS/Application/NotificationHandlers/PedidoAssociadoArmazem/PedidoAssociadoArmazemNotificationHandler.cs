@@ -23,7 +23,7 @@ namespace Application.NotificationHandlers.PedidoAssociadoArmazem
                 ChavePedido = notification.ChavePedido
             };
 
-            await _messageBus.PublishAsync(message, "wms-pedido-associado-armazem");
+            await _messageBus.Publish(message);
         }
     }
 }

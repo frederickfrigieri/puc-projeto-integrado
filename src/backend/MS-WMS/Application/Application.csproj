@@ -5,10 +5,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="NotificationHandlers\PedidoAssociadoArmazem\PedidoAssociadoArmazemNotification.cs" />
-		<Compile Remove="NotificationHandlers\PedidoAssociadoArmazem\PedidoAssociadoArmazemNotificationHandler.cs" />
-		<Compile Remove="NotificationHandlers\PedidoAssociadoEstoque\PedidoAssociadoEstoqueNotification.cs" />
-		<Compile Remove="NotificationHandlers\PedidoAssociadoEstoque\PedidoAssociadoEstoqueNotificationHandler.cs" />
 		<Compile Remove="Pedidos\ObterPedidosBase\ObterPedidosBaseReader.cs" />
 		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoImpressaoConsumer.cs" />
 		<Compile Remove="Pedidos\_ConsumerHandlers\AlterarStatusPedidoSeparadoConsumer.cs" />
@@ -25,11 +21,6 @@
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="ExcelDataReader" Version="3.6.0" />
 		<PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="NotificationHandlers\PedidoAssociadoArmazem\" />
-	  <Folder Include="NotificationHandlers\PedidoAssociadoEstoque\" />
 	</ItemGroup>
 
 	<ItemGroup>

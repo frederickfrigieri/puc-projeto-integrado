@@ -3,6 +3,7 @@ using Domain._SeedWork;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,16 +31,17 @@ namespace Infrastructure.Database
             return await _context.Armazens.SingleOrDefaultAsync(c => c.Chave == chave);
         }
 
-        public async Task<Armazem> ObterArmazemMenorQuantidadePedido()
+        public async Task<Armazem[]> ObterArmazemMenorQuantidadePedido()
         {
             return await _context.Armazens
-                .OrderBy(x => x.Itens.GroupBy(x => x.ChavePedido).Count())
-                .FirstOrDefaultAsync();
+                .Include(x => x.Estoques)
+                .OrderBy(x => x.Itens.Count())
+                .ToArrayAsync();
         }
 
         public async Task<Estoque> ObterEstoqueDisponivel(
             int produtoId,
-            int armazemId, 
+            int armazemId,
             Guid chaveParceiro)
         {
             return await _context.Estoques
@@ -51,22 +53,10 @@ namespace Infrastructure.Database
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<PedidoItem[]> ObterPedidosSemArmazem()
+        public async Task<PedidoItem[]> ObterItensPorPedido(Guid chavePedido)
         {
             return await _context.PedidosItens
-                .Where(x => x.Armazem == null)
-                .ToArrayAsync();
-        }
-
-        public async Task<PedidoItem[]> ObterPedidosSemEstoque()
-        {
-            var pedidosComEstoque = await _context.Estoques
-                .Where(x => x.PedidoItem != null)
-                .Select(x => x.PedidoItem)
-                .ToListAsync();
-
-            return await _context.PedidosItens
-                .Where(x => pedidosComEstoque.Contains(x) == false)
+                .Where(x => x.ChavePedido == chavePedido)
                 .ToArrayAsync();
         }
 
@@ -75,11 +65,6 @@ namespace Infrastructure.Database
             return await _context.Produtos
                 .Where(x => chaves.Contains(x.Chave))
                 .ToArrayAsync();
-        }
-
-        public Task<Produto[]> ObterProdutoPorPorParceiro(Guid chaveParceiro)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Produto> ObterProdutosPorPorParceirtoESku(Guid chaveParceiro, string sku)

@@ -9,16 +9,18 @@ namespace Domain.Entities
     {
         public int Quantidade { get; private set; }
 
-        internal PedidoItem(int quantidade, Produto produto, Guid chavePedido, Guid chaveParceiro, Guid chaveItem)
+        internal PedidoItem(int quantidade, int produtoId, Guid chavePedido, Guid chaveParceiro, Guid chaveItem)
         {
             Quantidade = quantidade;
-            Produto = produto;
+            ProdutoId = produtoId;
             ChavePedido = chavePedido;
             ChaveParceiro = chaveParceiro;
             Chave = chaveItem;
+
+            AddDomainEvent(new PedidoImportadoEvent(chavePedido));
         }
 
-        private PedidoItem(){}
+        private PedidoItem() { }
 
         public int ProdutoId { get; private set; }
         public Produto Produto { get; private set; }
@@ -31,15 +33,13 @@ namespace Domain.Entities
 
         public static PedidoItem Criar(ItemPedidoDto dto)
         {
-            //Todo depois usar o constructor
-            return new PedidoItem()
-            {
-                Quantidade = dto.Quantidade,
-                ProdutoId = dto.ProdutoId.Value,
-                ChaveParceiro = dto.ChaveParceiro,
-                ChavePedido = dto.ChavePedido,
-                Chave = dto.ChaveItem
-            };
+
+            return new PedidoItem(
+                dto.Quantidade,
+                dto.ProdutoId.Value,
+                dto.ChavePedido,
+                dto.ChaveParceiro,
+                dto.ChaveItem);
         }
 
         public void AssociarArmazem(Armazem armazem)

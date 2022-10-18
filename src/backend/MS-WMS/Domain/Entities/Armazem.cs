@@ -1,5 +1,4 @@
 ﻿using Domain._SeedWork;
-using Serilog.RequestResponse.Extensions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,57 +47,6 @@ namespace Domain.Entities
                 var estoque = new Estoque(chaveParceiro, produto);
                 Estoques.Add(estoque);
             });
-        }
-
-        public CadastrarItemResponse CadastrarItem(
-            int quantidade,
-            Produto produto,
-            Guid chavePedido,
-            Guid chaveParceiro,
-            Guid chaveItem)
-        {
-            var item = new PedidoItem(quantidade, produto, chavePedido, chaveParceiro, chaveItem);
-
-            if (Itens == null) Itens = new List<PedidoItem>();
-
-            Itens.Add(item);
-
-            return new CadastrarItemResponse
-            {
-                ChavePedido = chavePedido,
-                ChaveItem = item.Chave,
-                ChaveParceiro = chaveParceiro
-            };
-        }
-
-        public AssociarItemPedidoResponse AssociarPedidoItem(Guid chavePedido)
-        {
-            var item = Itens.Single(x => x.ChavePedido == chavePedido);
-
-            item.AssociarArmazem(this);
-
-            return new AssociarItemPedidoResponse
-            {
-                ChaveArmazem = Chave,
-                ChavePedido = chavePedido
-            };
-        }
-
-        public AssociarItemPedidoNoEstoqueResponse AssociarIPedidoItemNoEstoque(PedidoItem item)
-        {
-            var estoque = Estoques
-                .Where(x => x.PedidoItem == null
-                && x.ProdutoId == item.Produto.Id
-                && x.ArmazemId == item.ArmazemId)
-                .FirstOrDefault();
-
-            estoque.AssociarItem(item);
-
-            return new AssociarItemPedidoNoEstoqueResponse
-            {
-                ChavePedido = item.Chave,
-                ChaveEstoque = estoque.Chave
-            };
         }
     }
 

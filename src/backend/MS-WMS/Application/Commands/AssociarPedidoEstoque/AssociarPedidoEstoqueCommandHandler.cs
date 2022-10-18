@@ -16,26 +16,26 @@ namespace Application.Commands.AssociarPedidoEstoque
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(
-            AssociarPedidoEstoqueCommand request, 
+        public Task<Unit> Handle(
+            AssociarPedidoEstoqueCommand request,
             CancellationToken cancellationToken)
         {
-            var pedidosPendentes = await _repository.ObterPedidosSemEstoque();
+            //var pedidosPendentes = await _repository.ObterPedidosSemEstoque();
 
-            foreach (var pedidoPendente in pedidosPendentes)
-            {
-                if (pedidoPendente.ArmazemId.HasValue)
-                {
-                    var estoque = await _repository.ObterEstoqueDisponivel(
-                        pedidoPendente.ProdutoId,
-                        pedidoPendente.ArmazemId.Value,
-                        pedidoPendente.ChaveParceiro);
+            //foreach (var pedidoPendente in pedidosPendentes)
+            //{
+            //    if (pedidoPendente.ArmazemId.HasValue)
+            //    {
+            //        var estoque = await _repository.ObterEstoqueDisponivel(
+            //            pedidoPendente.ProdutoId,
+            //            pedidoPendente.ArmazemId.Value,
+            //            pedidoPendente.ChaveParceiro);
 
-                    estoque.AssociarItem(pedidoPendente);
-                }
-            }
+            //        estoque.AssociarItem(pedidoPendente);
+            //    }
+            //}
 
-            return Unit.Value;
+            return Unit.Task;
         }
     }
 }
