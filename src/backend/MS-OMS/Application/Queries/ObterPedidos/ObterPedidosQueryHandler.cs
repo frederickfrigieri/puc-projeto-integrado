@@ -31,22 +31,22 @@ namespace Application.ObterPedidos
                                 p.Chave, 
                                 p.StatusPedido,
                                 p.NomeCompleto as Cliente, 
-                                --pr.Descricao as Produto, 
-                                --i.Quantidade,
                                 p.Valor, 
                                 p.DataCadastro as DataPedido,
-                                sum(i.Quantidade) as Quantidade
+                                sum(i.Quantidade) as Quantidade,
+                                a.Descricao as Armazem
                                 from OMS.Pedidos p
                                 join OMS.ItensPedidos i on i.PedidoId = p.Id
                                 join OMS.Parceiros pa on pa.Id = p.ParceiroId
-                                join OMS.Produtos pr on pr.Id = i.ProdutoId";
+                                join OMS.Produtos pr on pr.Id = i.ProdutoId
+                                left join WMS.Armazens a on a.Chave = p.ChaveArmazem";
 
             if (_usuarioAutenticado.Perfil == Domain.Entities.Enums.PerfilUsuario.Parceiro)
             {
                 sqlPedidos += string.Format(" where pa.chave = '{0}'", _usuarioAutenticado.Chave);
             }
 
-            sqlPedidos += " group by p.Chave, p.StatusPedido, p.NomeCompleto, p.Valor, p.DataCadastro";
+            sqlPedidos += " group by p.Chave, p.StatusPedido, p.NomeCompleto, p.Valor, p.DataCadastro, a.Descricao";
             sqlPedidos += " order by p.DataCadastro Desc";
 
             using var connection = _sqlConnectionFactory.GetOpenConnection();

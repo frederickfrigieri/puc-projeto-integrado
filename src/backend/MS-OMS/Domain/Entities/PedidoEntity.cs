@@ -3,6 +3,7 @@ using Domain.Dtos;
 using Domain.Entities.Enums;
 using Domain.Events;
 using Domain.Rules;
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Entities
@@ -18,6 +19,8 @@ namespace Domain.Entities
         public List<ItemPedidoEntity> Itens { get; private set; }
 
         public StatusPedidoEnum StatusPedido { get; private set; }
+
+        public Guid? ChaveArmazem { get; private set; }
 
 
 
@@ -52,6 +55,13 @@ namespace Domain.Entities
         public void AtualizarStatus(StatusPedidoEnum status)
         {
             StatusPedido = status;
+        }
+
+        public void AssociarArmazem(Guid chaveArmazem)
+        {
+            ChaveArmazem = chaveArmazem;
+
+            AtualizarStatus(StatusPedidoEnum.PendenteEstoque);
         }
     }
 
